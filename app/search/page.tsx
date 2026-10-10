@@ -12,13 +12,16 @@ function SearchBody(){
    setLoading(true);
    try{
     const term=encodeURIComponent(query.trim());
-    const [tv,wiki]=await Promise.allSettled([
+    const [tv,wiki,saved]=await Promise.allSettled([
       fetch('https://api.tvmaze.com/search/shows?q='+term,{signal:controller.signal}).then(r=>r.ok?r.json():[]),
-      fetch('https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+term+'&language=fa&uselang=fa&type=item&limit=20&format=json&origin=*',{signal:controller.signal}).then(r=>r.ok?r.json():{search:[]})
+      fetch('https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+term+'&language=fa&uselang=fa&type=item&limit=20&format=json&origin=*',{signal:controller.signal}).then(r=>r.ok?r.json():{search:[]}),
+      fetch('/RMDB/data/catalog.json',{signal:controller.signal}).then(r=>r.ok?r.json():{shows:[],movies:[]})
     ]);
     const shows:Hit[]=tv.status==='fulfilled'?tv.value.map((v:{show:{id:number;name:string;premiered?:string;image?:{medium?:string};summary?:string}})=>({id:'tv-'+v.show.id,name:v.show.name,kind:'series',year:v.show.premiered?.slice(0,4),image:v.show.image?.medium})): [];
     const items:Hit[]=wiki.status==='fulfilled'?wiki.value.search.map((v:{id:string;label:string;description?:string})=>({id:'wd-'+v.id,name:v.label,kind:'movie',desc:v.description})): [];
-    if(!controller.signal.aborted)setResults([...shows,...items]);
+    const archive:Hit[]=saved.status==='fulfilled'?[...saved.value.shows,...saved.value.movies].filter((v:{title:string})=>v.title.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())).slice(0,30).map((v:{id:string;title:string;year?:string;image?:string})=>({id:v.id,name:v.title,kind:v.id.startsWith('tv-')?'series':'movie',year:v.year,image:v.image})):[];
+    const unique=new Map<string,Hit>();for(const v of [...archive,...shows,...items])unique.set(v.id,v);
+    if(!controller.signal.aborted)setResults(Array.from(unique.values()));
    }catch{if(!controller.signal.aborted)setResults([])}
    finally{if(!controller.signal.aborted)setLoading(false)}
   },400);
