@@ -1,7 +1,11 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  images: { remotePatterns: [{ protocol: 'https', hostname: 'image.tmdb.org' }] },
+  output: 'export',
+  basePath: '/RMDB',
+  assetPrefix: '/RMDB/',
+  trailingSlash: true,
+  images: { unoptimized: true, remotePatterns: [{ protocol: 'https', hostname: 'image.tmdb.org' }] },
 };
 
 export default nextConfig;
