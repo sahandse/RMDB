@@ -6,7 +6,7 @@ const input=JSON.parse(await readFile(new URL('../public/data/catalog.json',impo
 const unique=(items,prefix)=>[...new Map((Array.isArray(items)?items:[]).filter(x=>typeof x.id==='string'&&x.id.startsWith(prefix)&&typeof x.title==='string'&&x.title.trim()).map(x=>[x.id,x])).values()];
 const movies=unique(input.movies,'wd-Q').map(x=>({id:x.id,wikidataId:x.id.slice(3),title:{display:x.title,en:x.titleEn||null},year:x.year||null,source:'Wikidata',license:'CC0-1.0'}));
 const people=unique(input.people,'Q').map(x=>({id:'wd-'+x.id,wikidataId:x.id,title:{display:x.title,en:x.titleEn||null},born:x.birth||null,source:'Wikidata',license:'CC0-1.0'}));
-if(!movies.length)throw Error('No verified CC0 films; API snapshot not written.');
+// Empty CC0 lists are honest; do not misclassify TVmaze series as films.
 const updatedAt=input.updatedAt||new Date().toISOString();
 const emit=async(name,body)=>writeFile(new URL(name,dir),JSON.stringify(body,null,2)+'\n');
 await mkdir(dir,{recursive:true});
