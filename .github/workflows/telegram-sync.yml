@@ -76,7 +76,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json data/omdb-match-report.json; do
+          for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json data/omdb-match-report.json data/omdb-daily-budget.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           git add public/data/image-credits.json
