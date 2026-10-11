@@ -43,7 +43,19 @@ if(licensed){
   target.detailProvider='OMDb';
  }
 }
-if(!current.shows.length)throw Error('No verified TVmaze series in curated or cached archive');
+// Publication gate: keep incomplete original records in the private archive for
+// later enrichment, but remove them from the public-facing catalog.
+const present=x=>typeof x==='string'&&x.trim().length>0;
+const rich=x=>present(x.descriptionFa)||present(x.descriptionEn)||present(x.summary)||present(x.plot);
+const poster=x=>present(x.image)&&(/^(\/RMDB\/|\/media\/|https:\/\/)/.test(x.image));
+const detailed=x=>Boolean(x.cast?.length||x.credits?.directors?.length||x.episodes?.length||x.genres?.length||x.entityNames?.directors?.length);
+const publishable=x=>present(x.title)&&present(x.year)&&/^tt\d{7,9}$/.test(x.imdbId||'')&&poster(x)&&rich(x)&&detailed(x);
+const hidden={movies:current.movies.length,shows:current.shows.length};
+current.movies=current.movies.filter(publishable);
+current.shows=current.shows.filter(publishable);
+current.qualityGate={requires:['title','year','IMDb identifier','image','synopsis','verified cast or production information'],excluded:{movies:hidden.movies-current.movies.length,shows:hidden.shows-current.shows.length}};
+console.log('RMDB publication quality gate:',JSON.stringify(current.qualityGate));
+
 current.updatedAt=new Date().toISOString();
 await mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
 await writeFile(dataFile,JSON.stringify(current,null,2)+'\n');
