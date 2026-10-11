@@ -35,12 +35,16 @@ function DetailContent() {
      if(live)setDetails(result);
     } else if (/^wd-Q\d+$/.test(id)) {
      const qid = id.slice(3);
-     const r = await fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+qid+'&languages=fa%7Cen&props=labels%7Cdescriptions%7Cclaims&format=json&origin=*');
+     const r = await fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+qid+'&languages=fa%7Cen&props=labels%7Cdescriptions%7Cclaims%7Csitelinks&format=json&origin=*');
      if (!r.ok) throw new Error('Wikidata');
      const d = await r.json();const e = d.entities?.[qid];if(!e||e.missing)throw new Error('missing');
      const title=(english?e.labels?.en?.value||e.labels?.fa?.value:e.labels?.fa?.value||e.labels?.en?.value)||qid;
      const description=(english?e.descriptions?.en?.value||e.descriptions?.fa?.value:e.descriptions?.fa?.value||e.descriptions?.en?.value)||(english?'Description unavailable.':'توضیحات این اثر هنوز ثبت نشده است.');
      const originalTitle=e.labels?.en?.value||title;
+     let wikipediaSummary: string | null = null;
+     const wikiSite=english?'enwiki':'fawiki';
+     const wikiTitle=e.sitelinks?.[wikiSite]?.title;
+     if(wikiTitle){try{const host=english?'en.wikipedia.org':'fa.wikipedia.org';const endpoint='https://'+host+'/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&titles='+encodeURIComponent(wikiTitle)+'&format=json&origin=*';const answer=await fetch(endpoint);if(answer.ok){const pages=(await answer.json()).query?.pages;const item=Object.values(pages||{})[0] as {extract?:string}|undefined;wikipediaSummary=item?.extract?.slice(0,1200)||null}}catch{}}
      const p=(key:string)=>e.claims?.[key]?.[0]?.mainsnak?.datavalue?.value;
      const date=p('P577')?.time?.replace(/^\+/,'').slice(0,10)||'نامشخص';
      const file=p('P18');
@@ -49,7 +53,7 @@ function DetailContent() {
      let directors='نامشخص';
      if(directorIds.length){try{const dr=await fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+directorIds.join('%7C')+'&props=labels&languages=fa%7Cen&format=json&origin=*');if(dr.ok){const de=(await dr.json()).entities;directors=directorIds.map((q:string)=>de[q]?.labels?.[english?'en':'fa']?.value||de[q]?.labels?.en?.value).filter(Boolean).join('، ')||directors}}catch{}}
      const poster=typeof file==='string'?'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(file)+'?width=600':null;
-     if(live)setDetails({title,description,poster,source:'Wikidata',originalTitle,year:date.slice(0,4),facts:[['تاریخ انتشار',date],['کارگردان',directors],['مدت (دقیقه)',quantity('P2047')||'نامشخص'],['شناسه Wikidata',qid]]});
+     if(live)setDetails({title,description:wikipediaSummary||description,poster,source:wikipediaSummary?'Wikipedia / Wikidata':'Wikidata',originalTitle,year:date.slice(0,4),facts:[['تاریخ انتشار',date],['کارگردان',directors],['مدت (دقیقه)',quantity('P2047')||'نامشخص'],['شناسه Wikidata',qid]]});
     } else throw new Error('invalid');
    } catch {if(live)setStatus('دریافت اطلاعات این عنوان ممکن نشد. اتصال اینترنت یا سرویس داده را بررسی کنید.');}
   }
