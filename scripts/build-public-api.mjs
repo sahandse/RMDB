@@ -4,7 +4,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const dir=new URL('../public/api/v1/',import.meta.url);
 const input=JSON.parse(await readFile(new URL('../public/data/catalog.json',import.meta.url),'utf8'));
 const unique=(items,prefix)=>[...new Map((Array.isArray(items)?items:[]).filter(x=>typeof x.id==='string'&&x.id.startsWith(prefix)&&typeof x.title==='string'&&x.title.trim()).map(x=>[x.id,x])).values()];
-const movies=unique(input.movies,'wd-Q').map(x=>({id:x.id,wikidataId:x.id.slice(3),title:{display:x.title,en:x.titleEn||null},year:x.year||null,source:'Wikidata',license:'CC0-1.0'}));
+const movies=unique(input.movies,'wd-Q').map(x=>({id:x.id,wikidataId:x.id.slice(3),title:{display:x.title,en:x.titleEn||null},year:x.year||null,descriptionFa:x.descriptionFa||null,descriptionEn:x.descriptionEn||null,imdbId:x.imdbId||null,credits:x.credits||null,genres:x.genres||[],countries:x.countries||[],languages:x.languages||[],productionCompanies:x.productionCompanies||[],releaseDate:x.releaseDate||null,runtimeMinutes:x.runtimeMinutes||null,source:'Wikidata',license:'CC0-1.0'}));
 const people=unique(input.people,'Q').map(x=>({id:'wd-'+x.id,wikidataId:x.id,title:{display:x.title,en:x.titleEn||null},born:x.birth||null,source:'Wikidata',license:'CC0-1.0'}));
 // Empty CC0 lists are honest; do not misclassify TVmaze series as films.
 const updatedAt=input.updatedAt||new Date().toISOString();
