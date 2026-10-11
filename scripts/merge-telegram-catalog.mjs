@@ -3,7 +3,14 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const dataFile=new URL('../public/data/catalog.json',import.meta.url);
 const curatedFile=new URL('../data/telegram-curated.json',import.meta.url);
 const load=async(u,fallback)=>{try{return JSON.parse(await readFile(u,'utf8'))}catch(e){if(e.code==='ENOENT')return fallback;throw e}};
-const current=await load(dataFile,{updatedAt:null,movies:[],shows:[],people:[],errors:[]});
+let current=await load(dataFile,null);
+if(!current){
+ try{
+  const r=await fetch('https://sahandse.github.io/RMDB/data/catalog.json',{signal:AbortSignal.timeout(15000)});
+  if(r.ok){const previous=await r.json();if(Array.isArray(previous.shows)&&Array.isArray(previous.movies)){current=previous;console.log('Preserving existing published catalog');}}
+ }catch(e){console.warn('Published catalog not accessible:',e.message)}
+}
+if(!current)current={updatedAt:null,movies:[],shows:[],people:[],errors:[]};
 const curated=await load(curatedFile,{items:[]});
 for(const key of ['movies','shows','people'])if(!Array.isArray(current[key]))current[key]=[];
 if(!Array.isArray(curated.items))throw Error('Invalid Telegram catalog');
