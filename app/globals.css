@@ -75,3 +75,5 @@ html[dir="ltr"] .fact-list>div,html[dir="ltr"] .compare-table>div{text-align:lef
 .credit-disclosure a{text-decoration:underline;text-underline-offset:3px}
 @media(max-width:850px){.detail-cinema .fact-list{grid-template-columns:1fr}.detail-cinema .episode-list{grid-template-columns:1fr}}
 @media(max-width:650px){.detail-area{padding-top:20px}.detail-cinema .detail-grid{gap:23px}.detail-cinema .detail-description{font-size:14px}.detail-cinema .fact-list>div{padding:12px}.detail-cinema .filmography a{font-size:13px}}
+
+.detail-poster.poster-failed{min-height:310px;border:1px dashed var(--stroke);border-radius:16px;background:linear-gradient(140deg,#1e2838,#0c1018);display:flex;align-items:center;justify-content:center}.detail-poster.poster-failed::after{content:'🎬';font-size:50px;opacity:.5}
