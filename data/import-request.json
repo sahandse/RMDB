@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-11T08:04:00Z",
+  "requestedAt": "2026-10-11T08:51:20.585Z",
   "source": "RMDB administrator",
   "batch": {
     "films": 10,
     "series": 10
   },
   "mode": "telegram-first-quality-gated",
-  "note": "Immediate GitHub Actions push trigger; continue on 10-minute schedule; preserve incomplete archive records but exclude from published catalog."
+  "note": "Immediate new 10 movie + 10 series verified import request; skip duplicate IDs and exclude incomplete titles from public site."
 }
