@@ -49,6 +49,8 @@ async function verified(id){
  }
  throw Error('Supported formats: tv-123, wd-Q123 or imdb tt0903747');
 }
+const bot=await api('getMe',{});
+console.log('Telegram authentication OK; bot:',bot.username||bot.id,'; owner configured:',Boolean(owner),'channel configured:',Boolean(channel));
 const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message']});
 let touched=false;
 for(const u of updates){
@@ -56,6 +58,7 @@ for(const u of updates){
  state.offset=Math.max(state.offset,u.update_id+1);touched=true;
  const m=u.message;if(!m?.chat||m.chat.type!=='private'||String(m.from?.id)!==owner)continue;
  const text=String(m.text||'').trim();
+ console.log('Authorized command:',text.split(' ')[0]||'(none)');
  if(/^\/start(?:@\w+)?$/.test(text)||text==='/help'){await reply(m.chat.id,'RMDB curator: /add tv-123 | /add wd-Q123 | /add imdb tt0903747 | /remove tv-123 | /status');continue}
  if(text==='/status'){await reply(m.chat.id,'Approved items: '+current.items.length);continue}
  try{
@@ -72,7 +75,8 @@ for(const u of updates){
    if(current.items.length!==n){await api('sendMessage',{chat_id:channel,text:'RMDB removal: '+id});touched=true}
    await reply(m.chat.id,n===current.items.length?'Not found':'Removed: '+id);
   }else if(text.startsWith('/'))await reply(m.chat.id,'Unknown command. Send /help.');
- }catch(e){await reply(m.chat.id,'Failed: '+e.message)}
+ }catch(e){console.error('Telegram command failed:',e.message);await reply(m.chat.id,'Failed: '+e.message)}
 }
+if(!updates.length)console.log('No pending bot messages; send /start or /add in a PRIVATE chat with this bot.');
 if(touched){await mkdir(new URL('../data/',import.meta.url),{recursive:true});await writeFile(path,JSON.stringify(current,null,2)+'\n');await writeFile(statePath,JSON.stringify(state,null,2)+'\n');}
 console.log('Processed Telegram inbox updates:',updates.length,'; approved records:',current.items.length);
