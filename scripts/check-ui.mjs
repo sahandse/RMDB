@@ -5,12 +5,18 @@ for(const item of pages){
  const path='app/'+item+'.tsx';
  if(!existsSync(path)){problems.push('Missing page: '+path);continue}
  const text=readFileSync(path,'utf8');
- if(!text.includes('BrandLogo'))problems.push('Missing brand: '+path);
+ if(!text.includes('BrandLogo')&&!(item==='en/page'&&text.includes("import Home from '../page'")))problems.push('Missing brand: '+path);
  if(text.includes('useState(')||text.includes('useEffect(')){
    if(!text.trimStart().startsWith("'use client';"))problems.push('Client directive missing: '+path)
  }
  if(/href=["']\/RMDB\/(?:watch|download)\//.test(text))problems.push('Unsupported watch/download route: '+path);
 }
+const home=readFileSync('app/page.tsx','utf8');
+if(!home.includes('useLocale')||!home.includes('titleEn'))problems.push('Bilingual homepage or verified English labels missing');
+const english=readFileSync('app/en/page.tsx','utf8');
+if(!english.includes("import Home from '../page'"))problems.push('English and Persian home layouts diverged');
+const switchCode=readFileSync('app/components/language-switch.tsx','utf8');
+if(!switchCode.includes('next.delete')||!switchCode.includes('next.set'))problems.push('Locale switch must preserve route parameters');
 const layout=readFileSync('app/layout.tsx','utf8');
 if(!layout.includes('<MobileNav/>')||!layout.includes('<LanguageSwitch/>'))problems.push('Missing global navigation');
 const manifest=JSON.parse(readFileSync('public/manifest.webmanifest','utf8'));
