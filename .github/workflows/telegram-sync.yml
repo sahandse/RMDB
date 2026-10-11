@@ -91,6 +91,7 @@ jobs:
           RMDB_OMDB_REPUBLICATION_ALLOWED: ${{ vars.RMDB_OMDB_REPUBLICATION_ALLOWED }}
         run: |
           npm install --no-audit --no-fund
+          npx tsc --noEmit
           node scripts/merge-telegram-catalog.mjs
           node scripts/build-public-api.mjs
           node scripts/validate-data.mjs
