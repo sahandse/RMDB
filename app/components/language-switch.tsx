@@ -9,5 +9,5 @@ export default function LanguageSwitch(){
  let route=path;
  if(path==='/'||path==='/en'){route=en?'/':'/en'}else if(!en){next.set('lang','en')}
  const q=next.toString();const destination='/RMDB'+(route==='/'?'/':route+'/')+(q?'?'+q:'');
- return <a href={destination} className="locale-toggle" lang={en?'fa':'en'} aria-label={en?'Switch to Persian':'تغییر زبان به انگلیسی'}>{en?'فارسی':'English'}</a>;
+ return <div className="global-tools"><a href={en?'/RMDB/api/?lang=en':'/RMDB/api/'} className="api-shortcut">API</a><a href={destination} className="locale-toggle" lang={en?'fa':'en'} aria-label={en?'Switch to Persian':'تغییر زبان به انگلیسی'}>{en?'فارسی':'English'}</a></div>;
 }
