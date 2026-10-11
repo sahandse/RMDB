@@ -41,6 +41,9 @@ jobs:
           test -f out/explore/index.html
           test -f out/calendar/index.html
           test -f out/title/index.html
+          test -f out/episode/index.html
+          test -f out/iran/index.html
+          test -f out/watchlist/index.html
       - name: Create Pages files
         run: touch out/.nojekyll
       - name: Upload artifact
