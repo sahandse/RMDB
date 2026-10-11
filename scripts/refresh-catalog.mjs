@@ -10,7 +10,11 @@ const request = async (url, headers={}) => {
  return response.json();
 };
 try{
- const shows=await request('https://api.tvmaze.com/shows?page=0');
+ const shows=[];
+ for(let page=0;page<5;page++){
+  try {const batch=await request('https://api.tvmaze.com/shows?page='+page);if(!Array.isArray(batch)||!batch.length)break;shows.push(...batch)}
+  catch(e){snapshot.errors.push('TVmaze page '+page+': '+String(e));break}
+ }
  snapshot.shows=shows.filter(s=>s.id&&s.name).map(s=>({id:'tv-'+s.id,title:s.name,year:s.premiered?.slice(0,4)||null,image:s.image?.medium||null,rating:s.rating?.average??null,source:'TVmaze'}));
 }catch(e){snapshot.errors.push('TVmaze: '+String(e))}
 try{
