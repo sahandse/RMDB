@@ -48,3 +48,30 @@ html[dir="ltr"] .fact-list>div,html[dir="ltr"] .compare-table>div{text-align:lef
 .api-docs{max-width:1120px}.api-status-panel{border:1px solid #f4b86065;background:#f4b8600c;border-radius:18px;padding:18px 22px;margin:25px 0 40px}.api-status-panel p{color:var(--muted);margin:6px 0 0}
 .api-endpoints{display:grid;gap:11px}.api-endpoint{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px;border:1px solid var(--stroke);background:var(--surface);border-radius:16px}.api-endpoint>div:first-child{min-width:0}.api-endpoint strong{display:block;margin-bottom:6px}.api-endpoint code{display:block;direction:ltr;text-align:left;color:#a8bdd4;font-size:12px;overflow-wrap:anywhere}.api-actions{display:flex;gap:10px;flex-shrink:0}.api-actions a,.api-actions button{font-size:12px;border:1px solid #485365;background:#252d39;color:#fff;padding:9px 13px;border-radius:10px}.api-code{max-width:100%;padding:22px;overflow-x:auto;border-radius:16px;background:#101722;color:#dce8f4;border:1px solid var(--stroke);font-size:13px;line-height:1.8}.api-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.api-source-grid article{border:1px solid var(--stroke);background:var(--surface);padding:19px;border-radius:17px}.api-source-grid h3{margin:0}.api-source-grid p{color:var(--muted);font-size:13px;line-height:1.9}.api-source-grid a{color:var(--gold);font-size:12px}
 @media(max-width:700px){.global-tools{bottom:calc(78px + env(safe-area-inset-bottom,0px));inset-inline-end:12px}.global-tools .locale-toggle{position:static;inset:auto}.api-endpoint{align-items:stretch;flex-direction:column}.api-actions{justify-content:flex-end}.api-source-grid{grid-template-columns:1fr}}
+
+/* RMDB movie and series detail refinements */
+.detail-cinema{position:relative;isolation:isolate}
+.detail-cinema .cinema-backdrop{opacity:.4;pointer-events:none}
+.detail-cinema .detail-grid{position:relative}
+.detail-cinema .detail-grid>div:last-child{min-width:0}
+.detail-cinema h1{line-height:1.25;letter-spacing:-.03em;overflow-wrap:anywhere}
+.detail-cinema .detail-description{font-size:clamp(15px,1.65vw,17px);line-height:2.05;max-width:74ch;margin:18px 0 26px;white-space:pre-line}
+.detail-cinema .cinema-pills{display:flex;flex-wrap:wrap;gap:9px;margin-block:12px 16px}
+.detail-cinema .cinema-pills span{border:1px solid var(--stroke);background:#161d27d9;border-radius:999px;padding:4px 14px;font-size:13px}
+.detail-cinema .fact-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:32px}
+.detail-cinema .fact-list>div{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;min-width:0;gap:8px;border:1px solid var(--stroke);border-radius:15px;background:#161d27bd;padding:13px 17px}
+.detail-cinema .fact-list dt{font-size:12px;color:var(--muted)}
+.detail-cinema .fact-list dd{margin:0;width:100%;font-weight:600;overflow-wrap:anywhere;font-size:14px;line-height:1.8}
+.detail-cinema .filterbar{display:flex;gap:10px;flex-wrap:wrap}
+.detail-cinema .filterbar .secondary-link{border:1px solid var(--stroke);border-radius:999px;padding:7px 14px}
+.detail-cinema .filmography{display:flex;flex-wrap:wrap;gap:10px}
+.detail-cinema .filmography a{display:inline-flex;align-items:center;max-width:100%;border:1px solid var(--stroke);border-radius:13px;padding:9px 14px;background:var(--surface);font-size:14px;transition:border-color .2s,transform .2s}
+.detail-cinema .filmography a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.detail-cinema .episode-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 30px}
+.detail-cinema .episode-list a{border:1px solid var(--stroke);border-radius:12px;padding:13px 15px;background:var(--surface);overflow-wrap:anywhere}
+.credit-disclosure{margin-top:12px;font-size:12px;max-width:750px}
+.credit-disclosure summary{cursor:pointer;color:var(--muted);width:fit-content}
+.credit-disclosure p{line-height:1.9;color:var(--muted)}
+.credit-disclosure a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:850px){.detail-cinema .fact-list{grid-template-columns:1fr}.detail-cinema .episode-list{grid-template-columns:1fr}}
+@media(max-width:650px){.detail-area{padding-top:20px}.detail-cinema .detail-grid{gap:23px}.detail-cinema .detail-description{font-size:14px}.detail-cinema .fact-list>div{padding:12px}.detail-cinema .filmography a{font-size:13px}}
