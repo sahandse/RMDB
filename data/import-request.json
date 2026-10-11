@@ -1,0 +1,10 @@
+{
+  "requestedAt": "2026-10-11",
+  "source": "RMDB administrator",
+  "batch": {
+    "films": 10,
+    "series": 10
+  },
+  "mode": "telegram-first",
+  "note": "Run the existing verified metadata importer; skip previously archived records. This file is a trigger, not fictional content."
+}
