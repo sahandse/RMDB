@@ -1,0 +1,61 @@
+// GitHub Actions-only Telegram inbox. Never bundle credentials into the website.
+// Commands: /add tv-<id>, /add wd-Q<id>, /remove <id>, /status
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+const token=process.env.RMDB_TELEGRAM_BOT_TOKEN;
+const owner=String(process.env.RMDB_TELEGRAM_OWNER_ID||'');
+const channel=String(process.env.RMDB_TELEGRAM_CHANNEL_ID||'');
+if(!token||!/^\d+$/.test(owner)||!/^-100\d+$/.test(channel))throw Error('Missing Telegram secrets: BOT_TOKEN, OWNER_ID, CHANNEL_ID');
+const path=new URL('../data/telegram-curated.json',import.meta.url);
+const statePath=new URL('../data/telegram-offset.json',import.meta.url);
+const load=async(url,fallback)=>{try{return JSON.parse(await readFile(url,'utf8'))}catch{return fallback}};
+const current=await load(path,{version:1,items:[]});
+const state=await load(statePath,{offset:0});
+if(!Array.isArray(current.items)||!Number.isSafeInteger(state.offset))throw Error('Invalid saved Telegram state');
+const api=async(method,params)=>{
+ const response=await fetch('https://api.telegram.org/bot'+token+'/'+method,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(params),signal:AbortSignal.timeout(25000)});
+ if(!response.ok)throw Error('Telegram HTTP '+response.status);
+ const json=await response.json();if(!json.ok)throw Error('Telegram API error '+json.error_code);
+ return json.result;
+};
+const reply=async(chat_id,text)=>api('sendMessage',{chat_id,text}).catch(e=>console.error('Reply failed:',e.message));
+const fetchJson=async(url)=>{const r=await fetch(url,{headers:{Accept:'application/json','User-Agent':'RMDB Telegram curator (https://github.com/sahandse/RMDB)'},signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Source HTTP '+r.status);return r.json()};
+async function verified(id){
+ if(/^tv-\d+$/.test(id)){const key=id.slice(3);const v=await fetchJson('https://api.tvmaze.com/shows/'+key);
+  if(String(v.id)!==key||!v.name)throw Error('TVmaze identifier mismatch');
+  return {id,title:v.name,titleEn:v.name,year:v.premiered?.slice(0,4)||null,image:v.image?.medium||null,rating:v.rating?.average??null,genres:v.genres||[],source:'TVmaze',license:'CC BY-SA 4.0'};
+ }
+ if(/^wd-Q\d+$/.test(id)){const key=id.slice(3);const v=await fetchJson('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+key+'&props=labels%7Cclaims&languages=fa%7Cen&format=json');
+  const e=v.entities?.[key];if(!e||e.missing!==undefined)throw Error('Unknown Wikidata item');
+  const instance=(e.claims?.P31||[]).map(x=>x.mainsnak?.datavalue?.value?.id);
+  if(!instance.includes('Q11424'))throw Error('Only verified film (Q11424) Wikidata IDs supported');
+  const title=e.labels?.fa?.value||e.labels?.en?.value;if(!title)throw Error('No verified title');
+  return {id,title,titleEn:e.labels?.en?.value||null,year:null,source:'Wikidata',license:'CC0-1.0'};
+ }
+ throw Error('Supported formats: tv-123 or wd-Q123');
+}
+const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message']});
+let touched=false;
+for(const u of updates){
+ if(!Number.isSafeInteger(u.update_id))continue;
+ state.offset=Math.max(state.offset,u.update_id+1);touched=true;
+ const m=u.message;if(!m?.chat||m.chat.type!=='private'||String(m.from?.id)!==owner)continue;
+ const text=String(m.text||'').trim();
+ if(/^\/start(?:@\w+)?$/.test(text)||text==='/help'){await reply(m.chat.id,'RMDB curator: /add tv-123 | /add wd-Q123 | /remove tv-123 | /status');continue}
+ if(text==='/status'){await reply(m.chat.id,'Approved items: '+current.items.length);continue}
+ try{
+  if(text.startsWith('/add ')){
+   const id=text.slice(5).trim();if(current.items.some(x=>x.id===id)){await reply(m.chat.id,'Already saved: '+id);continue}
+   const item=await verified(id);
+   // Telegram channel acts as a durable human-readable audit of approved entries.
+   await api('sendMessage',{chat_id:channel,text:'RMDB approved record\n'+JSON.stringify(item),disable_web_page_preview:true});
+   current.items.push(item);touched=true;await reply(m.chat.id,'Saved: '+item.title+' ('+id+')');
+  }else if(text.startsWith('/remove ')){
+   const id=text.slice(8).trim();if(!/^(tv-\d+|wd-Q\d+)$/.test(id))throw Error('Invalid ID');
+   const n=current.items.length;current.items=current.items.filter(x=>x.id!==id);
+   if(current.items.length!==n){await api('sendMessage',{chat_id:channel,text:'RMDB removal: '+id});touched=true}
+   await reply(m.chat.id,n===current.items.length?'Not found':'Removed: '+id);
+  }else if(text.startsWith('/'))await reply(m.chat.id,'Unknown command. Send /help.');
+ }catch(e){await reply(m.chat.id,'Failed: '+e.message)}
+}
+if(touched){await mkdir(new URL('../data/',import.meta.url),{recursive:true});await writeFile(path,JSON.stringify(current,null,2)+'\n');await writeFile(statePath,JSON.stringify(state,null,2)+'\n');}
+console.log('Processed Telegram inbox updates:',updates.length,'; approved records:',current.items.length);
