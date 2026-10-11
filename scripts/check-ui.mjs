@@ -10,6 +10,9 @@ for(const item of pages){
    if(!text.trimStart().startsWith("'use client';"))problems.push('Client directive missing: '+path)
  }
  if(/href=["']\/RMDB\/(?:watch|download)\//.test(text))problems.push('Unsupported watch/download route: '+path);
+ const untranslated=[...text.matchAll(/>([^<>{}]*[\u0600-\u06FF][^<>{}]*)</g)].map(x=>x[1].trim()).filter(x=>x&&x!=='فارسی');
+ const labels=[...text.matchAll(/(?:placeholder|aria-label)="([^"]*[\u0600-\u06FF][^"]*)"/g)];
+ if(untranslated.length||labels.length)problems.push('Unlocalized static UI literals in '+path+': '+untranslated.slice(0,3).join(', '));
 }
 const home=readFileSync('app/page.tsx','utf8');
 if(!home.includes('useLocale')||!home.includes('titleEn'))problems.push('Bilingual homepage or verified English labels missing');
