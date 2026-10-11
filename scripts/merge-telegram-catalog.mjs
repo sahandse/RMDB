@@ -40,6 +40,7 @@ if(licensed){
   const target=all.find(v=>v.imdbId===x.imdbId);
   if(!target)continue;
   for(const [key,val] of Object.entries(x.fields||{}))if(val!==null&&val!==undefined&&val!==''&&!(Array.isArray(val)&&!val.length))target[key]=val;
+  if(typeof x.fields?.imdbRating==='string'&&/^\d(?:\.\d)?$|^10(?:\.0)?$/.test(x.fields.imdbRating))target.rating=Number(x.fields.imdbRating);
   target.detailProvider='OMDb';
  }
 }
