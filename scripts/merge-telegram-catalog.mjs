@@ -29,6 +29,20 @@ const at=current[category].findIndex(x=>x.id===item.id);
  if(at<0)current[category].push(entry);
  else current[category][at]={...current[category][at],...entry};
 }
+// Licensed OMDb snapshot takes precedence only if the site operator has confirmed
+// appropriate republication rights. Otherwise TVmaze/Wikidata remain public sources.
+const licensed=process.env.RMDB_OMDB_REPUBLICATION_ALLOWED==='true';
+if(licensed){
+ const supplemental=await load(new URL('../data/omdb-licensed-metadata.json',import.meta.url),{items:[]});
+ for(const x of supplemental.items||[]){
+  if(!/^tt\d{7,9}$/.test(x.imdbId||''))continue;
+  const all=[...current.movies,...current.shows];
+  const target=all.find(v=>v.imdbId===x.imdbId);
+  if(!target)continue;
+  for(const [key,val] of Object.entries(x.fields||{}))if(val!==null&&val!==undefined&&val!==''&&!(Array.isArray(val)&&!val.length))target[key]=val;
+  target.detailProvider='OMDb';
+ }
+}
 if(!current.shows.length)throw Error('No verified TVmaze series in curated or cached archive');
 current.updatedAt=new Date().toISOString();
 await mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
