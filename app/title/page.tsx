@@ -36,8 +36,8 @@ function DetailContent() {
       const record=[...(local.shows||[]),...(local.movies||[])].find((x:{id:string})=>x.id===id);
       if(record){
         const title=english?(record.titleEn||record.title):record.title;
-        const cast=(record.cast||[]).filter((x:{id:number;name:string})=>x?.id&&x?.name).map((x:{id:number;name:string})=>({id:x.id,name:x.name,character:x.character||null,image:x.image||null}));
-        const episodes=(record.episodes||[]).filter((x:{id:number;name:string;season:number})=>x?.id&&x?.name&&Number.isInteger(x.season)).map((x:{id:number;name:string;season:number;number:number|null})=>({id:x.id,name:x.name,season:x.season,number:x.number,airdate:x.airdate,runtime:x.runtime,summary:x.summary,image:x.image||null}));
+        const cast=(record.cast||[]).filter((x:{id:number;name:string})=>x?.id&&x?.name).map((x:{id:number;name:string;character?:string|null;image?:string|null})=>({id:x.id,name:x.name,character:x.character||null,image:x.image||null}));
+        const episodes=(record.episodes||[]).filter((x:{id:number;name:string;season:number})=>x?.id&&x?.name&&Number.isInteger(x.season)).map((x:{id:number;name:string;season:number;number:number|null;airdate?:string;runtime?:number;summary?:string;image?:string|null})=>({id:x.id,name:x.name,season:x.season,number:x.number,airdate:x.airdate,runtime:x.runtime,summary:x.summary,image:x.image||null}));
         const gallery=[...new Set([record.image,...(Array.isArray(record.gallery)?record.gallery:[])].filter((x:unknown)=>typeof x==='string'&&(/^(\/RMDB\/|https:\/\/)/.test(x as string))))] as string[];
         const descr=english?(record.descriptionEn||record.plot||record.summary||record.descriptionFa):(record.descriptionFa||record.plot||record.summary||record.descriptionEn);
         const facts:[string,string][]=[['سال انتشار',record.year||'نامشخص']];
