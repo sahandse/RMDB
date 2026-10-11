@@ -36,5 +36,5 @@ for(const key of ['movies','shows','people']){
   snapshot.errors.push(key+': retained previous verified snapshot');
  }
 }
-if(!snapshot.shows.length&&!snapshot.movies.length){console.error('No verified catalog records available.');process.exitCode=1}
+if(!snapshot.shows.length||!snapshot.movies.length){console.error('Both movies and shows must have verified records before publishing.');process.exitCode=1}
 else{await mkdir(root,{recursive:true});await writeFile(new URL('catalog.json',root),JSON.stringify(snapshot,null,2)+'\n');console.log('Saved verified snapshot',snapshot.shows.length,snapshot.movies.length,snapshot.people.length,snapshot.errors);}
