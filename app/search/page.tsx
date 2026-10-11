@@ -12,9 +12,10 @@ function SearchBody(){
    setLoading(true);
    try{
     const term=encodeURIComponent(query.trim());
+    const language=/[آ-ی]/.test(query)?'fa':'en';
     const [tv,wiki,saved]=await Promise.allSettled([
       fetch('https://api.tvmaze.com/search/shows?q='+term,{signal:controller.signal}).then(r=>r.ok?r.json():[]),
-      fetch('https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+term+'&language=fa&uselang=fa&type=item&limit=20&format=json&origin=*',{signal:controller.signal}).then(r=>r.ok?r.json():{search:[]}),
+      fetch('https://www.wikidata.org/w/api.php?action=wbsearchentities&search='+term+'&language='+language+'&uselang=fa&type=item&limit=20&format=json&origin=*',{signal:controller.signal}).then(r=>r.ok?r.json():{search:[]}),
       fetch('/RMDB/data/catalog.json',{signal:controller.signal}).then(r=>r.ok?r.json():{shows:[],movies:[]})
     ]);
     const shows:Hit[]=tv.status==='fulfilled'?tv.value.map((v:{show:{id:number;name:string;premiered?:string;image?:{medium?:string};summary?:string}})=>({id:'tv-'+v.show.id,name:v.show.name,kind:'series',year:v.show.premiered?.slice(0,4),image:v.show.image?.medium})): [];
