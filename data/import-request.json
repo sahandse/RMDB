@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-11T09:00:07.502Z",
+  "requestedAt": "2026-10-11T09:24:22.675Z",
   "source": "RMDB administrator",
   "batch": {
     "films": 10,
     "series": 10
   },
   "mode": "recurring-10-minute-quality-gated",
-  "note": "Start scheduled 10 movie + 10 series import immediately; no manual approval; continue every 10 minutes daily, with OMDb usage capped at 1000 attempts per UTC day and automatic rollover."
+  "note": "Run Telegram inbox immediately to respond to /start and show owner-only inline keyboard after bot diagnostics fix."
 }
