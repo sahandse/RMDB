@@ -5,6 +5,8 @@ on:
     - cron: '*/15 * * * *'
 permissions:
   contents: write
+  pages: write
+  id-token: write
 concurrency:
   group: rmdb-telegram-sync
   cancel-in-progress: false
@@ -34,3 +36,17 @@ jobs:
             git commit -m "data: sync verified Telegram curator records"
             git push
           fi
+      - name: Build updated catalog and public pages
+        run: |
+          npm install --no-audit --no-fund
+          node scripts/refresh-catalog.mjs
+          node scripts/build-public-api.mjs
+          node scripts/validate-data.mjs
+          node scripts/check-ui.mjs
+          npm run build
+          touch out/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+      - name: Deploy updated pages
+        uses: actions/deploy-pages@v4
