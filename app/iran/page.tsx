@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {useEffect,useState} from 'react';
 type Film={id:string;title:string;year:string|null};
 export default function Iran(){const [items,setItems]=useState<Film[]>([]),[state,setState]=useState('در حال دریافت اطلاعات سینمای ایران...');
