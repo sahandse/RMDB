@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {Suspense,useEffect,useState} from 'react';
 import {useSearchParams} from 'next/navigation';
 type Episode={id:number;name:string;season:number;number:number|null;airdate?:string;summary?:string;runtime?:number;image?:{original?:string;medium?:string};rating?:{average:number|null};_embedded?:{show?:{id:number;name:string}}};
