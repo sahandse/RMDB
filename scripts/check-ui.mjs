@@ -1,5 +1,5 @@
 import {readFileSync,existsSync} from 'node:fs';
-const pages=['page','en/page','title/page','person/page','actor/page','episode/page','people/page','search/page','explore/page','calendar/page','iran/page','top/page','compare/page','watchlist/page'];
+const pages=['page','en/page','title/page','person/page','actor/page','episode/page','people/page','search/page','explore/page','calendar/page','iran/page','top/page','compare/page','watchlist/page','api/page'];
 let problems=[];
 for(const item of pages){
  const path='app/'+item+'.tsx';
@@ -14,6 +14,8 @@ for(const item of pages){
  const labels=[...text.matchAll(/(?:placeholder|aria-label)="([^"]*[\u0600-\u06FF][^"]*)"/g)];
  if(untranslated.length||labels.length)problems.push('Unlocalized static UI literals in '+path+': '+untranslated.slice(0,3).join(', '));
 }
+const api=readFileSync('app/api/page.tsx','utf8');
+if(!api.includes('movies.json')||!api.includes('people.json')||!api.includes('Wikidata')||!api.includes('TVmaze'))problems.push('API portal missing endpoints or sources');
 const home=readFileSync('app/page.tsx','utf8');
 if(!home.includes('useLocale')||!home.includes('titleEn'))problems.push('Bilingual homepage or verified English labels missing');
 const english=readFileSync('app/en/page.tsx','utf8');
