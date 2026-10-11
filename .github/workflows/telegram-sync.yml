@@ -37,6 +37,11 @@ jobs:
           test -n "$OWNER_ID" || { echo 'Missing RMDB_TELEGRAM_OWNER_ID'; exit 1; }
           test -n "$CHANNEL_ID" || { echo 'Missing RMDB_TELEGRAM_CHANNEL_ID'; exit 1; }
           echo 'Required Telegram configuration is present (values hidden).'
+      - name: Check ingestion script syntax
+        run: |
+          node --check scripts/auto-import-telegram.mjs
+          node --check scripts/merge-telegram-catalog.mjs
+          node --check scripts/sync-telegram.mjs
       - name: Poll approved bot commands
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
