@@ -53,7 +53,9 @@ try{
     await add({id,title,titleEn:x.labels?.en?.value||null,year:typeof release==='string'?release.match(/\d{4}/)?.[0]||null:null,descriptionFa:x.descriptions?.fa?.value||null,descriptionEn:x.descriptions?.en?.value||null,imdbId:typeof imdbId==='string'?imdbId:null,source:'Wikidata',license:'CC0-1.0'},'films')
    }catch(e){counts.errors.push(qid+': '+e.message)}
   }
-  // Stay on the current batch while verified records remain unarchived.\n  if(rows.every(v=>existing.has('wd-'+(v.film?.value?.split('/').pop()||'')))||counts.films<10)state.movieOffset+=40;\n  await persist();
+  // Resume the same candidate batch if the limit was reached midway.
+  if(counts.films<10 || rows.every(v=>existing.has('wd-'+(v.film?.value?.split('/').pop()||''))))state.movieOffset+=40;
+  await persist();
  }
 }catch(e){counts.errors.push('Wikidata: '+e.message)}
 await persist();
