@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-11T09:24:22.675Z",
-  "source": "RMDB administrator",
+  "requestedAt": "2026-10-11T10:32:55.544Z",
+  "source": "RMDB administrator via ChatGPT",
   "batch": {
     "films": 10,
     "series": 10
   },
-  "mode": "recurring-10-minute-quality-gated",
-  "note": "Run Telegram inbox immediately to respond to /start and show owner-only inline keyboard after bot diagnostics fix."
+  "mode": "immediate-10-plus-10-verified",
+  "note": "User requested 20 new records now: 10 movies and 10 TV series, skip duplicates, publish licensed/quality-complete records and keep incomplete items in archive."
 }
