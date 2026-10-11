@@ -14,13 +14,18 @@ if(!current)current={updatedAt:null,movies:[],shows:[],people:[],errors:[]};
 const curated=await load(curatedFile,{items:[]});
 for(const key of ['movies','shows','people'])if(!Array.isArray(current[key]))current[key]=[];
 if(!Array.isArray(curated.items))throw Error('Invalid Telegram catalog');
+const credits=await load(new URL('../public/data/image-credits.json',import.meta.url),{items:{}});
 const before={movies:current.movies.length,shows:current.shows.length};
 for(const item of curated.items){
  const category=item.source==='TVmaze'&&/^tv-\d+$/.test(item.id)?'shows':item.source==='Wikidata'&&/^wd-Q\d+$/.test(item.id)?'movies':null;
  if(!category||typeof item.title!=='string'||!item.title.trim())continue;
  const entry={id:item.id,title:item.title,titleEn:item.titleEn||null,year:item.year||null,source:item.source};
  for(const field of ['image','rating','genres','summary','imdbId','language','status','network','descriptionFa','descriptionEn','cast','episodes','officialSite','ended','premiered','averageRuntime','type','wikidataId','credits','countries','languages','productionCompanies','releaseDate','runtimeMinutes'])if(item[field]!=null)entry[field]=item[field];
- const at=current[category].findIndex(x=>x.id===item.id);
+ if(category==='movies'&&credits.items?.[item.id]?.image){
+  entry.image=credits.items[item.id].image;
+  entry.imageCredit=credits.items[item.id];
+}
+const at=current[category].findIndex(x=>x.id===item.id);
  if(at<0)current[category].push(entry);
  else current[category][at]={...current[category][at],...entry};
 }
