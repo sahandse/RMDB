@@ -32,6 +32,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Generate real public catalog
         run: node scripts/refresh-catalog.mjs
+      - name: Check page branding and navigation
+        run: node scripts/check-ui.mjs
       - name: Build static site
         run: npm run build
       - name: Validate exported catalog
