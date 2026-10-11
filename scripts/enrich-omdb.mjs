@@ -11,14 +11,22 @@ const file=new URL('../data/omdb-match-report.json',import.meta.url);
 const curated=JSON.parse(await readFile(new URL('../data/telegram-curated.json',import.meta.url),'utf8'));
 let report;
 try{report=JSON.parse(await readFile(file,'utf8'))}catch{report={version:1,lookups:{}}}
-let done=0;
+// Count ALL attempted HTTP calls, including errors, against the per-day account budget.
+const budgetFile=new URL('../data/omdb-daily-budget.json',import.meta.url);
+const today=new Date().toISOString().slice(0,10);
+let budget={date:today,requests:0};
+try{const saved=JSON.parse(await readFile(budgetFile,'utf8'));if(saved.date===today&&Number.isInteger(saved.requests)&&saved.requests>=0)budget=saved}catch{}
+const dailyMax=1000,perRunMax=4;
+const saveBudget=async()=>{await mkdir(new URL('../data/',import.meta.url),{recursive:true});await writeFile(budgetFile,JSON.stringify(budget,null,2)+'\n')};
+let done=0,attempted=0;
 for(const item of curated.items||[]){
  const imdb=item.imdbId;
- if(done>=2)break; // <= 576 requests per 24h at a strict 5-minute schedule.
+ if(attempted>=perRunMax||budget.requests>=dailyMax)break;
  if(!/^tt\d{7,9}$/.test(imdb||'')||report.lookups[imdb])continue;
  const url=new URL('https://www.omdbapi.com/');
  url.searchParams.set('i',imdb);url.searchParams.set('apikey',key);url.searchParams.set('r','json');
  try{
+  budget.requests++;attempted++;await saveBudget();
   const response=await fetch(url,{signal:AbortSignal.timeout(15000)});
   // Never print full URL: it contains the secret key.
   if(!response.ok)throw Error('OMDb HTTP '+response.status);
@@ -41,4 +49,4 @@ for(const item of curated.items||[]){
 }
 await mkdir(new URL('../data/',import.meta.url),{recursive:true});
 await writeFile(file,JSON.stringify(report,null,2)+'\n');
-console.log('OMDb ID verification requests completed:',done,'; cached matches:',Object.keys(report.lookups).length);
+console.log('OMDb verification summary:',JSON.stringify({date:today,requestAttemptsThisRun:attempted,verifiedThisRun:done,requestsToday:budget.requests,dailyLimit:dailyMax,cachedMatches:Object.keys(report.lookups).length}));
