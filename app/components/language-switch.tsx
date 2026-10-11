@@ -1,8 +1,10 @@
 'use client';
 import {usePathname,useSearchParams} from 'next/navigation';
+import {useEffect} from 'react';
 export default function LanguageSwitch(){
  const path=usePathname(),params=useSearchParams();
  const en=path.startsWith('/en')||params.get('lang')==='en';
+ useEffect(()=>{document.documentElement.lang=en?'en':'fa';document.documentElement.dir=en?'ltr':'rtl';},[en]);
  const search=new URLSearchParams(params.toString());
  const target=en?'fa':'en';
  if(target==='fa')search.delete('lang');else search.set('lang','en');
