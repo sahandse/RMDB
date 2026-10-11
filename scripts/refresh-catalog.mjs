@@ -25,7 +25,7 @@ try{
 try {
  const peopleQuery='SELECT ?person ?personLabel ?personEn ?birth WHERE { ?person wdt:P106 wd:Q33999. OPTIONAL { ?person wdt:P569 ?birth. } OPTIONAL { ?person rdfs:label ?personEn FILTER(LANG(?personEn) = "en") } SERVICE wikibase:label { bd:serviceParam wikibase:language "fa,en". } } LIMIT 200';
  const people=await request('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(peopleQuery),{Accept:'application/sparql-results+json'});
- snapshot.people=people.results.bindings.map(x=>({id:x.person.value.split('/').pop(),title:x.personLabel?.value||'',titleEn:x.personEn?.value||null,birth:x.birth?.value?.slice(0,10)||null,source:'Wikidata'})).filter(x=>x.title&&!/^Q\\d+$/.test(x.title));
+ snapshot.people=people.results.bindings.map(x=>({id:x.person.value.split('/').pop(),title:x.personLabel?.value||'',titleEn:x.personEn?.value||null,birth:x.birth?.value?.slice(0,10)||null,source:'Wikidata'})).filter(x=>x.title&&!/^Q\d+$/.test(x.title));
 }catch(e){snapshot.errors.push('People: '+String(e))}
 if(!snapshot.shows.length&&!snapshot.movies.length){console.error('No fresh data. Keeping previous snapshot.');process.exitCode=1}
 else{await mkdir(root,{recursive:true});await writeFile(new URL('catalog.json',root),JSON.stringify(snapshot,null,2)+'\n');console.log('Saved snapshot',snapshot.shows.length,snapshot.movies.length,snapshot.errors);}
