@@ -49,6 +49,7 @@ jobs:
           node --check scripts/auto-import-telegram.mjs
           node --check scripts/merge-telegram-catalog.mjs
           node --check scripts/sync-telegram.mjs
+          node --check scripts/notify-manual-import.mjs
           node --check scripts/check-telegram-pipeline.mjs
           node --check scripts/report-data-health.mjs
       - name: Poll approved bot commands
@@ -112,3 +113,9 @@ jobs:
           path: out
       - name: Deploy updated pages
         uses: actions/deploy-pages@v4
+      - name: Notify owner about requested import after successful deployment
+        if: success()
+        env:
+          RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
+          RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
+        run: node scripts/notify-manual-import.mjs
