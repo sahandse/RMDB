@@ -10,12 +10,12 @@ export async function getShows(): Promise<Entry[]> {
   return shows.filter(s => s.name && s.url).slice(0, 12).map(s => ({ id: 'tv-' + s.id, title: s.name, subtitle: 'سریال تلویزیونی', year: year(s.premiered), image: s.image?.medium || null, url: s.url, source: 'TVmaze' as const, rating: s.rating?.average ?? null }));
  } catch { return []; }
 }
-export async function getFilms(): Promise<Entry[]> {
+export async function getFilms(language: 'fa' | 'en' = 'fa'): Promise<Entry[]> {
  const query = `SELECT ?film ?filmLabel ?date ?image WHERE {
   ?film wdt:P31 wd:Q11424.
   OPTIONAL { ?film wdt:P577 ?date. }
   OPTIONAL { ?film wdt:P18 ?image. }
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "fa,en". }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "${language},${language === 'fa' ? 'en' : 'fa'}". }
  } LIMIT 12`;
  try {
   const url = 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query);
