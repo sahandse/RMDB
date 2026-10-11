@@ -68,6 +68,7 @@ jobs:
           test -f out/top/index.html
           test -f out/compare/index.html
           test -f out/locations/index.html
+          test -f out/openapi.json
       - name: Create Pages files
         run: touch out/.nojekyll
       - name: Upload artifact
