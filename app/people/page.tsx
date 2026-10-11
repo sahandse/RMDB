@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {useEffect,useState} from 'react';
 type Person={id:number;name:string;image?:{medium?:string}};
 export default function People(){
