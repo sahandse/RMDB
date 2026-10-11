@@ -61,6 +61,7 @@ for(const u of updates){
   const permitted=String(callback.from?.id)===owner&&callback.message?.chat?.type==='private';
   if(!permitted){await api('answerCallbackQuery',{callback_query_id:callback.id,text:'دسترسی مجاز نیست',show_alert:true}).catch(()=>{});continue}
   if(callback.data==='rmdb_import_10_10'){
+   await writeFile(new URL('../data/manual-import-request.json',import.meta.url),JSON.stringify({requestedAt:new Date().toISOString(),chatId:String(callback.message.chat.id),request:'10 movies and 10 series'})+'\n');
    await api('answerCallbackQuery',{callback_query_id:callback.id,text:'درخواست دریافت شد؛ نتیجه پس از اجرای واردکننده مشخص می‌شود.'});
    await reply(callback.message.chat.id,'🎬 درخواست ۱۰ فیلم و ۱۰ سریال ثبت شد. این Workflow واردکننده را در همین اجرا فراخوانی می‌کند؛ تعداد نهایی به آثار معتبر و نتیجه انتشار بستگی دارد.');
   }else await api('answerCallbackQuery',{callback_query_id:callback.id,text:'دکمه ناشناخته'}).catch(()=>{});
