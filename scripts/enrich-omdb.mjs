@@ -3,7 +3,10 @@
 // metadata locally only; DO NOT copy OMDb plot/posters/ratings into public CC0 API.
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const key=process.env.RMDB_OMDB_API_KEY;
+const botToken=process.env.RMDB_TELEGRAM_BOT_TOKEN;
+const channel=process.env.RMDB_TELEGRAM_CHANNEL_ID;
 if(!key){console.log('OMDb disabled: configure RMDB_OMDB_API_KEY as an Actions secret.');process.exit(0)}
+if(!botToken||!/^[-]100\d+$/.test(channel||''))throw Error('Telegram secrets required for OMDb verification archive');
 const file=new URL('../data/omdb-match-report.json',import.meta.url);
 const curated=JSON.parse(await readFile(new URL('../data/telegram-curated.json',import.meta.url),'utf8'));
 let report;
@@ -22,7 +25,17 @@ for(const item of curated.items||[]){
   const data=await response.json();
   if(data.Response!=='True'){console.warn('OMDb did not resolve a title:',imdb);continue}
   if(data.imdbID?.toLowerCase()!==imdb.toLowerCase())throw Error('OMDb ID mismatch');
-  report.lookups[imdb]={matchedId:imdb,originalRecordId:item.id,verifiedAt:new Date().toISOString(),type:data.Type||null,releaseYear:data.Year||null,titleMatches:Boolean(data.Title&&data.Title.toLowerCase()===String(item.titleEn||item.title).toLowerCase())};
+  const record={matchedId:imdb,originalRecordId:item.id,verifiedAt:new Date().toISOString(),type:data.Type||null,releaseYear:data.Year||null,titleMatches:Boolean(data.Title&&data.Title.toLowerCase()===String(item.titleEn||item.title).toLowerCase()),source:'OMDb identifier cross-check'};
+  const form=new FormData();
+  form.set('chat_id',channel);
+  form.set('caption','RMDB OMDb ID verification · '+imdb+' · '+item.id);
+  form.set('document',new Blob([JSON.stringify(record,null,2)],{type:'application/json'}),imdb+'-verified.json');
+  const sent=await fetch('https://api.telegram.org/bot'+botToken+'/sendDocument',{method:'POST',body:form,signal:AbortSignal.timeout(25000)});
+  const reply=await sent.json();
+  if(!sent.ok||!reply.ok)throw Error('Telegram OMDb archive failed: '+(reply.description||sent.status));
+  report.lookups[imdb]={...record,telegramMessageId:reply.result.message_id};
+  await mkdir(new URL('../data/',import.meta.url),{recursive:true});
+  await writeFile(file,JSON.stringify(report,null,2)+'\n');
   done++;
  }catch(e){console.warn('OMDb lookup error for',imdb,':',e.message)}
 }
