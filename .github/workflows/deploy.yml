@@ -38,6 +38,8 @@ jobs:
         run: |
           test -f out/index.html
           test -f out/en/index.html
+          test -f out/actor/index.html
+          test -f out/data/catalog.json
           test -f out/search/index.html
           test -f out/person/index.html
           test -f out/people/index.html
