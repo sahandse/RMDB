@@ -58,8 +58,8 @@ for(const key of ['movies','shows','people']){
 try{
  const curated=JSON.parse(await readFile(new URL('../data/telegram-curated.json',import.meta.url),'utf8'));
  for(const item of Array.isArray(curated.items)?curated.items:[]){
-  const target=item.source==='TVmaze'&&/^tv-\\d+$/.test(item.id)?snapshot.shows:
-   item.source==='Wikidata'&&/^wd-Q\\d+$/.test(item.id)?snapshot.movies:null;
+  const target=item.source==='TVmaze'&&/^tv-\d+$/.test(item.id)?snapshot.shows:
+   item.source==='Wikidata'&&/^wd-Q\d+$/.test(item.id)?snapshot.movies:null;
   if(target&&typeof item.title==='string'&&item.title.trim()&&!target.some(x=>x.id===item.id)){
    const {id,title,titleEn,year,image,rating,genres,source}=item;
    target.push({id,title,titleEn:titleEn||null,year:year||null,image:image||null,rating:rating??null,genres:genres||[],source});
