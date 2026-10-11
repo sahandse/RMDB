@@ -1,6 +1,9 @@
 name: Sync RMDB Telegram curator
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - data/import-request.json
   schedule:
     - cron: '*/5 * * * *'
 permissions:
