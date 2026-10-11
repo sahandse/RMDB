@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import { Suspense,useEffect,useState } from 'react';
 import {useSearchParams} from 'next/navigation';
 type Hit={id:string;name:string;kind:'movie'|'series'|'person';year?:string;image?:string|null;desc?:string};
