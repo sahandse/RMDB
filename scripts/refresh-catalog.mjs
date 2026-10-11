@@ -23,9 +23,9 @@ try{
  snapshot.movies=payload.results.bindings.map(b=>({id:'wd-'+b.film.value.split('/').pop(),title:b.filmLabel?.value||'',titleEn:b.titleEn?.value||null,year:b.date?.value?.slice(0,4)||null,source:'Wikidata'})).filter(m=>m.title&&!/^Q\d+$/.test(m.title));
 }catch(e){snapshot.errors.push('Wikidata: '+String(e))}
 try {
- const peopleQuery='SELECT ?person ?personLabel ?birth WHERE { ?person wdt:P106 wd:Q33999. OPTIONAL { ?person wdt:P569 ?birth. } SERVICE wikibase:label { bd:serviceParam wikibase:language "fa,en". } } LIMIT 200';
+ const peopleQuery='SELECT ?person ?personLabel ?personEn ?birth WHERE { ?person wdt:P106 wd:Q33999. OPTIONAL { ?person wdt:P569 ?birth. } OPTIONAL { ?person rdfs:label ?personEn FILTER(LANG(?personEn) = "en") } SERVICE wikibase:label { bd:serviceParam wikibase:language "fa,en". } } LIMIT 200';
  const people=await request('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(peopleQuery),{Accept:'application/sparql-results+json'});
- snapshot.people=people.results.bindings.map(x=>({id:x.person.value.split('/').pop(),title:x.personLabel?.value||'',birth:x.birth?.value?.slice(0,10)||null,source:'Wikidata'})).filter(x=>x.title&&!/^Q\\d+$/.test(x.title));
+ snapshot.people=people.results.bindings.map(x=>({id:x.person.value.split('/').pop(),title:x.personLabel?.value||'',titleEn:x.personEn?.value||null,birth:x.birth?.value?.slice(0,10)||null,source:'Wikidata'})).filter(x=>x.title&&!/^Q\\d+$/.test(x.title));
 }catch(e){snapshot.errors.push('People: '+String(e))}
 if(!snapshot.shows.length&&!snapshot.movies.length){console.error('No fresh data. Keeping previous snapshot.');process.exitCode=1}
 else{await mkdir(root,{recursive:true});await writeFile(new URL('catalog.json',root),JSON.stringify(snapshot,null,2)+'\n');console.log('Saved snapshot',snapshot.shows.length,snapshot.movies.length,snapshot.errors);}
