@@ -92,3 +92,21 @@ html[dir="ltr"] .fact-list>div,html[dir="ltr"] .compare-table>div{text-align:lef
 .detail-cinema .section-title{scroll-margin-top:95px}
 @media(max-width:850px){.detail-cinema .detail-poster{position:static}}
 @media(prefers-reduced-motion:reduce){.rmdb-completeness-track>div{transition:none}}
+
+/* Movie/series premium detail experience */
+.rmdb-story{margin:25px 0 28px}.rmdb-story .section-title{margin-bottom:10px}
+.rmdb-plot-closed{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.rmdb-text-action{border:0;background:none;color:var(--gold);padding:4px 0;cursor:pointer;font-weight:700}
+.rmdb-detail-nav{position:relative;display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:9px;margin-top:14px}
+.rmdb-detail-nav a{white-space:nowrap;flex-shrink:0}
+.rmdb-cast-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px;margin:12px 0 38px}
+.rmdb-cast-card{display:flex;flex-direction:column;gap:5px;background:var(--surface);border:1px solid var(--stroke);border-radius:17px;padding:12px;min-width:0;transition:transform .2s,border-color .2s}
+.rmdb-cast-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.rmdb-cast-card img,.rmdb-cast-avatar{width:100%;aspect-ratio:1;object-fit:cover;border-radius:13px;background:#29313e}
+.rmdb-cast-avatar{display:grid;place-items:center;font-size:28px;color:#a3afbe}
+.rmdb-cast-card strong{font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.rmdb-cast-card small{font-size:12px;color:var(--muted);line-height:1.5}
+.rmdb-gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:5px 0 17px;margin-bottom:22px}
+.rmdb-gallery img{width:min(65vw,330px);height:185px;border-radius:13px;object-fit:cover;flex-shrink:0;scroll-snap-align:start;background:var(--surface)}
+@media(max-width:650px){.rmdb-cast-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rmdb-cast-card{padding:10px}.rmdb-gallery img{width:75vw;height:165px}}
+@media(prefers-reduced-motion:reduce){.rmdb-cast-card{transition:none}}
