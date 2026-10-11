@@ -19,7 +19,7 @@ for(const item of curated.items){
  const category=item.source==='TVmaze'&&/^tv-\d+$/.test(item.id)?'shows':item.source==='Wikidata'&&/^wd-Q\d+$/.test(item.id)?'movies':null;
  if(!category||typeof item.title!=='string'||!item.title.trim())continue;
  const entry={id:item.id,title:item.title,titleEn:item.titleEn||null,year:item.year||null,source:item.source};
- for(const field of ['image','rating','genres','summary','imdbId','language','status','network','descriptionFa','descriptionEn'])if(item[field]!=null)entry[field]=item[field];
+ for(const field of ['image','rating','genres','summary','imdbId','language','status','network','descriptionFa','descriptionEn','cast','episodes','officialSite','ended','premiered','averageRuntime','type','wikidataId','credits','countries','languages','productionCompanies','releaseDate','runtimeMinutes'])if(item[field]!=null)entry[field]=item[field];
  const at=current[category].findIndex(x=>x.id===item.id);
  if(at<0)current[category].push(entry);
  else current[category][at]={...current[category][at],...entry};
