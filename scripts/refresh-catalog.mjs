@@ -11,11 +11,11 @@ const request = async (url, headers={}) => {
 };
 try{
  const shows=[];
- for(let page=0;page<5;page++){
-  try {const batch=await request('https://api.tvmaze.com/shows?page='+page);if(!Array.isArray(batch)||!batch.length)break;shows.push(...batch)}
+ for(let page=0;page<20;page++){
+  try {const batch=await request('https://api.tvmaze.com/shows?page='+page);if(!Array.isArray(batch)||!batch.length)break;shows.push(...batch);await new Promise(resolve=>setTimeout(resolve,650))}
   catch(e){snapshot.errors.push('TVmaze page '+page+': '+String(e));break}
  }
- snapshot.shows=shows.filter(s=>s.id&&s.name).map(s=>({id:'tv-'+s.id,title:s.name,year:s.premiered?.slice(0,4)||null,image:s.image?.medium||null,rating:s.rating?.average??null,genres:s.genres||[],source:'TVmaze'}));
+ snapshot.shows=[...new Map(shows.filter(s=>s.id&&s.name).map(s=>[s.id,s])).values()].map(s=>({id:'tv-'+s.id,title:s.name,year:s.premiered?.slice(0,4)||null,image:s.image?.medium||null,rating:s.rating?.average??null,genres:s.genres||[],source:'TVmaze'}));
 }catch(e){snapshot.errors.push('TVmaze: '+String(e))}
 try{
  const sparql='SELECT ?film ?filmLabel ?titleEn ?date WHERE { ?film wdt:P31 wd:Q11424; wdt:P577 ?date. FILTER(?date >= "1980-01-01T00:00:00Z"^^xsd:dateTime) OPTIONAL { ?film rdfs:label ?titleEn FILTER(LANG(?titleEn) = "en") } SERVICE wikibase:label { bd:serviceParam wikibase:language "fa,en". } } ORDER BY DESC(?date) LIMIT 700';
@@ -41,5 +41,5 @@ for(const key of ['movies','shows','people']){
   snapshot.errors.push(key+': retained previous verified snapshot');
  }
 }
-if(!snapshot.shows.length||!snapshot.movies.length){console.error('Both movies and shows must have verified records before publishing.');process.exitCode=1}
+if(!snapshot.shows.length){console.error('No TVmaze shows available; retaining existing catalog.');process.exitCode=1}
 else{await mkdir(root,{recursive:true});await writeFile(new URL('catalog.json',root),JSON.stringify(snapshot,null,2)+'\n');console.log('Saved verified snapshot',snapshot.shows.length,snapshot.movies.length,snapshot.people.length,snapshot.errors);}
