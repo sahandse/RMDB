@@ -40,7 +40,7 @@ jobs:
         run: npm run build
       - name: Validate exported catalog
         run: |
-          node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('out/data/catalog.json','utf8'));if(!Array.isArray(d.movies)||!Array.isArray(d.shows))process.exit(1);console.log('Real catalog records:',d.movies.length,d.shows.length)"
+          node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('out/data/catalog.json','utf8'));if(!Array.isArray(d.movies)||!Array.isArray(d.shows)||!d.movies.length||!d.shows.length)process.exit(1);console.log('Real catalog records:',d.movies.length,d.shows.length)"
       - name: Validate exported routes
         run: |
           test -f out/index.html
