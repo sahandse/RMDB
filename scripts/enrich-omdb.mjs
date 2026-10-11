@@ -24,7 +24,7 @@ for(const item of curated.items||[]){
  if(attempted>=perRunMax||budget.requests>=dailyMax)break;
  if(!/^tt\d{7,9}$/.test(imdb||'')||report.lookups[imdb])continue;
  const url=new URL('https://www.omdbapi.com/');
- url.searchParams.set('i',imdb);url.searchParams.set('apikey',key);url.searchParams.set('r','json');
+ url.searchParams.set('i',imdb);url.searchParams.set('apikey',key);url.searchParams.set('r','json');url.searchParams.set('plot','full');
  try{
   budget.requests++;attempted++;await saveBudget();
   const response=await fetch(url,{signal:AbortSignal.timeout(15000)});
@@ -33,7 +33,7 @@ for(const item of curated.items||[]){
   const data=await response.json();
   if(data.Response!=='True'){console.warn('OMDb did not resolve a title:',imdb);continue}
   if(data.imdbID?.toLowerCase()!==imdb.toLowerCase())throw Error('OMDb ID mismatch');
-  const record={matchedId:imdb,originalRecordId:item.id,verifiedAt:new Date().toISOString(),type:data.Type||null,releaseYear:data.Year||null,titleMatches:Boolean(data.Title&&data.Title.toLowerCase()===String(item.titleEn||item.title).toLowerCase()),source:'OMDb identifier cross-check'};
+  const record={matchedId:imdb,originalRecordId:item.id,verifiedAt:new Date().toISOString(),type:data.Type||null,releaseYear:data.Year||null,titleMatches:Boolean(data.Title&&data.Title.toLowerCase()===String(item.titleEn||item.title).toLowerCase()),source:'OMDb identifier cross-check',availableFields:Object.fromEntries(['Rated','Released','Runtime','Genre','Director','Writer','Actors','Plot','Language','Country','Awards','Poster','Ratings','Metascore','imdbRating','imdbVotes','BoxOffice','Production','DVD','totalSeasons'].map(field=>[field,data[field]!=null&&data[field]!=='N/A'&&data[field]!==''&&(!Array.isArray(data[field])||data[field].length>0)]))};
   const form=new FormData();
   form.set('chat_id',channel);
   form.set('caption','RMDB OMDb ID verification · '+imdb+' · '+item.id);
