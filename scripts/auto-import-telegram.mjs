@@ -34,10 +34,13 @@ try{
   let rows;try{rows=await json('https://api.tvmaze.com/shows?page='+page)}catch(e){if(String(e).includes('HTTP 404')){state.tvPage=0;break}throw e}
   if(!Array.isArray(rows)||!rows.length){state.tvPage=0;break}
   for(const s of rows){if(counts.shows>=10)break;if(!Number.isInteger(s.id)||!s.name)continue;
+   if(existing.has('tv-'+s.id))continue;
+   try{
    const full=await json('https://api.tvmaze.com/shows/'+s.id+'?embed%5B%5D=cast&embed%5B%5D=episodes');
    const actors=(full._embedded?.cast||[]).map(x=>({id:x.person?.id||null,name:x.person?.name||null,character:x.character?.name||null})).filter(x=>x.id&&x.name);
    const episodes=(full._embedded?.episodes||[]).map(x=>({id:x.id,season:x.season,number:x.number,name:x.name,airdate:x.airdate,runtime:x.runtime,summary:x.summary||null}));
    await add({cast:actors,episodes,officialSite:full.officialSite||null,ended:full.ended||null,premiered:full.premiered||null,averageRuntime:full.averageRuntime||null,type:full.type||null,id:'tv-'+s.id,title:s.name,titleEn:s.name,year:s.premiered?.slice(0,4)||null,image:s.image?.medium||null,rating:s.rating?.average??null,genres:s.genres||[],summary:s.summary||null,language:s.language||null,status:s.status||null,network:s.network?.name||s.webChannel?.name||null,imdbId:s.externals?.imdb||null,source:'TVmaze',license:'CC BY-SA 4.0'},'shows')
+   }catch(e){counts.errors.push('tv-'+s.id+': '+e.message)}
   }
   // Revisit same page until all its records are archived. Existing IDs are skipped.
   if(rows.every(s=>existing.has('tv-'+s.id)))state.tvPage++;
