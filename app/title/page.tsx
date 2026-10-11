@@ -51,6 +51,7 @@ function DetailContent() {
         return;
       }
     }
+    throw new Error('Record not yet available in RMDB local catalog');
     if (/^tv-\d+$/.test(id)) {
      const r = await fetch('https://api.tvmaze.com/shows/'+id.slice(3)+'?embed=cast');
      if (!r.ok) throw new Error('TVmaze');
