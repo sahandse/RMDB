@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-11",
+  "requestedAt": "2026-10-11T08:04:00Z",
   "source": "RMDB administrator",
   "batch": {
     "films": 10,
     "series": 10
   },
-  "mode": "telegram-first",
-  "note": "Run the existing verified metadata importer; skip previously archived records. This file is a trigger, not fictional content."
+  "mode": "telegram-first-quality-gated",
+  "note": "Immediate GitHub Actions push trigger; continue on 10-minute schedule; preserve incomplete archive records but exclude from published catalog."
 }
