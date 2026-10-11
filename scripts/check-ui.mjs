@@ -1,0 +1,19 @@
+import {readFileSync,existsSync} from 'node:fs';
+const pages=['page','en/page','title/page','person/page','actor/page','episode/page','people/page','search/page','explore/page','calendar/page','iran/page','top/page','compare/page','watchlist/page'];
+let problems=[];
+for(const item of pages){
+ const path='app/'+item+'.tsx';
+ if(!existsSync(path)){problems.push('Missing page: '+path);continue}
+ const text=readFileSync(path,'utf8');
+ if(!text.includes('BrandLogo'))problems.push('Missing brand: '+path);
+ if(text.includes('useState(')||text.includes('useEffect(')){
+   if(!text.trimStart().startsWith("'use client';"))problems.push('Client directive missing: '+path)
+ }
+ if(/href=["']\/RMDB\/(?:watch|download)\//.test(text))problems.push('Unsupported watch/download route: '+path);
+}
+const layout=readFileSync('app/layout.tsx','utf8');
+if(!layout.includes('<MobileNav/>')||!layout.includes('<LanguageSwitch/>'))problems.push('Missing global navigation');
+const manifest=JSON.parse(readFileSync('public/manifest.webmanifest','utf8'));
+if(!manifest.icons?.some(x=>x.src==='/RMDB/icon.svg'))problems.push('Missing RMDB icon');
+if(!existsSync('public/icon.svg'))problems.push('Missing actual icon');
+if(problems.length){console.error(problems.join('\n'));process.exitCode=1}else console.log('RMDB UI smoke checks passed for',pages.length,'pages');
