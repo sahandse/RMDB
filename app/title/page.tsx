@@ -27,6 +27,30 @@ function DetailContent() {
   async function load() {
    setDetails(null);setStatus(label('در حال دریافت اطلاعات واقعی...','Loading verified data...'));
    try {
+    // Read the same archived metadata delivered through Telegram first. Works without
+    // contacting TVmaze/Wikidata from a user's browser (including restricted networks).
+    const localResponse=await fetch('/RMDB/data/catalog.json',{cache:'no-store'});
+    if(localResponse.ok){
+      const local=await localResponse.json();
+      const record=[...(local.shows||[]),...(local.movies||[])].find((x:{id:string})=>x.id===id);
+      if(record){
+        const title=english?(record.titleEn||record.title):record.title;
+        const cast=(record.cast||[]).filter((x:{id:number;name:string})=>x?.id&&x?.name).map((x:{id:number;name:string})=>({id:x.id,name:x.name}));
+        const episodes=(record.episodes||[]).filter((x:{id:number;name:string;season:number})=>x?.id&&x?.name&&Number.isInteger(x.season)).map((x:{id:number;name:string;season:number;number:number|null})=>({id:x.id,name:x.name,season:x.season,number:x.number}));
+        const descr=english?(record.descriptionEn||record.summary||record.descriptionFa):(record.descriptionFa||record.summary||record.descriptionEn);
+        const facts:[string,string][]=[['سال انتشار',record.year||'نامشخص']];
+        if(record.genres?.length)facts.push(['ژانر',record.genres.join('، ')]);
+        if(record.status)facts.push(['وضعیت',record.status]);
+        if(record.network)facts.push(['شبکه',record.network]);
+        if(record.rating!=null)facts.push(['امتیاز TVmaze',String(record.rating)]);
+        if(cast.length)facts.push(['بازیگران',cast.slice(0,12).map((x:{name:string})=>x.name).join('، ')]);
+        if(record.releaseDate)facts.push(['تاریخ انتشار',String(record.releaseDate).replace(/^\+/,'').slice(0,10)]);
+        if(record.runtimeMinutes)facts.push(['مدت (دقیقه)',String(record.runtimeMinutes)]);
+        if(record.wikidataId)facts.push(['شناسه Wikidata',record.wikidataId]);
+        if(live)setDetails({title,description:clean(descr||label('توضیحی ثبت نشده است.','No description is available.')),poster:record.image||null,source:record.source||'RMDB',originalTitle:record.titleEn||undefined,year:record.year||undefined,cast,episodes,facts});
+        return;
+      }
+    }
     if (/^tv-\d+$/.test(id)) {
      const r = await fetch('https://api.tvmaze.com/shows/'+id.slice(3)+'?embed=cast');
      if (!r.ok) throw new Error('TVmaze');
