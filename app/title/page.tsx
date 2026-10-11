@@ -20,7 +20,7 @@ function DetailContent() {
  useEffect(()=>{try{setReviews(JSON.parse(localStorage.getItem('rmdb-reviews-'+id)||'[]'))}catch{setReviews([])}},[id]);
  const saveReview=()=>{if(!review.trim()||review.length>1000)return;const next=[{rating:personalRating,text:review.trim(),date:new Date().toISOString()},...reviews];localStorage.setItem('rmdb-reviews-'+id,JSON.stringify(next));setReviews(next);setReview('')};
  useEffect(()=>{try{setSaved((JSON.parse(localStorage.getItem('rmdb-watchlist-v1')||'[]') as {id:string}[]).some(x=>x.id===id))}catch{setSaved(false)}},[id]);
- const toggleSaved=()=>{if(!details)return;try{const list=JSON.parse(localStorage.getItem('rmdb-watchlist-v1')||'[]') as {id:string;title:string;year?:string;image?:string|null}[];const next=saved?list.filter(x=>x.id!==id):[...list.filter(x=>x.id!==id),{id,title:details.title,year:details.year,image:details.poster}];localStorage.setItem('rmdb-watchlist-v1',JSON.stringify(next));setSaved(!saved)}catch{}};
+ const toggleSaved=()=>{if(!details)return;try{const list=JSON.parse(localStorage.getItem('rmdb-watchlist-v1')||'[]') as {id:string;title:string;year?:string;image?:string|null;titleEn?:string}[];const next=saved?list.filter(x=>x.id!==id):[...list.filter(x=>x.id!==id),{id,title:details.title,titleEn:details.originalTitle,year:details.year,image:details.poster}];localStorage.setItem('rmdb-watchlist-v1',JSON.stringify(next));setSaved(!saved)}catch{}};
  useEffect(() => {
   let live = true;
   async function load() {
