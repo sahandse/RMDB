@@ -39,6 +39,7 @@ jobs:
           echo 'Required Telegram configuration is present (values hidden).'
       - name: Check ingestion script syntax
         run: |
+          node --check scripts/audit-telegram-catalog.mjs
           node --check scripts/cache-licensed-images.mjs
           node --check scripts/auto-import-telegram.mjs
           node --check scripts/merge-telegram-catalog.mjs
@@ -76,12 +77,13 @@ jobs:
           node scripts/build-public-api.mjs
           node scripts/validate-data.mjs
           node scripts/check-telegram-pipeline.mjs
+          node scripts/audit-telegram-catalog.mjs
           node scripts/check-ui.mjs
           npm run build
           touch out/.nojekyll
       - name: Commit generated catalog and public API
         run: |
-          git add -f public/data/catalog.json public/api/v1/index.json public/api/v1/movies.json public/api/v1/people.json
+          git add -f public/data/catalog.json public/api/v1/index.json public/api/v1/movies.json public/api/v1/people.json public/data/import-health.json
           if ! git diff --cached --quiet; then
             git commit -m "data: publish Telegram-curated RMDB catalog"
             git push
