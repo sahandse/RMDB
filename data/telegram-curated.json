@@ -1,4 +1,20 @@
 {
   "version": 1,
-  "items": []
+  "items": [
+    {
+      "id": "tv-169",
+      "title": "Breaking Bad",
+      "titleEn": "Breaking Bad",
+      "year": "2008",
+      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/501/1253519.jpg",
+      "rating": 9.2,
+      "genres": [
+        "Drama",
+        "Crime",
+        "Thriller"
+      ],
+      "source": "TVmaze",
+      "license": "CC BY-SA 4.0"
+    }
+  ]
 }
