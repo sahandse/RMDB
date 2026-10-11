@@ -41,10 +41,10 @@ function DetailContent() {
         const facts:[string,string][]=[['سال انتشار',record.year||'نامشخص']];
         const allTitles=[...(local.shows||[]),...(local.movies||[])];
         const tags=new Set((record.genres||[]).filter((x:unknown)=>typeof x==='string'));
-        const related=allTitles.filter((x:{id:string;genres?:string[]})=>x.id!==id&&Array.isArray(x.genres)&&x.genres.some(g=>tags.has(g))).slice(0,8).map((x:{id:string;title:string;year?:string|null})=>({id:x.id,title:x.title,year:x.year}));
+        const related=allTitles.filter((x:{id:string;genres?:string[]})=>x.id!==id&&tags.size>0&&Array.isArray(x.genres)&&x.genres.some(g=>tags.has(g))).slice(0,8).map((x:{id:string;title:string;year?:string|null})=>({id:x.id,title:x.title,year:x.year}));
         const fields=[record.title,record.year,record.image,record.imdbId,record.summary||record.descriptionFa||record.descriptionEn,record.genres?.length,record.cast?.length||record.credits?.cast?.length,record.episodes?.length||record.runtimeMinutes,record.language||record.languages?.length,record.network||record.countries?.length];
         const completeness=Math.round(fields.filter(Boolean).length*100/fields.length);
-        const showFacts=(name:string,values:unknown,field?:string)=>{if(Array.isArray(values)&&values.length){const known=field&&record.entityNames?.[field];const display=Array.isArray(known)&&known.length?known.map((x:{fa?:string;en?:string})=>(english?x.en||x.fa:x.fa||x.en)||'').filter(Boolean):values.map(String);facts.push([name,display.join('، ')])}};
+        const showFacts=(name:string,values:unknown,field?:string)=>{if(Array.isArray(values)&&values.length){const known=field&&record.entityNames?.[field];const display=Array.isArray(known)&&known.length?known.map((x:{fa?:string;en?:string})=>(english?x.en||x.fa:x.fa||x.en)||'').filter(Boolean):values.map(String).filter(v=>!/^Q\d+$/.test(v));if(display.length)facts.push([name,display.join('، ')])}};
         if(record.titleEn&&record.titleEn!==record.title)facts.push(['عنوان اصلی',record.titleEn]);
         if(record.imdbId)facts.push(['شناسه IMDb',record.imdbId]);
         if(record.premiered)facts.push(['شروع پخش',record.premiered]);
