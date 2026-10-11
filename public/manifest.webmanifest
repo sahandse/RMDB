@@ -1,0 +1,20 @@
+{
+  "name": "RMDB | مرجع فیلم و سریال",
+  "short_name": "RMDB",
+  "description": "مرجع فارسی اطلاعات فیلم و سریال",
+  "start_url": "/RMDB/",
+  "scope": "/RMDB/",
+  "display": "standalone",
+  "background_color": "#0b0e13",
+  "theme_color": "#0b0e13",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/RMDB/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
