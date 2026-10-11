@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {useEffect,useState} from 'react';
 type Show={id:string;title:string;rating:number|null;year:string|null};
 export default function Top(){const [items,setItems]=useState<Show[]>([]),[status,setStatus]=useState('در حال بارگذاری آرشیو...');
