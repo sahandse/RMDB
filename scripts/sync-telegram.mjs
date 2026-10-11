@@ -51,11 +51,21 @@ async function verified(id){
 }
 const bot=await api('getMe',{});
 console.log('Telegram authentication OK; bot:',bot.username||bot.id,'; owner configured:',Boolean(owner),'channel configured:',Boolean(channel));
-const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message','channel_post']});
+const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message','channel_post','callback_query']});
 let touched=false;
 for(const u of updates){
  if(!Number.isSafeInteger(u.update_id))continue;
  state.offset=Math.max(state.offset,u.update_id+1);touched=true;
+ const callback=u.callback_query;
+ if(callback){
+  const permitted=String(callback.from?.id)===owner&&callback.message?.chat?.type==='private';
+  if(!permitted){await api('answerCallbackQuery',{callback_query_id:callback.id,text:'دسترسی مجاز نیست',show_alert:true}).catch(()=>{});continue}
+  if(callback.data==='rmdb_import_10_10'){
+   await api('answerCallbackQuery',{callback_query_id:callback.id,text:'درخواست دریافت شد؛ نتیجه پس از اجرای واردکننده مشخص می‌شود.'});
+   await reply(callback.message.chat.id,'🎬 درخواست ۱۰ فیلم و ۱۰ سریال ثبت شد. این Workflow واردکننده را در همین اجرا فراخوانی می‌کند؛ تعداد نهایی به آثار معتبر و نتیجه انتشار بستگی دارد.');
+  }else await api('answerCallbackQuery',{callback_query_id:callback.id,text:'دکمه ناشناخته'}).catch(()=>{});
+  continue;
+ }
  const m=u.message||u.channel_post;
  const privateOwner=m?.chat?.type==='private'&&String(m.from?.id)===owner;
  const approvedChannel=m?.chat?.type==='channel'&&String(m.chat.id)===channel;
@@ -67,8 +77,8 @@ for(const u of updates){
  const directImdb=text.match(/^tt\d{7,9}$/i);
  const importId=imdbLink?'imdb '+imdbLink[1]:directImdb?'imdb '+directImdb[0]:null;
  console.log('Authorized command:',text.split(' ')[0]||'(none)');
- if(privateOwner&&(/^\/start(?:@\w+)?$/.test(text)||text==='/help')){await reply(m.chat.id,'Send any IMDb title URL or tt0903747 directly. Also: /add tv-123 | /add wd-Q123 | /add imdb tt0903747 | /status');continue}
- if(privateOwner&&text==='/status'){await reply(m.chat.id,'Approved items: '+current.items.length);continue}
+ if(privateOwner&&(/^\/start(?:@\w+)?$/.test(text)||text==='/help'||text==='/menu')){await api('sendMessage',{chat_id:m.chat.id,text:'🎬 مدیریت RMDB\nبرای درخواست واردکردن یک نوبت جدید، روی دکمه زیر بزن.\nدستورهای دیگر: /status ، /add ، /remove',reply_markup:{inline_keyboard:[[{text:'🎬 افزودن ۱۰ فیلم و ۱۰ سریال',callback_data:'rmdb_import_10_10'}]]}});continue}
+ if(privateOwner&&text==='/status'){await reply(m.chat.id,'تعداد رکوردهای آرشیوشده: '+current.items.length+'\nبرای بازکردن دکمه واردکننده: /menu');continue}
  try{
   if(importId||text.startsWith('/add ')){
    const id=importId||text.slice(5).trim();
