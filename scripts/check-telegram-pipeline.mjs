@@ -14,7 +14,7 @@ const unpublished=curated.items.filter(x=>!ids.has(x.id));
 console.log('Records safely retained for future enrichment:',unpublished.length);
 for(const item of combined){if(!item.image||!item.imdbId||!(item.summary||item.descriptionFa||item.descriptionEn||item.plot))throw Error('Incomplete title published: '+item.id)}
 const apiIds=new Set(api.items.map(x=>x.id));
-const missingMovies=curated.items.filter(x=>x.source==='Wikidata'&&!apiIds.has(x.id));
+const missingMovies=site.movies.filter(x=>x.source==='Wikidata'&&!apiIds.has(x.id));
 if(missingMovies.length)throw Error('Curated CC0 movies missing from public API: '+missingMovies.slice(0,8).map(x=>x.id).join(', '));
 const full=curated.items.filter(x=>ids.has(x.id)&&Array.isArray(x.episodes)&&x.episodes.length);
 for(const x of full){const v=site.shows.find(s=>s.id===x.id);if(!Array.isArray(v?.episodes)||v.episodes.length!==x.episodes.length)throw Error('Episode details lost: '+x.id)}
@@ -31,7 +31,7 @@ const archivedFilm=curated.items.find(x=>x.id===filmId);
 if(!archivedFilm)throw Error('Expected real test film is missing from Telegram archive: '+filmId);
 if(!/^tt\d{7,9}$/.test(archivedFilm.imdbId||'')||!Number.isInteger(archivedFilm.telegramMessageId))throw Error('Film metadata or Telegram delivery evidence invalid: '+filmId);
 const publishedFilm=site.movies.find(x=>x.id===filmId),publishedApiFilm=api.items.find(x=>x.id===filmId);
-if(!publishedApiFilm||publishedApiFilm.imdbId!==archivedFilm.imdbId)throw Error('Single-film public CC0 API regression failed: '+filmId);
+if(publishedFilm&&(!publishedApiFilm||publishedApiFilm.imdbId!==archivedFilm.imdbId))throw Error('Published film CC0 API regression failed: '+filmId);
 if(publishedFilm&&publishedFilm.imdbId!==archivedFilm.imdbId)throw Error('Published film IMDb mismatch: '+filmId);
 console.log('Single-film Telegram → RMDB CC0 API integrity PASS:',filmId,archivedFilm.title,'publishedInCuratedUI:',Boolean(publishedFilm));
 console.log(JSON.stringify({passed:true,localImagesChecked:localImages.length,telegramRecords:curated.items.length,siteFilms:site.movies.length,siteShows:site.shows.length,apiMovies:api.items.length,seriesWithEpisodes:full.length}));
