@@ -1,0 +1,13 @@
+{
+  "name": "RMDB Public Data",
+  "version": "v1",
+  "updatedAt": "2026-10-11T07:45:02.081Z",
+  "base": "/RMDB/api/v1/",
+  "license": "CC0-1.0",
+  "source": "Wikidata",
+  "endpoints": [
+    "movies.json",
+    "people.json"
+  ],
+  "notice": "This read-only static snapshot contains only CC0 Wikidata records. TVmaze and media files are excluded."
+}

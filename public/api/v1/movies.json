@@ -1,0 +1,879 @@
+{
+  "version": "v1",
+  "updatedAt": "2026-10-11T07:45:02.081Z",
+  "license": "CC0-1.0",
+  "source": "Wikidata",
+  "count": 20,
+  "items": [
+    {
+      "id": "wd-Q1000094",
+      "wikidataId": "Q1000094",
+      "title": {
+        "display": "You're Dead",
+        "en": "You're Dead"
+      },
+      "year": "1999",
+      "descriptionFa": null,
+      "descriptionEn": "1999 film directed by Andy Hurst",
+      "imdbId": "tt0178997",
+      "credits": {
+        "directors": [
+          "Q526222"
+        ],
+        "cast": [
+          "Q215017",
+          "Q200405",
+          "Q134506684"
+        ],
+        "writers": [
+          "Q526222"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q2484376",
+        "Q157443"
+      ],
+      "countries": [
+        "Q183",
+        "Q145",
+        "Q30"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1999-01-01T00:00:00Z",
+      "runtimeMinutes": "+100",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000174",
+      "wikidataId": "Q1000174",
+      "title": {
+        "display": "Tinko",
+        "en": "Tinko"
+      },
+      "year": "1957",
+      "descriptionFa": null,
+      "descriptionEn": "1957 German film directed by Herbert Ballmann",
+      "imdbId": "tt0131068",
+      "credits": {
+        "directors": [
+          "Q1379822"
+        ],
+        "cast": [
+          "Q108233",
+          "Q95951",
+          "Q1578075",
+          "Q2061747",
+          "Q1442953",
+          "Q4238551",
+          "Q1461729"
+        ],
+        "writers": [
+          "Q67991",
+          "Q71019"
+        ],
+        "producers": []
+      },
+      "genres": [],
+      "countries": [
+        "Q16957",
+        "Q183"
+      ],
+      "languages": [
+        "Q188"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1957-01-01T00:00:00Z",
+      "runtimeMinutes": "+91",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000210",
+      "wikidataId": "Q1000210",
+      "title": {
+        "display": "Untersuchung an Mädeln",
+        "en": "Untersuchung an Mädeln"
+      },
+      "year": "1999",
+      "descriptionFa": null,
+      "descriptionEn": "1999 film by Peter Payer",
+      "imdbId": "tt0209455",
+      "credits": {
+        "directors": [
+          "Q2077488"
+        ],
+        "cast": [
+          "Q63910",
+          "Q90067"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q2484376"
+      ],
+      "countries": [
+        "Q40"
+      ],
+      "languages": [
+        "Q188"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1999-10-09T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000394",
+      "wikidataId": "Q1000394",
+      "title": {
+        "display": "This Modern Age",
+        "en": "This Modern Age"
+      },
+      "year": "1931",
+      "descriptionFa": null,
+      "descriptionEn": "1931 film by Nick Grinde",
+      "imdbId": "tt0022478",
+      "credits": {
+        "directors": [
+          "Q1985392"
+        ],
+        "cast": [
+          "Q40475",
+          "Q461370",
+          "Q922580",
+          "Q15069875",
+          "Q2831060",
+          "Q448208",
+          "Q458513",
+          "Q1621558",
+          "Q1383202",
+          "Q455912",
+          "Q6902234",
+          "Q6756370"
+        ],
+        "writers": [
+          "Q1443029"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232",
+        "Q1054574"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [
+        "Q179200"
+      ],
+      "releaseDate": "+1931-08-29T00:00:00Z",
+      "runtimeMinutes": "+69",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100052082",
+      "wikidataId": "Q100052082",
+      "title": {
+        "display": "Demain est à nous",
+        "en": "Demain est à nous"
+      },
+      "year": "2019",
+      "descriptionFa": null,
+      "descriptionEn": "2019 film directed by Gilles de Maistre",
+      "imdbId": "tt9420080",
+      "credits": {
+        "directors": [
+          "Q3106578"
+        ],
+        "cast": [],
+        "writers": [
+          "Q100054253",
+          "Q100055128",
+          "Q100055775"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q93204"
+      ],
+      "countries": [
+        "Q142"
+      ],
+      "languages": [
+        "Q150"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2019-09-25T00:00:00Z",
+      "runtimeMinutes": "+84",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q10005695",
+      "wikidataId": "Q10005695",
+      "title": {
+        "display": "Happy Journey",
+        "en": "Happy Journey"
+      },
+      "year": "2014",
+      "descriptionFa": null,
+      "descriptionEn": "2014 Marathi film directed by Sachin Kundalkar",
+      "imdbId": "tt4443924",
+      "credits": {
+        "directors": [
+          "Q7396742"
+        ],
+        "cast": [
+          "Q4818791",
+          "Q7246459",
+          "Q7127782"
+        ],
+        "writers": [
+          "Q7396742"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q668"
+      ],
+      "languages": [
+        "Q1571"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2014-11-28T00:00:00Z",
+      "runtimeMinutes": "+130",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100057542",
+      "wikidataId": "Q100057542",
+      "title": {
+        "display": "The Two Sights",
+        "en": "The Two Sights"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 film directed by Joshua Bonnetta",
+      "imdbId": "tt11991040",
+      "credits": {
+        "directors": [
+          "Q28948381"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q93204"
+      ],
+      "countries": [
+        "Q16"
+      ],
+      "languages": [
+        "Q1860",
+        "Q9314"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-02-15T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q10007277",
+      "wikidataId": "Q10007277",
+      "title": {
+        "display": "Pacho, hybský zbojník",
+        "en": "Pacho, hybský zbojník"
+      },
+      "year": "1975",
+      "descriptionFa": null,
+      "descriptionEn": "1975 film by Martin Ťapák",
+      "imdbId": "tt0073504",
+      "credits": {
+        "directors": [
+          "Q12035899"
+        ],
+        "cast": [
+          "Q511930",
+          "Q12027605",
+          "Q12028808",
+          "Q12765013",
+          "Q12044704",
+          "Q730137",
+          "Q11985169",
+          "Q1066361",
+          "Q7542461",
+          "Q13539044",
+          "Q3502280",
+          "Q12021980",
+          "Q13419675",
+          "Q12781500",
+          "Q12761856",
+          "Q11710967",
+          "Q19401093",
+          "Q12765998",
+          "Q16519811",
+          "Q12034870",
+          "Q61971605",
+          "Q12768716",
+          "Q3509419",
+          "Q13421335",
+          "Q1166581",
+          "Q13449830",
+          "Q95745200",
+          "Q95899232",
+          "Q95892088",
+          "Q13421853",
+          "Q94929242",
+          "Q3506567",
+          "Q12778636",
+          "Q95170853",
+          "Q12773042",
+          "Q101209969",
+          "Q101249083",
+          "Q102318458",
+          "Q106353977",
+          "Q106158775",
+          "Q106188418",
+          "Q108147497",
+          "Q108271001",
+          "Q110787083",
+          "Q110693810",
+          "Q110693786",
+          "Q110773833",
+          "Q120634224",
+          "Q116896865",
+          "Q133310691",
+          "Q112396028",
+          "Q131850359",
+          "Q133367551",
+          "Q109986917",
+          "Q133465638",
+          "Q133467467",
+          "Q133576203",
+          "Q133576405",
+          "Q133576268",
+          "Q133587111",
+          "Q133576281",
+          "Q133578001",
+          "Q133577255",
+          "Q133767926",
+          "Q133576404",
+          "Q133577414",
+          "Q133695510",
+          "Q133576265",
+          "Q133576401",
+          "Q133576287",
+          "Q133577368",
+          "Q112462484",
+          "Q133576473",
+          "Q133767804"
+        ],
+        "writers": [
+          "Q3394963",
+          "Q1934261",
+          "Q562897",
+          "Q12035899"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q157443"
+      ],
+      "countries": [
+        "Q33946"
+      ],
+      "languages": [
+        "Q9058"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1975-08-26T00:00:00Z",
+      "runtimeMinutes": "+85",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000825",
+      "wikidataId": "Q1000825",
+      "title": {
+        "display": "Jan Dara",
+        "en": "Jan Dara"
+      },
+      "year": "2001",
+      "descriptionFa": null,
+      "descriptionEn": "2001 Thai film directed by Nonzee Nimibutr",
+      "imdbId": "tt0282628",
+      "credits": {
+        "directors": [
+          "Q360509"
+        ],
+        "cast": [
+          "Q2370079",
+          "Q1041384",
+          "Q4272908",
+          "Q13016199",
+          "Q16305292",
+          "Q16139733",
+          "Q6121318"
+        ],
+        "writers": [
+          "Q360509",
+          "Q13016619"
+        ],
+        "producers": [
+          "Q716064",
+          "Q13014776",
+          "Q360509"
+        ]
+      },
+      "genres": [
+        "Q20442589"
+      ],
+      "countries": [
+        "Q869"
+      ],
+      "languages": [
+        "Q9217"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2001-01-01T00:00:00Z",
+      "runtimeMinutes": "+108",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000826",
+      "wikidataId": "Q1000826",
+      "title": {
+        "display": "Guns of the Magnificent Seven",
+        "en": "Guns of the Magnificent Seven"
+      },
+      "year": "1969",
+      "descriptionFa": null,
+      "descriptionEn": "1969 film by Paul Wendkos",
+      "imdbId": "tt0064395",
+      "credits": {
+        "directors": [
+          "Q450601"
+        ],
+        "cast": [
+          "Q298818",
+          "Q313040",
+          "Q945099",
+          "Q3751926",
+          "Q465643",
+          "Q106743",
+          "Q372497",
+          "Q962579",
+          "Q1276579",
+          "Q891531",
+          "Q516627",
+          "Q14747"
+        ],
+        "writers": [
+          "Q3134070"
+        ],
+        "producers": [
+          "Q3559718"
+        ]
+      },
+      "genres": [
+        "Q172980"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [
+        "Q456294"
+      ],
+      "releaseDate": "+1969-01-01T00:00:00Z",
+      "runtimeMinutes": "+100",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100097551",
+      "wikidataId": "Q100097551",
+      "title": {
+        "display": "قتل آمریکایی: خانواده همسایه",
+        "en": "American Murder: The Family Next Door"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 true crime documentary film",
+      "imdbId": "tt12987894",
+      "credits": {
+        "directors": [
+          "Q108574859"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q93204",
+        "Q959790"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [
+        "Q7976"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-09-30T00:00:00Z",
+      "runtimeMinutes": "+82",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100104941",
+      "wikidataId": "Q100104941",
+      "title": {
+        "display": "Die Filmstadt Hollywood",
+        "en": "Die Filmstadt Hollywood"
+      },
+      "year": "1928",
+      "descriptionFa": null,
+      "descriptionEn": "1928 film by Max Goldschmidt",
+      "imdbId": "tt0460795",
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q882",
+          "Q55412",
+          "Q77181"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q93204"
+      ],
+      "countries": [],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+1928-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100105983",
+      "wikidataId": "Q100105983",
+      "title": {
+        "display": "Dakara - The confession of a thug",
+        "en": "Dakara - The confession of a thug"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 film by Lemena Vintsy",
+      "imdbId": "tt11899814",
+      "credits": {
+        "directors": [
+          "Q100093874"
+        ],
+        "cast": [],
+        "writers": [
+          "Q100093874"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232",
+        "Q959790",
+        "Q2484376"
+      ],
+      "countries": [
+        "Q1019"
+      ],
+      "languages": [
+        "Q7930"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-12-19T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1001065",
+      "wikidataId": "Q1001065",
+      "title": {
+        "display": "En la sombra",
+        "en": "En la sombra"
+      },
+      "year": "1917",
+      "descriptionFa": null,
+      "descriptionEn": "1917 film",
+      "imdbId": "tt0007889",
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q1936124"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q226730"
+      ],
+      "countries": [
+        "Q96"
+      ],
+      "languages": [
+        "Q1321"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1917-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100109700",
+      "wikidataId": "Q100109700",
+      "title": {
+        "display": "Dog's Eyes",
+        "en": "Dog's Eyes"
+      },
+      "year": "1983",
+      "descriptionFa": null,
+      "descriptionEn": "1983 film directed by Alberto Durant",
+      "imdbId": "tt0084029",
+      "credits": {
+        "directors": [
+          "Q20014632"
+        ],
+        "cast": [],
+        "writers": [
+          "Q20014632",
+          "Q730457"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q419"
+      ],
+      "languages": [
+        "Q1321"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1983-00-00T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1001102",
+      "wikidataId": "Q1001102",
+      "title": {
+        "display": "The Rat Savior",
+        "en": "The Rat Savior"
+      },
+      "year": "1976",
+      "descriptionFa": null,
+      "descriptionEn": "1976 film by Krsto Papić",
+      "imdbId": "tt0074701",
+      "credits": {
+        "directors": [
+          "Q3199956"
+        ],
+        "cast": [
+          "Q1269500",
+          "Q603685",
+          "Q1658517",
+          "Q1253847",
+          "Q12628320",
+          "Q1590034",
+          "Q5340143"
+        ],
+        "writers": [
+          "Q617562",
+          "Q3199956"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q200092",
+        "Q471839"
+      ],
+      "countries": [
+        "Q83286",
+        "Q36704"
+      ],
+      "languages": [
+        "Q6654",
+        "Q9299",
+        "Q9301"
+      ],
+      "productionCompanies": [
+        "Q3503539"
+      ],
+      "releaseDate": "+1976-10-26T00:00:00Z",
+      "runtimeMinutes": "+75",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q10012033",
+      "wikidataId": "Q10012033",
+      "title": {
+        "display": "Candle March",
+        "en": "Candle March"
+      },
+      "year": "2014",
+      "descriptionFa": null,
+      "descriptionEn": "2014 film directed by Sachin Dev",
+      "imdbId": "tt6304754",
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q12062287",
+          "Q7695206",
+          "Q16202697"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [],
+      "countries": [
+        "Q668"
+      ],
+      "languages": [
+        "Q1571"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2014-12-05T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100136557",
+      "wikidataId": "Q100136557",
+      "title": {
+        "display": "Ariran omo olusho",
+        "en": "Ariran omo olusho"
+      },
+      "year": "2020",
+      "descriptionFa": "فيلم نيجريه 2020",
+      "descriptionEn": "2020 Nigerian film",
+      "imdbId": null,
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q19610277",
+          "Q20810389",
+          "Q19665328"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q1033"
+      ],
+      "languages": [
+        "Q34311"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100136948",
+      "wikidataId": "Q100136948",
+      "title": {
+        "display": "Agba Yahoo",
+        "en": "Agba Yahoo"
+      },
+      "year": "2020",
+      "descriptionFa": "فيلم نيجريه 2020",
+      "descriptionEn": "2020 Nigerian film",
+      "imdbId": null,
+      "credits": {
+        "directors": [],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q1033"
+      ],
+      "languages": [
+        "Q34311"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100136995",
+      "wikidataId": "Q100136995",
+      "title": {
+        "display": "Yeye eleye",
+        "en": "Yeye eleye"
+      },
+      "year": "2020",
+      "descriptionFa": "فيلم نيجريه 2020",
+      "descriptionEn": "2020 Nigerian film",
+      "imdbId": null,
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q19610277",
+          "Q19282080",
+          "Q20810389",
+          "Q19665037",
+          "Q19665328"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q1033"
+      ],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    }
+  ]
+}

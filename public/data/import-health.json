@@ -1,0 +1,29 @@
+{
+  "updatedAt": "2026-10-11T07:45:02.297Z",
+  "telegram": {
+    "total": 41,
+    "withPoster": 21,
+    "withImdb": 37,
+    "withSummary": 40,
+    "channelMessages": 40
+  },
+  "films": {
+    "total": 20,
+    "withPoster": 0,
+    "withImdb": 17,
+    "withSummary": 20
+  },
+  "series": {
+    "total": 21,
+    "withPoster": 21,
+    "withImdb": 20,
+    "withSummary": 20,
+    "withCast": 20,
+    "withEpisodes": 20
+  },
+  "site": {
+    "films": 20,
+    "series": 4704
+  },
+  "notes": "Counts describe verified available metadata, not guaranteed completeness for all titles."
+}
