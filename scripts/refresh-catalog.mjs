@@ -27,6 +27,18 @@ try {
  const people=await request('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(peopleQuery),{Accept:'application/sparql-results+json'});
  snapshot.people=people.results.bindings.map(x=>({id:x.person.value.split('/').pop(),title:x.personLabel?.value||'',titleEn:x.personEn?.value||null,birth:x.birth?.value?.slice(0,10)||null,source:'Wikidata'})).filter(x=>x.title&&!/^Q\d+$/.test(x.title));
 }catch(e){snapshot.errors.push('People: '+String(e))}
+// Enrich the on-site people directory with real TVmaze person records.
+// These are display-only (TVmaze license), excluded from the CC0 public API.
+try{
+ const tvPeople=await request('https://api.tvmaze.com/people?page=0');
+ if(Array.isArray(tvPeople)){
+  const entries=tvPeople.filter(x=>Number.isInteger(x.id)&&x.name).map(x=>({
+   id:'tvp-'+x.id,title:x.name,titleEn:x.name,image:x.image?.medium||null,
+   birth:x.birthday||null,source:'TVmaze'
+  }));
+  snapshot.people.push(...entries);
+ }
+}catch(e){snapshot.errors.push('TVmaze people: '+String(e))}
 // Preserve previously verified records when one upstream provider times out.
 let previous=null;
 try{previous=JSON.parse(await readFile(new URL('catalog.json',root),'utf8'))}catch{}
