@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {useEffect,useState} from 'react';
 type Airing={id:number;name:string;airdate:string;season:number;number:number|null;show?:{id:number;name:string;image?:{medium?:string}}};
 const dateFa=(s:string)=>s?new Intl.DateTimeFormat('fa-IR-u-ca-persian',{year:'numeric',month:'long',day:'numeric'}).format(new Date(s+'T12:00:00Z')):'نامشخص';
