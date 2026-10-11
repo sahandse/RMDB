@@ -34,8 +34,10 @@ jobs:
         run: npx tsc --noEmit
       - name: Probe public source availability (non-blocking)
         run: node scripts/check-sources.mjs
-      - name: Generate real public catalog
-        run: node scripts/refresh-catalog.mjs
+      - name: Generate quality-filtered RMDB catalog
+        env:
+          RMDB_OMDB_REPUBLICATION_ALLOWED: ${{ vars.RMDB_OMDB_REPUBLICATION_ALLOWED }}
+        run: node scripts/merge-telegram-catalog.mjs
       - name: Generate versioned CC0 public API
         run: node scripts/build-public-api.mjs
       - name: Validate data provenance and public API licenses
