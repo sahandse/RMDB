@@ -30,6 +30,8 @@ jobs:
           node-version: '22'
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Generate real public catalog
+        run: node scripts/refresh-catalog.mjs
       - name: Build static site
         run: npm run build
       - name: Validate exported routes
