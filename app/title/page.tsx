@@ -11,7 +11,7 @@ function DetailContent() {
  const [details,setDetails] = useState<Details|null>(null);
  const label=(fa:string,en:string)=>english?en:fa;
  const localValue=(key:string,value:string)=>{if(english)return value==='نامشخص'?'Unknown':value==='ثبت نشده'?'Not recorded':value;const map:Record<string,string>={Drama:'درام',Comedy:'کمدی',Action:'اکشن',Adventure:'ماجراجویی',Crime:'جنایی',Thriller:'دلهره‌آور',Romance:'عاشقانه',Horror:'ترسناک',Fantasy:'فانتزی',ScienceFiction:'علمی‌تخیلی',Mystery:'معمایی',Animation:'پویانمایی',Family:'خانوادگی',Documentary:'مستند',History:'تاریخی',War:'جنگی',Music:'موسیقی',Sports:'ورزشی',Running:'در حال پخش',Ended:'پایان‌یافته',ToBeDetermined:'نامشخص',InDevelopment:'در حال تولید'};if(key==='ژانر')return value.split('، ').map(x=>map[x.replaceAll(' ','')]||x).join('، ');if(key==='وضعیت')return map[value.replaceAll(' ','')]||value;return value};
- const factName=(name:string)=>({ 'سال انتشار':'Release year','ژانر':'Genres','وضعیت':'Status','شبکه':'Network','کشور':'Country','امتیاز TVmaze':'TVmaze rating','بازیگران':'Cast','تاریخ انتشار':'Release date','کارگردان':'Director','مدت (دقیقه)':'Runtime (minutes)','شناسه Wikidata':'Wikidata ID','عنوان اصلی':'Original title','شناسه IMDb':'IMDb ID','شروع پخش':'Premiered','پایان پخش':'Ended','مدت هر قسمت (دقیقه)':'Episode runtime (minutes)','نوع اثر':'Title type','زبان اصلی':'Original language','وب‌سایت رسمی (نشانی)':'Official website (address)','تعداد قسمت‌ها':'Episodes','تعداد فصل‌ها':'Seasons','تعداد بازیگران ثبت‌شده':'Recorded cast','کارگردان (شناسه Wikidata)':'Directors (Wikidata IDs)','نویسنده (شناسه Wikidata)':'Writers (Wikidata IDs)','تهیه‌کننده (شناسه Wikidata)':'Producers (Wikidata IDs)','بازیگران فیلم (شناسه Wikidata)':'Film cast (Wikidata IDs)','کشورهای تولید (شناسه Wikidata)':'Production countries (Wikidata IDs)','زبان‌ها (شناسه Wikidata)':'Languages (Wikidata IDs)','شرکت‌های تولید (شناسه Wikidata)':'Production companies (Wikidata IDs)' } as Record<string,string>)[name]||name;
+ const factName=(name:string)=>({ 'سال انتشار':'Release year','ژانر':'Genres','وضعیت':'Status','شبکه':'Network','کشور':'Country','امتیاز TVmaze':'TVmaze rating','بازیگران':'Cast','تاریخ انتشار':'Release date','کارگردان':'Director','مدت (دقیقه)':'Runtime (minutes)','شناسه Wikidata':'Wikidata ID','عنوان اصلی':'Original title','شناسه IMDb':'IMDb ID','شروع پخش':'Premiered','پایان پخش':'Ended','مدت هر قسمت (دقیقه)':'Episode runtime (minutes)','نوع اثر':'Title type','زبان اصلی':'Original language','وب‌سایت رسمی (نشانی)':'Official website (address)','تعداد قسمت‌ها':'Episodes','تعداد فصل‌ها':'Seasons','تعداد بازیگران ثبت‌شده':'Recorded cast','کارگردان (شناسه Wikidata)':'Directors (Wikidata IDs)','نویسنده (شناسه Wikidata)':'Writers (Wikidata IDs)','تهیه‌کننده (شناسه Wikidata)':'Producers (Wikidata IDs)','بازیگران فیلم (شناسه Wikidata)':'Film cast (Wikidata IDs)','کشورهای تولید (شناسه Wikidata)':'Production countries (Wikidata IDs)','زبان‌ها (شناسه Wikidata)':'Languages (Wikidata IDs)','شرکت‌های تولید (شناسه Wikidata)':'Production companies (Wikidata IDs)','کشورهای تولید':'Production countries','زبان‌ها':'Languages','شرکت‌های تولید':'Production companies','نویسنده':'Writers','تهیه‌کننده':'Producers','بازیگران فیلم':'Film cast' } as Record<string,string>)[name]||name;
  const [status,setStatus] = useState('');
  const [saved,setSaved]=useState(false);
  const [season,setSeason]=useState(0);
@@ -44,7 +44,7 @@ function DetailContent() {
         const related=allTitles.filter((x:{id:string;genres?:string[]})=>x.id!==id&&Array.isArray(x.genres)&&x.genres.some(g=>tags.has(g))).slice(0,8).map((x:{id:string;title:string;year?:string|null})=>({id:x.id,title:x.title,year:x.year}));
         const fields=[record.title,record.year,record.image,record.imdbId,record.summary||record.descriptionFa||record.descriptionEn,record.genres?.length,record.cast?.length||record.credits?.cast?.length,record.episodes?.length||record.runtimeMinutes,record.language||record.languages?.length,record.network||record.countries?.length];
         const completeness=Math.round(fields.filter(Boolean).length*100/fields.length);
-        const showFacts=(name:string,values:unknown)=>{if(Array.isArray(values)&&values.length)facts.push([name,values.map(String).join('، ')])};
+        const showFacts=(name:string,values:unknown,field?:string)=>{if(Array.isArray(values)&&values.length){const known=field&&record.entityNames?.[field];const display=Array.isArray(known)&&known.length?known.map((x:{fa?:string;en?:string})=>(english?x.en||x.fa:x.fa||x.en)||'').filter(Boolean):values.map(String);facts.push([name,display.join('، ')])}};
         if(record.titleEn&&record.titleEn!==record.title)facts.push(['عنوان اصلی',record.titleEn]);
         if(record.imdbId)facts.push(['شناسه IMDb',record.imdbId]);
         if(record.premiered)facts.push(['شروع پخش',record.premiered]);
@@ -53,10 +53,10 @@ function DetailContent() {
         if(record.type)facts.push(['نوع اثر',record.type]);
         if(record.language)facts.push(['زبان اصلی',record.language]);
         if(record.officialSite)facts.push(['وب‌سایت رسمی (نشانی)',String(record.officialSite)]);
-        showFacts('کشورهای تولید (شناسه Wikidata)',record.countries);
-        showFacts('زبان‌ها (شناسه Wikidata)',record.languages);
-        showFacts('شرکت‌های تولید (شناسه Wikidata)',record.productionCompanies);
-        if(record.credits){for(const [key,name] of [['directors','کارگردان'],['writers','نویسنده'],['producers','تهیه‌کننده'],['cast','بازیگران فیلم']] as const){showFacts(name+' (شناسه Wikidata)',record.credits[key])}}
+        showFacts('کشورهای تولید',record.countries,'countries');
+        showFacts('زبان‌ها',record.languages,'languages');
+        showFacts('شرکت‌های تولید',record.productionCompanies,'productionCompanies');
+        if(record.credits){for(const [key,name] of [['directors','کارگردان'],['writers','نویسنده'],['producers','تهیه‌کننده'],['cast','بازیگران فیلم']] as const){showFacts(name,record.credits[key],key)}}
         if(episodes.length){facts.push(['تعداد قسمت‌ها',String(episodes.length)]);facts.push(['تعداد فصل‌ها',String(new Set(episodes.map((x:{season:number})=>x.season)).size)])}
         if(cast.length)facts.push(['تعداد بازیگران ثبت‌شده',String(cast.length)]);
 
