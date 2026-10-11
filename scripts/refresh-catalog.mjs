@@ -1,6 +1,6 @@
 // Scheduled, key-free metadata snapshot for GitHub Pages.
 // Keep provenance and update timestamps. Do not fabricate missing fields.
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
 const root = new URL('../public/data/', import.meta.url);
 const stamp = new Date().toISOString();
 const snapshot = {updatedAt:stamp,shows:[],movies:[],people:[],errors:[]};
@@ -27,5 +27,14 @@ try {
  const people=await request('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(peopleQuery),{Accept:'application/sparql-results+json'});
  snapshot.people=people.results.bindings.map(x=>({id:x.person.value.split('/').pop(),title:x.personLabel?.value||'',titleEn:x.personEn?.value||null,birth:x.birth?.value?.slice(0,10)||null,source:'Wikidata'})).filter(x=>x.title&&!/^Q\d+$/.test(x.title));
 }catch(e){snapshot.errors.push('People: '+String(e))}
-if(!snapshot.shows.length&&!snapshot.movies.length){console.error('No fresh data. Keeping previous snapshot.');process.exitCode=1}
-else{await mkdir(root,{recursive:true});await writeFile(new URL('catalog.json',root),JSON.stringify(snapshot,null,2)+'\n');console.log('Saved snapshot',snapshot.shows.length,snapshot.movies.length,snapshot.errors);}
+// Preserve previously verified records when one upstream provider times out.
+let previous=null;
+try{previous=JSON.parse(await readFile(new URL('catalog.json',root),'utf8'))}catch{}
+for(const key of ['movies','shows','people']){
+ if(!snapshot[key].length&&Array.isArray(previous?.[key])&&previous[key].length){
+  snapshot[key]=previous[key];
+  snapshot.errors.push(key+': retained previous verified snapshot');
+ }
+}
+if(!snapshot.shows.length&&!snapshot.movies.length){console.error('No verified catalog records available.');process.exitCode=1}
+else{await mkdir(root,{recursive:true});await writeFile(new URL('catalog.json',root),JSON.stringify(snapshot,null,2)+'\n');console.log('Saved verified snapshot',snapshot.shows.length,snapshot.movies.length,snapshot.people.length,snapshot.errors);}
