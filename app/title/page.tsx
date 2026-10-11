@@ -52,7 +52,20 @@ function DetailContent() {
      const directorIds=(e.claims?.P57||[]).map((x:{mainsnak?:{datavalue?:{value?:{id?:string}}}})=>x.mainsnak?.datavalue?.value?.id).filter(Boolean).slice(0,8);
      let directors='نامشخص';
      if(directorIds.length){try{const dr=await fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+directorIds.join('%7C')+'&props=labels&languages=fa%7Cen&format=json&origin=*');if(dr.ok){const de=(await dr.json()).entities;directors=directorIds.map((q:string)=>de[q]?.labels?.[english?'en':'fa']?.value||de[q]?.labels?.en?.value).filter(Boolean).join('، ')||directors}}catch{}}
-     const poster=typeof file==='string'?'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(file)+'?width=600':null;
+     let poster:string|null=null;
+     if(typeof file==='string'){
+       try{
+         const media=await fetch('https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File:'+encodeURIComponent(file)+'&format=json&origin=*');
+         if(media.ok){
+           const pages=(await media.json()).query?.pages||{};
+           const record=Object.values(pages)[0] as {imageinfo?:{extmetadata?:{LicenseShortName?:{value?:string};LicenseUrl?:{value?:string}}}[]} | undefined;
+           const license=record?.imageinfo?.[0]?.extmetadata?.LicenseShortName?.value||'';
+           if(/^(CC0|CC BY(?:-SA)?(?: |-|$)|Public domain|PD-)/i.test(license)){
+             poster='https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(file)+'?width=600';
+           }
+         }
+       }catch{}
+     }
      if(live)setDetails({title,description:wikipediaSummary||description,poster,source:wikipediaSummary?'Wikipedia / Wikidata':'Wikidata',originalTitle,year:date.slice(0,4),facts:[['تاریخ انتشار',date],['کارگردان',directors],['مدت (دقیقه)',quantity('P2047')||'نامشخص'],['شناسه Wikidata',qid]]});
     } else throw new Error('invalid');
    } catch {if(live)setStatus('دریافت اطلاعات این عنوان ممکن نشد. اتصال اینترنت یا سرویس داده را بررسی کنید.');}
