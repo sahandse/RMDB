@@ -44,6 +44,8 @@ jobs:
           node --check scripts/auto-import-telegram.mjs
           node --check scripts/merge-telegram-catalog.mjs
           node --check scripts/sync-telegram.mjs
+          node --check scripts/check-telegram-pipeline.mjs
+          node --check scripts/report-data-health.mjs
       - name: Poll approved bot commands
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
