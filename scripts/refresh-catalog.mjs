@@ -53,5 +53,18 @@ for(const key of ['movies','shows','people']){
   snapshot.errors.push(key+': retained previous verified snapshot');
  }
 }
+// Merge user-approved Telegram records AFTER refresh, without treating messages as evidence.
+// Every curated record was resolved against TVmaze/Wikidata before approval.
+try{
+ const curated=JSON.parse(await readFile(new URL('../data/telegram-curated.json',import.meta.url),'utf8'));
+ for(const item of Array.isArray(curated.items)?curated.items:[]){
+  const target=item.source==='TVmaze'&&/^tv-\\d+$/.test(item.id)?snapshot.shows:
+   item.source==='Wikidata'&&/^wd-Q\\d+$/.test(item.id)?snapshot.movies:null;
+  if(target&&typeof item.title==='string'&&item.title.trim()&&!target.some(x=>x.id===item.id)){
+   const {id,title,titleEn,year,image,rating,genres,source}=item;
+   target.push({id,title,titleEn:titleEn||null,year:year||null,image:image||null,rating:rating??null,genres:genres||[],source});
+  }
+ }
+}catch(e){if(e.code!=='ENOENT')snapshot.errors.push('Curated data: '+String(e))}
 if(!snapshot.shows.length){console.error('No TVmaze shows available; retaining existing catalog.');process.exitCode=1}
 else{await mkdir(root,{recursive:true});await writeFile(new URL('catalog.json',root),JSON.stringify(snapshot,null,2)+'\n');console.log('Saved verified snapshot',snapshot.shows.length,snapshot.movies.length,snapshot.people.length,snapshot.errors);}
