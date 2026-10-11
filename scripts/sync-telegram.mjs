@@ -20,8 +20,8 @@ const api=async(method,params)=>{
 const reply=async(chat_id,text)=>api('sendMessage',{chat_id,text}).catch(e=>console.error('Reply failed:',e.message));
 const fetchJson=async(url)=>{const r=await fetch(url,{headers:{Accept:'application/json','User-Agent':'RMDB Telegram curator (https://github.com/sahandse/RMDB)'},signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Source HTTP '+r.status);return r.json()};
 async function verified(id){
- if(/^imdb[: ]tt\\d{7,9}$/i.test(id)){
-  const imdb=id.match(/tt\\d{7,9}/i)[0].toLowerCase();
+ if(/^imdb[: ]tt\d{7,9}$/i.test(id)){
+  const imdb=id.match(/tt\d{7,9}/i)[0].toLowerCase();
   // Exact IMDb identifier lookup only. No IMDb page scraping or dataset redistribution.
   try {
    const show=await fetch('https://api.tvmaze.com/lookup/shows?imdb='+encodeURIComponent(imdb),{headers:{Accept:'application/json'},signal:AbortSignal.timeout(15000)});
@@ -33,7 +33,7 @@ async function verified(id){
   const matches=query?.results?.bindings||[];
   if(matches.length!==1)throw Error('No unique verified film match for '+imdb);
   const qid=matches[0].item?.value?.split('/').pop();
-  if(!/^Q\\d+$/.test(qid))throw Error('Invalid Wikidata match');
+  if(!/^Q\d+$/.test(qid))throw Error('Invalid Wikidata match');
   return verified('wd-'+qid);
  }
  if(/^tv-\d+$/.test(id)){const key=id.slice(3);const v=await fetchJson('https://api.tvmaze.com/shows/'+key);
@@ -47,7 +47,7 @@ async function verified(id){
   const title=e.labels?.fa?.value||e.labels?.en?.value;if(!title)throw Error('No verified title');
   return {id,title,titleEn:e.labels?.en?.value||null,year:null,source:'Wikidata',license:'CC0-1.0'};
  }
- throw Error('Supported formats: tv-123 or wd-Q123');
+ throw Error('Supported formats: tv-123, wd-Q123 or imdb tt0903747');
 }
 const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message']});
 let touched=false;
@@ -65,7 +65,7 @@ for(const u of updates){
    if(current.items.some(x=>x.id===item.id)){await reply(m.chat.id,'Already saved: '+item.id);continue}
    // Telegram channel acts as a durable human-readable audit of approved entries.
    await api('sendMessage',{chat_id:channel,text:'RMDB approved record\n'+JSON.stringify(item),disable_web_page_preview:true});
-   current.items.push(item);touched=true;await reply(m.chat.id,'Saved: '+item.title+' ('+id+')');
+   current.items.push(item);touched=true;await reply(m.chat.id,'Saved: '+item.title+' ('+item.id+')');
   }else if(text.startsWith('/remove ')){
    const id=text.slice(8).trim();if(!/^(tv-\d+|wd-Q\d+)$/.test(id))throw Error('Invalid ID');
    const n=current.items.length;current.items=current.items.filter(x=>x.id!==id);
