@@ -1,0 +1,36 @@
+name: Sync RMDB Telegram curator
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+permissions:
+  contents: write
+concurrency:
+  group: rmdb-telegram-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Poll approved bot commands
+        env:
+          RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
+          RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
+          RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
+        run: node scripts/sync-telegram.mjs
+      - name: Commit changes safely
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/telegram-curated.json data/telegram-offset.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: sync verified Telegram curator records"
+            git push
+          fi
