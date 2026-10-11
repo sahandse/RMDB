@@ -41,6 +41,26 @@ for(const item of curated.items||[]){
   const sent=await fetch('https://api.telegram.org/bot'+botToken+'/sendDocument',{method:'POST',body:form,signal:AbortSignal.timeout(25000)});
   const reply=await sent.json();
   if(!sent.ok||!reply.ok)throw Error('Telegram OMDb archive failed: '+(reply.description||sent.status));
+  if(process.env.RMDB_OMDB_REPUBLICATION_ALLOWED==='true'){
+   // Activate only if redistribution/storage rights are confirmed for this project.
+   const licensedFile=new URL('../data/omdb-licensed-metadata.json',import.meta.url);
+   let licensed={version:1,items:[]};
+   try{licensed=JSON.parse(await readFile(licensedFile,'utf8'))}catch{}
+   const pick=(k)=>data[k]&&data[k]!=='N/A'?data[k]:null;
+   const fields={
+    titleEn:pick('Title'),year:pick('Year'),rated:pick('Rated'),released:pick('Released'),
+    runtimeText:pick('Runtime'),genresText:pick('Genre'),directorsText:pick('Director'),
+    writersText:pick('Writer'),actorsText:pick('Actors'),plot:pick('Plot'),
+    languageText:pick('Language'),countryText:pick('Country'),awards:pick('Awards'),
+    omdbPoster:pick('Poster'),ratings:Array.isArray(data.Ratings)?data.Ratings:[],
+    metascore:pick('Metascore'),imdbRating:pick('imdbRating'),imdbVotes:pick('imdbVotes'),
+    boxOffice:pick('BoxOffice'),production:pick('Production'),dvd:pick('DVD'),
+    totalSeasons:pick('totalSeasons'),omdbType:pick('Type')
+   };
+   licensed.items=licensed.items.filter(x=>x.imdbId!==imdb);
+   licensed.items.push({imdbId:imdb,fields,license:'CC BY-NC 4.0',verifiedAt:record.verifiedAt});
+   await writeFile(licensedFile,JSON.stringify(licensed,null,2)+'\n');
+  }
   report.lookups[imdb]={...record,telegramMessageId:reply.result.message_id};
   await mkdir(new URL('../data/',import.meta.url),{recursive:true});
   await writeFile(file,JSON.stringify(report,null,2)+'\n');
