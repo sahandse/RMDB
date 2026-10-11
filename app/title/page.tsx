@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 type Details = { title: string; description: string; poster: string|null; facts: [string,string][]; source: string; originalTitle?: string; year?:string; cast?: {id:number;name:string}[]; episodes?: {id:number;name:string;season:number;number:number|null}[] };
