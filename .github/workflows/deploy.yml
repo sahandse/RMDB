@@ -32,6 +32,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: TypeScript validation
         run: npx tsc --noEmit
+      - name: Probe public source availability (non-blocking)
+        run: node scripts/check-sources.mjs
       - name: Generate real public catalog
         run: node scripts/refresh-catalog.mjs
       - name: Generate versioned CC0 public API
@@ -47,6 +49,8 @@ jobs:
         run: |
           test -f out/index.html
           test -f out/en/index.html
+          test -f out/api/index.html
+          test -f out/data/sources-health.json
           test -f out/actor/index.html
           test -f out/data/catalog.json
           test -f out/api/v1/index.json
