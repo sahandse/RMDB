@@ -75,9 +75,17 @@ jobs:
           node scripts/merge-telegram-catalog.mjs
           node scripts/build-public-api.mjs
           node scripts/validate-data.mjs
+          node scripts/check-telegram-pipeline.mjs
           node scripts/check-ui.mjs
           npm run build
           touch out/.nojekyll
+      - name: Commit generated catalog and public API
+        run: |
+          git add -f public/data/catalog.json public/api/v1/index.json public/api/v1/movies.json public/api/v1/people.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: publish Telegram-curated RMDB catalog"
+            git push
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
