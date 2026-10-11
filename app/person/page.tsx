@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {Suspense,useEffect,useState} from 'react';
 import {useSearchParams} from 'next/navigation';
 type Person={name:string;birthday?:string;country?:{name:string};image?:{medium?:string}};
