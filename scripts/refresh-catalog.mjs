@@ -30,6 +30,11 @@ try {
 // Preserve previously verified records when one upstream provider times out.
 let previous=null;
 try{previous=JSON.parse(await readFile(new URL('catalog.json',root),'utf8'))}catch{}
+// A partial upstream page fetch must not silently shrink the published catalog.
+if(snapshot.errors.some(e=>e.startsWith('TVmaze page '))&&Array.isArray(previous?.shows)&&previous.shows.length>snapshot.shows.length){
+ snapshot.shows=previous.shows;
+ snapshot.errors.push('TVmaze: retained full earlier verified show archive');
+}
 for(const key of ['movies','shows','people']){
  if(!snapshot[key].length&&Array.isArray(previous?.[key])&&previous[key].length){
   snapshot[key]=previous[key];
