@@ -9,8 +9,10 @@ const previous=await readFile(manifestFile,'utf8').then(JSON.parse).catch(()=>({
 const manifest={items:previous.items||{},updatedAt:new Date().toISOString()};
 const clean=x=>String(x||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
 await mkdir(out,{recursive:true});
+let checked=0;
 for(const item of catalog.items||[]){
  if(item.source!=='Wikidata'||!/^wd-Q\d+$/.test(item.id)||manifest.items[item.id])continue;
+ if(checked++>=15)break;
  try{
   const qid=item.id.slice(3);
   const request=async(url)=>{const r=await fetch(url,{headers:{'User-Agent':'RMDB image archiver (https://github.com/sahandse/RMDB)'},signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('HTTP '+r.status);return r};
@@ -28,6 +30,8 @@ for(const item of catalog.items||[]){
   const response=await request(url);
   const type=response.headers.get('content-type')||'';
   if(!/^image\/(?:jpeg|png|webp)$/.test(type))continue;
+  const announced=Number(response.headers.get('content-length')||0);
+  if(announced>1200000)continue;
   const bytes=new Uint8Array(await response.arrayBuffer());
   if(bytes.length>1200000)continue;
   const ext=type==='image/png'?'png':type==='image/webp'?'webp':'jpg';
