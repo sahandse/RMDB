@@ -39,6 +39,7 @@ jobs:
           echo 'Required Telegram configuration is present (values hidden).'
       - name: Check ingestion script syntax
         run: |
+          node --check scripts/cache-licensed-images.mjs
           node --check scripts/auto-import-telegram.mjs
           node --check scripts/merge-telegram-catalog.mjs
           node --check scripts/sync-telegram.mjs
@@ -53,6 +54,8 @@ jobs:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
         run: node scripts/auto-import-telegram.mjs
+      - name: Cache permitted Wikimedia Commons images
+        run: node scripts/cache-licensed-images.mjs
       - name: Commit changes safely
         run: |
           git config user.name "github-actions[bot]"
@@ -60,6 +63,7 @@ jobs:
           for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
+          git add public/media public/data/image-credits.json
           if ! git diff --cached --quiet; then
             git commit -m "data: sync verified Telegram curator records"
             git push
