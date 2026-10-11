@@ -5,7 +5,7 @@ on:
     paths:
       - data/import-request.json
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
 permissions:
   contents: write
   pages: write
@@ -57,7 +57,7 @@ jobs:
           RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
         run: node scripts/sync-telegram.mjs
-      - name: Incrementally add up to 10 films and 10 series
+      - name: Import up to 20 new titles (10 movies and 10 series)
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
