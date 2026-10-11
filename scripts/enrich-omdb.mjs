@@ -16,7 +16,7 @@ const budgetFile=new URL('../data/omdb-daily-budget.json',import.meta.url);
 const today=new Date().toISOString().slice(0,10);
 let budget={date:today,requests:0};
 try{const saved=JSON.parse(await readFile(budgetFile,'utf8'));if(saved.date===today&&Number.isInteger(saved.requests)&&saved.requests>=0)budget=saved}catch{}
-const dailyMax=1000,perRunMax=4;
+const dailyMax=1000,perRunMax=7;
 const saveBudget=async()=>{await mkdir(new URL('../data/',import.meta.url),{recursive:true});await writeFile(budgetFile,JSON.stringify(budget,null,2)+'\n')};
 let done=0,attempted=0;
 for(const item of curated.items||[]){
