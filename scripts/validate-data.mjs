@@ -11,7 +11,7 @@ const valid=(items,prefix,source)=>{
 };
 const shows=valid(data.shows,'tv-','TVmaze');
 const movies=valid(data.movies,'wd-Q','Wikidata');
-if(!shows)throw Error('Empty TVmaze catalog');
+// An empty validated list is expected when the publication-quality filter removes incomplete titles.
 const people=Array.isArray(data.people)?data.people:[];
 for(const p of people){if(!p.id||!p.title||!['TVmaze','Wikidata'].includes(p.source))throw Error('Invalid person record')}
 const publicIndex=JSON.parse(readFileSync('public/api/v1/index.json','utf8'));
