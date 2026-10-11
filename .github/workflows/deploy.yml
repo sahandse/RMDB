@@ -37,6 +37,7 @@ jobs:
       - name: Validate exported routes
         run: |
           test -f out/index.html
+          test -f out/en/index.html
           test -f out/search/index.html
           test -f out/person/index.html
           test -f out/people/index.html
