@@ -1,0 +1,1 @@
+export default function BrandLogo(){return <span className="brand-lockup"><img src="/RMDB/icon.svg" width="33" height="33" alt="" aria-hidden="true"/><span>RMDB<span className="brand-dot">.</span></span></span>}
