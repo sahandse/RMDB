@@ -54,7 +54,7 @@ try{
 try{
  // Small deterministic Wikidata batches, no IMDb dataset copy or scraping.
  for(let attempts=0;attempts<5&&counts.films<10;attempts++){
-  const q='SELECT DISTINCT ?film WHERE { ?film wdt:P31 wd:Q11424. } ORDER BY ?film LIMIT 40 OFFSET '+state.movieOffset;
+  const q='SELECT DISTINCT ?film WHERE { ?film wdt:P31 wd:Q11424; wdt:P18 ?poster; wdt:P345 ?imdb; wdt:P577 ?released. FILTER(STRSTARTS(STR(?imdb), "tt")) } ORDER BY ?film LIMIT 40 OFFSET '+state.movieOffset;
   const result=await json('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(q));
   const rows=result.results?.bindings||[];
   if(!rows.length){state.movieOffset=0;break}
@@ -65,6 +65,7 @@ try{
     const x=entity.entities?.[qid];if(!x||x.missing!==undefined)continue;
     const claim=(property)=>x.claims?.[property]?.[0]?.mainsnak?.datavalue?.value;
     if(!(x.claims?.P31||[]).some(v=>v.mainsnak?.datavalue?.value?.id==='Q11424'))continue;
+    if(typeof claim('P18')!=='string'||!/^tt\d{7,9}$/.test(claim('P345')||''))continue;
     const title=x.labels?.fa?.value||x.labels?.en?.value;if(!title)continue;
     const release=claim('P577')?.time;
     const imdbId=claim('P345');
