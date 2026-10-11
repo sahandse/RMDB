@@ -12,7 +12,7 @@ await mkdir(out,{recursive:true});
 let checked=0;
 for(const item of catalog.items||[]){
  if(item.source!=='Wikidata'||!/^wd-Q\d+$/.test(item.id)||manifest.items[item.id])continue;
- if(checked++>=15)break;
+ if(checked++>=40)break;
  try{
   const qid=item.id.slice(3);
   const request=async(url)=>{const r=await fetch(url,{headers:{'User-Agent':'RMDB image archiver (https://github.com/sahandse/RMDB)'},signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('HTTP '+r.status);return r};
