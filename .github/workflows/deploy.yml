@@ -32,6 +32,15 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Build static site
         run: npm run build
+      - name: Validate exported routes
+        run: |
+          test -f out/index.html
+          test -f out/search/index.html
+          test -f out/person/index.html
+          test -f out/people/index.html
+          test -f out/explore/index.html
+          test -f out/calendar/index.html
+          test -f out/title/index.html
       - name: Create Pages files
         run: touch out/.nojekyll
       - name: Upload artifact
