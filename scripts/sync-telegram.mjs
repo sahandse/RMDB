@@ -51,6 +51,8 @@ async function verified(id){
 }
 const bot=await api('getMe',{});
 console.log('Telegram authentication OK; bot:',bot.username||bot.id,'; owner configured:',Boolean(owner),'channel configured:',Boolean(channel));
+const webhook=await api('getWebhookInfo',{});
+if(webhook.url)throw Error('Telegram webhook is active; getUpdates polling cannot work. Remove webhook or migrate this bot to webhook delivery.');
 const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message','channel_post','callback_query']});
 let touched=false;
 for(const u of updates){
@@ -70,7 +72,13 @@ for(const u of updates){
  const m=u.message||u.channel_post;
  const privateOwner=m?.chat?.type==='private'&&String(m.from?.id)===owner;
  const approvedChannel=m?.chat?.type==='channel'&&String(m.chat.id)===channel;
- if(!privateOwner&&!approvedChannel)continue;
+ if(!privateOwner&&!approvedChannel){
+  if(m?.chat?.type==='private'&&/^\/(?:start|menu|help)(?:@\w+)?(?:\s|$)/i.test(String(m.text||''))){
+   await reply(m.chat.id,'⚠️ این حساب به‌عنوان مدیر RMDB شناخته نشد.\nشناسه عددی تلگرام شما: '+m.from?.id+'\nمقدار Secret با نام RMDB_TELEGRAM_OWNER_ID در GitHub باید دقیقاً همین عدد باشد.');
+   console.warn('RMDB owner mismatch for private start; confirm OWNER_ID secret');
+  }
+  continue;
+ }
  // Ignore bot-authored channel messages to prevent re-import loops.
  if(approvedChannel&&(m.from?.id===bot.id||m.sender_chat?.id===m.chat.id&&/^(RMDB approved record|RMDB AUTO|RMDB imported)/.test(m.text||m.caption||'')))continue;
  const text=String(m.text||m.caption||'').trim();
@@ -78,7 +86,7 @@ for(const u of updates){
  const directImdb=text.match(/^tt\d{7,9}$/i);
  const importId=imdbLink?'imdb '+imdbLink[1]:directImdb?'imdb '+directImdb[0]:null;
  console.log('Authorized command:',text.split(' ')[0]||'(none)');
- if(privateOwner&&(/^\/start(?:@\w+)?$/.test(text)||text==='/help'||text==='/menu')){await api('sendMessage',{chat_id:m.chat.id,text:'🎬 مدیریت RMDB\nبرای درخواست واردکردن یک نوبت جدید، روی دکمه زیر بزن.\nدستورهای دیگر: /status ، /add ، /remove',reply_markup:{inline_keyboard:[[{text:'🎬 افزودن ۱۰ فیلم و ۱۰ سریال',callback_data:'rmdb_import_10_10'}]]}});continue}
+ if(privateOwner&&(/^\/(?:start|help|menu)(?:@\w+)?(?:\s|$)/i.test(text))){await api('sendMessage',{chat_id:m.chat.id,text:'🎬 مدیریت RMDB\nبرای درخواست واردکردن یک نوبت جدید، روی دکمه زیر بزن.\nدستورهای دیگر: /status ، /add ، /remove',reply_markup:{inline_keyboard:[[{text:'🎬 افزودن ۱۰ فیلم و ۱۰ سریال',callback_data:'rmdb_import_10_10'}]]}});continue}
  if(privateOwner&&text==='/status'){await reply(m.chat.id,'تعداد رکوردهای آرشیوشده: '+current.items.length+'\nبرای بازکردن دکمه واردکننده: /menu');continue}
  try{
   if(importId||text.startsWith('/add ')){
