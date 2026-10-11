@@ -77,3 +77,18 @@ html[dir="ltr"] .fact-list>div,html[dir="ltr"] .compare-table>div{text-align:lef
 @media(max-width:650px){.detail-area{padding-top:20px}.detail-cinema .detail-grid{gap:23px}.detail-cinema .detail-description{font-size:14px}.detail-cinema .fact-list>div{padding:12px}.detail-cinema .filmography a{font-size:13px}}
 
 .detail-poster.poster-failed{min-height:310px;border:1px dashed var(--stroke);border-radius:16px;background:linear-gradient(140deg,#1e2838,#0c1018);display:flex;align-items:center;justify-content:center}.detail-poster.poster-failed::after{content:'🎬';font-size:50px;opacity:.5}
+
+/* Detail page: understated cinema database styling */
+.detail-cinema .rmdb-score{color:#ffcf55;font-weight:800;font-size:15px;background:#292316;border-color:#56421b;direction:ltr;font-variant-numeric:tabular-nums}
+.rmdb-completeness{padding:16px 18px;margin:20px 0 30px;border-radius:16px;background:linear-gradient(130deg,#1e2430,#121820);border:1px solid #303946;max-width:500px}
+.rmdb-completeness-top{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#c5ced9;margin-bottom:10px}
+.rmdb-completeness-top strong{color:#ffcf55;font-variant-numeric:tabular-nums}
+.rmdb-completeness-track{height:6px;background:#343b45;border-radius:99px;overflow:hidden}
+.rmdb-completeness-track>div{height:100%;border-radius:99px;background:linear-gradient(90deg,#ad842e,#ffcf55);transition:width .35s ease}
+.detail-cinema .detail-poster{align-self:start;position:sticky;top:100px}
+.detail-cinema .detail-poster img{box-shadow:0 22px 55px #0008;aspect-ratio:2/3;object-fit:cover}
+.detail-cinema .save-button{margin:12px 0 8px}
+.detail-cinema .local-reviews{border-top:1px solid var(--stroke);padding-top:24px;margin:20px 0 36px}
+.detail-cinema .section-title{scroll-margin-top:95px}
+@media(max-width:850px){.detail-cinema .detail-poster{position:static}}
+@media(prefers-reduced-motion:reduce){.rmdb-completeness-track>div{transition:none}}
