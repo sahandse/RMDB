@@ -24,6 +24,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify required configuration
+        env:
+          BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
+          OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
+          CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
+        run: |
+          test -n "$BOT_TOKEN" || { echo 'Missing RMDB_TELEGRAM_BOT_TOKEN'; exit 1; }
+          test -n "$OWNER_ID" || { echo 'Missing RMDB_TELEGRAM_OWNER_ID'; exit 1; }
+          test -n "$CHANNEL_ID" || { echo 'Missing RMDB_TELEGRAM_CHANNEL_ID'; exit 1; }
+          echo 'Required Telegram configuration is present (values hidden).'
       - name: Poll approved bot commands
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
