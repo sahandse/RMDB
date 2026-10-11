@@ -60,7 +60,7 @@ function DetailContent() {
         if(episodes.length){facts.push(['تعداد قسمت‌ها',String(episodes.length)]);facts.push(['تعداد فصل‌ها',String(new Set(episodes.map((x:{season:number})=>x.season)).size)])}
         if(cast.length)facts.push(['تعداد بازیگران ثبت‌شده',String(cast.length)]);
 
-        if(record.genres?.length)facts.push(['ژانر',record.genres.join('، ')]);
+        if(record.genres?.length)showFacts('ژانر',record.genres,'genres');
         if(record.status)facts.push(['وضعیت',record.status]);
         if(record.network)facts.push(['شبکه',record.network]);
         if(record.rating!=null)facts.push(['امتیاز TVmaze',String(record.rating)]);
