@@ -1,29 +1,30 @@
 {
-  "updatedAt": "2026-10-11T07:45:02.297Z",
+  "updatedAt": "2026-10-11T08:53:38.174Z",
   "telegram": {
-    "total": 41,
-    "withPoster": 21,
-    "withImdb": 37,
-    "withSummary": 40,
-    "channelMessages": 40
+    "total": 61,
+    "withPoster": 31,
+    "withImdb": 56,
+    "withSummary": 60,
+    "channelMessages": 60
   },
   "films": {
-    "total": 20,
+    "total": 30,
     "withPoster": 0,
-    "withImdb": 17,
-    "withSummary": 20
+    "withImdb": 26,
+    "withSummary": 30
   },
   "series": {
-    "total": 21,
-    "withPoster": 21,
-    "withImdb": 20,
-    "withSummary": 20,
-    "withCast": 20,
-    "withEpisodes": 20
+    "total": 31,
+    "withPoster": 31,
+    "withImdb": 30,
+    "withSummary": 30,
+    "withCast": 30,
+    "withEpisodes": 30
   },
   "site": {
-    "films": 20,
-    "series": 4704
+    "films": 1,
+    "series": 30,
+    "awaitingEnrichment": 30
   },
   "notes": "Counts describe verified available metadata, not guaranteed completeness for all titles."
 }
