@@ -12,6 +12,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   sync:
+    environment:
+      name: github-pages
+      url: https://sahandse.github.io/RMDB/
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
