@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {useEffect,useMemo,useState} from 'react';
 type Item={id:string;title:string;year:string|null;image?:string|null;rating?:number|null;source:string;genres?:string[]};
 type Catalog={updatedAt:string;movies:Item[];shows:Item[]};
