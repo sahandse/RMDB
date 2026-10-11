@@ -2,13 +2,13 @@ name: Sync RMDB Telegram curator
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
 permissions:
   contents: write
   pages: write
   id-token: write
 concurrency:
-  group: rmdb-telegram-sync
+  group: pages
   cancel-in-progress: false
 jobs:
   sync:
@@ -43,11 +43,16 @@ jobs:
           RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
         run: node scripts/sync-telegram.mjs
+      - name: Incrementally add up to 10 films and 10 series
+        env:
+          RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
+          RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
+        run: node scripts/auto-import-telegram.mjs
       - name: Commit changes safely
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in data/telegram-curated.json data/telegram-offset.json; do
+          for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           if ! git diff --cached --quiet; then
@@ -57,7 +62,7 @@ jobs:
       - name: Build updated catalog and public pages
         run: |
           npm install --no-audit --no-fund
-          node scripts/refresh-catalog.mjs
+          node scripts/merge-telegram-catalog.mjs
           node scripts/build-public-api.mjs
           node scripts/validate-data.mjs
           node scripts/check-ui.mjs
