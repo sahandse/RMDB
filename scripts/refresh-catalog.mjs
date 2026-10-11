@@ -14,7 +14,7 @@ try{
  snapshot.shows=shows.filter(s=>s.id&&s.name).map(s=>({id:'tv-'+s.id,title:s.name,year:s.premiered?.slice(0,4)||null,image:s.image?.medium||null,rating:s.rating?.average??null,source:'TVmaze'}));
 }catch(e){snapshot.errors.push('TVmaze: '+String(e))}
 try{
- const sparql='SELECT ?film ?filmLabel ?date WHERE { ?film wdt:P31 wd:Q11424. OPTIONAL { ?film wdt:P577 ?date. } SERVICE wikibase:label { bd:serviceParam wikibase:language "fa,en". } } LIMIT 200';
+ const sparql='SELECT ?film ?filmLabel ?date WHERE { ?film wdt:P31 wd:Q11424; wdt:P577 ?date. FILTER(?date >= "1980-01-01T00:00:00Z"^^xsd:dateTime) SERVICE wikibase:label { bd:serviceParam wikibase:language "fa,en". } } ORDER BY DESC(?date) LIMIT 700';
  const payload=await request('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(sparql),{Accept:'application/sparql-results+json'});
  snapshot.movies=payload.results.bindings.map(b=>({id:'wd-'+b.film.value.split('/').pop(),title:b.filmLabel?.value||'',year:b.date?.value?.slice(0,4)||null,source:'Wikidata'})).filter(m=>m.title&&!/^Q\d+$/.test(m.title));
 }catch(e){snapshot.errors.push('Wikidata: '+String(e))}
