@@ -1,5 +1,5 @@
 import {readFileSync,existsSync} from 'node:fs';
-const pages=['page','en/page','title/page','person/page','actor/page','episode/page','people/page','search/page','explore/page','calendar/page','iran/page','top/page','compare/page','watchlist/page','api/page'];
+const pages=['page','en/page','title/page','person/page','actor/page','episode/page','people/page','search/page','explore/page','calendar/page','iran/page','top/page','compare/page','watchlist/page','api/page','locations/page'];
 let problems=[];
 for(const item of pages){
  const path='app/'+item+'.tsx';
@@ -16,6 +16,8 @@ for(const item of pages){
 }
 const api=readFileSync('app/api/page.tsx','utf8');
 if(!api.includes('movies.json')||!api.includes('people.json')||!api.includes('Wikidata')||!api.includes('TVmaze'))problems.push('API portal missing endpoints or sources');
+const locations=readFileSync('app/locations/page.tsx','utf8');
+if(!locations.includes('wdt:P915')||!locations.includes('source-note'))problems.push('Filming locations must use verified Wikidata statements');
 const home=readFileSync('app/page.tsx','utf8');
 if(!home.includes('useLocale')||!home.includes('titleEn'))problems.push('Bilingual homepage or verified English labels missing');
 const english=readFileSync('app/en/page.tsx','utf8');
