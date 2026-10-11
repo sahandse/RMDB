@@ -51,31 +51,39 @@ async function verified(id){
 }
 const bot=await api('getMe',{});
 console.log('Telegram authentication OK; bot:',bot.username||bot.id,'; owner configured:',Boolean(owner),'channel configured:',Boolean(channel));
-const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message']});
+const updates=await api('getUpdates',{offset:state.offset,limit:50,timeout:0,allowed_updates:['message','channel_post']});
 let touched=false;
 for(const u of updates){
  if(!Number.isSafeInteger(u.update_id))continue;
  state.offset=Math.max(state.offset,u.update_id+1);touched=true;
- const m=u.message;if(!m?.chat||m.chat.type!=='private'||String(m.from?.id)!==owner)continue;
- const text=String(m.text||'').trim();
+ const m=u.message||u.channel_post;
+ const privateOwner=m?.chat?.type==='private'&&String(m.from?.id)===owner;
+ const approvedChannel=m?.chat?.type==='channel'&&String(m.chat.id)===channel;
+ if(!privateOwner&&!approvedChannel)continue;
+ // Ignore bot-authored channel messages to prevent re-import loops.
+ if(approvedChannel&&(m.from?.id===bot.id||m.sender_chat?.id===m.chat.id&&/^(RMDB approved record|RMDB AUTO|RMDB imported)/.test(m.text||m.caption||'')))continue;
+ const text=String(m.text||m.caption||'').trim();
+ const imdbLink=text.match(/https?:\/\/(?:www\.|m\.)?imdb\.com\/(?:title|[a-z]{2}\/[a-z]{2}\/title)\/(tt\d{7,9})(?:[/?#]|$)/i);
+ const directImdb=text.match(/^tt\d{7,9}$/i);
+ const importId=imdbLink?'imdb '+imdbLink[1]:directImdb?'imdb '+directImdb[0]:null;
  console.log('Authorized command:',text.split(' ')[0]||'(none)');
- if(/^\/start(?:@\w+)?$/.test(text)||text==='/help'){await reply(m.chat.id,'RMDB curator: /add tv-123 | /add wd-Q123 | /add imdb tt0903747 | /remove tv-123 | /status');continue}
- if(text==='/status'){await reply(m.chat.id,'Approved items: '+current.items.length);continue}
+ if(privateOwner&&(/^\/start(?:@\w+)?$/.test(text)||text==='/help')){await reply(m.chat.id,'Send any IMDb title URL or tt0903747 directly. Also: /add tv-123 | /add wd-Q123 | /add imdb tt0903747 | /status');continue}
+ if(privateOwner&&text==='/status'){await reply(m.chat.id,'Approved items: '+current.items.length);continue}
  try{
-  if(text.startsWith('/add ')){
-   const id=text.slice(5).trim();
+  if(importId||text.startsWith('/add ')){
+   const id=importId||text.slice(5).trim();
    const item=await verified(id);
-   if(current.items.some(x=>x.id===item.id)){await reply(m.chat.id,'Already saved: '+item.id);continue}
+   if(current.items.some(x=>x.id===item.id)){if(privateOwner)await reply(m.chat.id,'Already saved: '+item.id);continue}
    // Telegram channel acts as a durable human-readable audit of approved entries.
    await api('sendMessage',{chat_id:channel,text:'RMDB approved record\n'+JSON.stringify(item),disable_web_page_preview:true});
-   current.items.push(item);touched=true;await reply(m.chat.id,'Saved: '+item.title+' ('+item.id+')');
-  }else if(text.startsWith('/remove ')){
+   current.items.push(item);touched=true;if(privateOwner)await reply(m.chat.id,'Saved: '+item.title+' ('+item.id+')');
+  }else if(privateOwner&&text.startsWith('/remove ')){
    const id=text.slice(8).trim();if(!/^(tv-\d+|wd-Q\d+)$/.test(id))throw Error('Invalid ID');
    const n=current.items.length;current.items=current.items.filter(x=>x.id!==id);
    if(current.items.length!==n){await api('sendMessage',{chat_id:channel,text:'RMDB removal: '+id});touched=true}
    await reply(m.chat.id,n===current.items.length?'Not found':'Removed: '+id);
-  }else if(text.startsWith('/'))await reply(m.chat.id,'Unknown command. Send /help.');
- }catch(e){console.error('Telegram command failed:',e.message);await reply(m.chat.id,'Failed: '+e.message)}
+  }else if(privateOwner&&text.startsWith('/'))await reply(m.chat.id,'Unknown command. Send /help.');
+ }catch(e){console.error('Telegram command failed:',e.message);if(privateOwner)await reply(m.chat.id,'Failed: '+e.message)}
 }
 if(!updates.length)console.log('No pending bot messages; send /start or /add in a PRIVATE chat with this bot.');
 if(touched){await mkdir(new URL('../data/',import.meta.url),{recursive:true});await writeFile(path,JSON.stringify(current,null,2)+'\n');await writeFile(statePath,JSON.stringify(state,null,2)+'\n');}
