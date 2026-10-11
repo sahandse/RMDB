@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {useEffect,useState} from 'react';
 type Saved={id:string;title:string;image?:string|null;year?:string};
 const KEY='rmdb-watchlist-v1';
