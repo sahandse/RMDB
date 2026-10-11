@@ -42,6 +42,7 @@ jobs:
           echo 'Required Telegram configuration is present (values hidden).'
       - name: Check ingestion script syntax
         run: |
+          node --check scripts/enrich-omdb.mjs
           node --check scripts/audit-telegram-catalog.mjs
           node --check scripts/cache-licensed-images.mjs
           node --check scripts/auto-import-telegram.mjs
@@ -60,13 +61,17 @@ jobs:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
         run: node scripts/auto-import-telegram.mjs
+      - name: Verify IMDb references with OMDb (optional)
+        env:
+          RMDB_OMDB_API_KEY: ${{ secrets.RMDB_OMDB_API_KEY }}
+        run: node scripts/enrich-omdb.mjs
       - name: Cache permitted Wikimedia Commons images
         run: node scripts/cache-licensed-images.mjs
       - name: Commit changes safely
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json; do
+          for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json data/omdb-match-report.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
           git add public/data/image-credits.json
