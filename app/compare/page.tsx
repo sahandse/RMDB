@@ -1,5 +1,5 @@
-import BrandLogo from '@/app/components/brand-logo';
 'use client';
+import BrandLogo from '@/app/components/brand-logo';
 import {useEffect,useState} from 'react';
 type Item={id:string;title:string;year:string|null;rating?:number|null;genres?:string[];source:string};
 export default function Compare(){
