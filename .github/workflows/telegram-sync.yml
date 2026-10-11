@@ -63,7 +63,8 @@ jobs:
           for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
-          git add public/media public/data/image-credits.json
+          git add public/data/image-credits.json
+          if [ -d public/media ]; then git add public/media; fi
           if ! git diff --cached --quiet; then
             git commit -m "data: sync verified Telegram curator records"
             git push
