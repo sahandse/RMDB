@@ -64,6 +64,8 @@ jobs:
       - name: Verify IMDb references with OMDb (optional)
         env:
           RMDB_OMDB_API_KEY: ${{ secrets.RMDB_OMDB_API_KEY }}
+          RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
+          RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
         run: node scripts/enrich-omdb.mjs
       - name: Cache permitted Wikimedia Commons images
         run: node scripts/cache-licensed-images.mjs
