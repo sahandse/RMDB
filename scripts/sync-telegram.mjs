@@ -20,6 +20,22 @@ const api=async(method,params)=>{
 const reply=async(chat_id,text)=>api('sendMessage',{chat_id,text}).catch(e=>console.error('Reply failed:',e.message));
 const fetchJson=async(url)=>{const r=await fetch(url,{headers:{Accept:'application/json','User-Agent':'RMDB Telegram curator (https://github.com/sahandse/RMDB)'},signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Source HTTP '+r.status);return r.json()};
 async function verified(id){
+ if(/^imdb[: ]tt\\d{7,9}$/i.test(id)){
+  const imdb=id.match(/tt\\d{7,9}/i)[0].toLowerCase();
+  // Exact IMDb identifier lookup only. No IMDb page scraping or dataset redistribution.
+  try {
+   const show=await fetch('https://api.tvmaze.com/lookup/shows?imdb='+encodeURIComponent(imdb),{headers:{Accept:'application/json'},signal:AbortSignal.timeout(15000)});
+   if(show.ok){const found=await show.json();if(found?.id&&found?.externals?.imdb===imdb)return verified('tv-'+found.id)}
+  }catch(e){console.warn('TVmaze IMDb lookup:',String(e).slice(0,100))}
+  // Wikidata P345 stores cross-references under CC0 terms; verify entity type afterwards.
+  const sparql='SELECT ?item WHERE { ?item wdt:P345 "'+imdb+'" . ?item wdt:P31 wd:Q11424 . } LIMIT 2';
+  const query=await fetchJson('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(sparql));
+  const matches=query?.results?.bindings||[];
+  if(matches.length!==1)throw Error('No unique verified film match for '+imdb);
+  const qid=matches[0].item?.value?.split('/').pop();
+  if(!/^Q\\d+$/.test(qid))throw Error('Invalid Wikidata match');
+  return verified('wd-'+qid);
+ }
  if(/^tv-\d+$/.test(id)){const key=id.slice(3);const v=await fetchJson('https://api.tvmaze.com/shows/'+key);
   if(String(v.id)!==key||!v.name)throw Error('TVmaze identifier mismatch');
   return {id,title:v.name,titleEn:v.name,year:v.premiered?.slice(0,4)||null,image:v.image?.medium||null,rating:v.rating?.average??null,genres:v.genres||[],source:'TVmaze',license:'CC BY-SA 4.0'};
@@ -40,12 +56,13 @@ for(const u of updates){
  state.offset=Math.max(state.offset,u.update_id+1);touched=true;
  const m=u.message;if(!m?.chat||m.chat.type!=='private'||String(m.from?.id)!==owner)continue;
  const text=String(m.text||'').trim();
- if(/^\/start(?:@\w+)?$/.test(text)||text==='/help'){await reply(m.chat.id,'RMDB curator: /add tv-123 | /add wd-Q123 | /remove tv-123 | /status');continue}
+ if(/^\/start(?:@\w+)?$/.test(text)||text==='/help'){await reply(m.chat.id,'RMDB curator: /add tv-123 | /add wd-Q123 | /add imdb tt0903747 | /remove tv-123 | /status');continue}
  if(text==='/status'){await reply(m.chat.id,'Approved items: '+current.items.length);continue}
  try{
   if(text.startsWith('/add ')){
-   const id=text.slice(5).trim();if(current.items.some(x=>x.id===id)){await reply(m.chat.id,'Already saved: '+id);continue}
+   const id=text.slice(5).trim();
    const item=await verified(id);
+   if(current.items.some(x=>x.id===item.id)){await reply(m.chat.id,'Already saved: '+item.id);continue}
    // Telegram channel acts as a durable human-readable audit of approved entries.
    await api('sendMessage',{chat_id:channel,text:'RMDB approved record\n'+JSON.stringify(item),disable_web_page_preview:true});
    current.items.push(item);touched=true;await reply(m.chat.id,'Saved: '+item.title+' ('+id+')');
