@@ -38,6 +38,8 @@ jobs:
         run: node scripts/refresh-catalog.mjs
       - name: Generate versioned CC0 public API
         run: node scripts/build-public-api.mjs
+      - name: Validate data provenance and public API licenses
+        run: node scripts/validate-data.mjs
       - name: Check page branding and navigation
         run: node scripts/check-ui.mjs
       - name: Build static site
