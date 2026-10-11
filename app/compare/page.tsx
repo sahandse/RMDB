@@ -1,0 +1,9 @@
+'use client';
+import {useEffect,useState} from 'react';
+type Item={id:string;title:string;year:string|null;rating?:number|null;genres?:string[];source:string};
+export default function Compare(){
+ const [all,setAll]=useState<Item[]>([]),[left,setLeft]=useState(''),[right,setRight]=useState('');
+ useEffect(()=>{fetch('/RMDB/data/catalog.json').then(r=>r.json()).then(d=>setAll([...(d.movies||[]),...(d.shows||[])])).catch(()=>{})},[]);
+ const a=all.find(x=>x.id===left),b=all.find(x=>x.id===right);
+ return <><header className="topbar"><div className="layout navbar"><a href="/RMDB/" className="logo">RMDB.</a><nav className="navlinks"><a href="/RMDB/explore/">آرشیو</a></nav></div></header><main className="layout detail-area"><span className="eyebrow">مقایسه اطلاعات واقعی</span><h1>مقایسه دو اثر</h1><p className="detail-description">مقایسه بر اساس رکوردهای واقعی ذخیره‌شده RMDB؛ اطلاعات ناموجود، حدس زده نمی‌شوند.</p><div className="compare-controls">{[left,right].map((v,i)=><select aria-label={i===0?'اثر اول':'اثر دوم'} key={i} value={v} onChange={e=>i===0?setLeft(e.target.value):setRight(e.target.value)}><option value="">انتخاب اثر {i+1}</option>{all.map(x=><option value={x.id} key={x.id}>{x.title} ({x.year||'—'})</option>)}</select>)}</div>{a&&b?<div className="compare-table"><div><strong>ویژگی</strong><strong>{a.title}</strong><strong>{b.title}</strong></div>{[['سال',a.year,b.year],['امتیاز منبع',a.rating?.toFixed(1),b.rating?.toFixed(1)],['ژانر',(a.genres||[]).join('، '),(b.genres||[]).join('، ')],['منبع داده',a.source,b.source]].map(([label,v1,v2])=><div key={label}><span>{label}</span><span>{v1||'ثبت نشده'}</span><span>{v2||'ثبت نشده'}</span></div>)}</div>:<div className="empty">دو اثر را انتخاب کنید.</div>}</main></>;
+}
