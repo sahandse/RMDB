@@ -9,7 +9,8 @@ if(dupes.length)throw Error('Duplicate Telegram IDs: '+dupes.slice(0,10).join(',
 const all=[...(catalog.movies||[]),...(catalog.shows||[])];
 const siteIds=new Set(all.map(x=>x.id));
 const missing=(curated.items||[]).filter(x=>!siteIds.has(x.id)).map(x=>x.id);
-// Records excluded by the public quality gate remain safely in the archive.\nconsole.log('Unpublished archive records awaiting enrichment:',missing.length);
+// Records excluded by the public quality gate remain safely in the archive.
+console.log('Unpublished archive records awaiting enrichment:',missing.length);
 const byType=t=>(curated.items||[]).filter(x=>x.source===t);
 const tv=byType('TVmaze'),films=byType('Wikidata');
 const stats=items=>({total:items.length,withPoster:items.filter(x=>typeof x.image==='string'&&x.image.length>0).length,withImdb:items.filter(x=>/^tt\d{7,9}$/.test(x.imdbId||'')).length,withSummary:items.filter(x=>Boolean(x.summary||x.descriptionFa||x.descriptionEn)).length});
