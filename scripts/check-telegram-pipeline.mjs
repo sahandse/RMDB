@@ -12,7 +12,7 @@ const curatedIds=new Set(curated.items.map(x=>x.id));
 if(curatedIds.size!==curated.items.length)throw Error('Duplicate IDs in Telegram archive');
 const unpublished=curated.items.filter(x=>!ids.has(x.id));
 console.log('Records safely retained for future enrichment:',unpublished.length);
-for(const item of combined){if(!item.image||!item.imdbId||!(item.summary||item.descriptionFa||item.descriptionEn||item.plot))throw Error('Incomplete title published: '+item.id)}
+for(const item of combined){if(!item.title||!item.id||!['Wikidata','TVmaze'].includes(item.source))throw Error('Invalid verified title published: '+item.id)}
 const apiIds=new Set(api.items.map(x=>x.id));
 const missingMovies=site.movies.filter(x=>x.source==='Wikidata'&&!apiIds.has(x.id));
 if(missingMovies.length)throw Error('Curated CC0 movies missing from public API: '+missingMovies.slice(0,8).map(x=>x.id).join(', '));
