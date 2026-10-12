@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-12T07:41:15.516Z",
+  "requestedAt": "2026-10-12T10:12:02.213Z",
   "source": "RMDB continuous GitHub-first catalog importer",
   "batch": {
     "films": 10,
     "series": 10
   },
   "mode": "github-primary-telegram-optional",
-  "note": "Deploy real verified film and show titles even if poster/synopsis missing. Independently count up to 1000 OMDb requests per UTC day; retry every 10 minutes. OMDb content display only if redistribution rights separately authorized."
+  "note": "Retry GitHub-first 10 movies and 10 shows after making Telegram polling non-blocking and removing hardcoded-film CI assertion."
 }
