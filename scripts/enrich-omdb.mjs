@@ -23,7 +23,10 @@ let done=0,attempted=0;
 for(const item of curated.items||[]){
  const imdb=item.imdbId;
  if(attempted>=perRunMax||budget.requests>=dailyMax)break;
- if(!/^tt\d{7,9}$/.test(imdb||'')||report.lookups[imdb])continue;
+ if(!/^tt\d{7,9}$/.test(imdb||''))continue;
+ const cachedAt=Date.parse(report.lookups[imdb]?.verifiedAt||'');
+ // Recheck previous matches at most once every 30 days; keep old snapshot on failures.
+ if(Number.isFinite(cachedAt)&&Date.now()-cachedAt<30*24*60*60*1000)continue;
  const url=new URL('https://www.omdbapi.com/');
  url.searchParams.set('i',imdb);url.searchParams.set('apikey',key);url.searchParams.set('r','json');url.searchParams.set('plot','full');
  try{
@@ -64,8 +67,11 @@ for(const item of curated.items||[]){
     boxOffice:pick('BoxOffice'),production:pick('Production'),dvd:pick('DVD'),
     totalSeasons:pick('totalSeasons'),omdbType:pick('Type')
    };
+   // Preserve fields that an upstream response omitted rather than erasing data.
+   const previous=licensed.items.find(x=>x.imdbId===imdb);
+   const updates=Object.fromEntries(Object.entries(fields).filter(([_,v])=>v!==null&&v!==undefined&&v!==''&&(!Array.isArray(v)||v.length>0)));
    licensed.items=licensed.items.filter(x=>x.imdbId!==imdb);
-   licensed.items.push({imdbId:imdb,fields,license:'CC BY-NC 4.0',verifiedAt:record.verifiedAt});
+   licensed.items.push({imdbId:imdb,fields:{...(previous?.fields||{}),...updates},license:'CC BY-NC 4.0',verifiedAt:record.verifiedAt});
    await writeFile(licensedFile,JSON.stringify(licensed,null,2)+'\n');
   }
   report.lookups[imdb]={...record,telegramMessageId:messageId};
