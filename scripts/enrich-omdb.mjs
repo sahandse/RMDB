@@ -11,6 +11,13 @@ const file=new URL('../data/omdb-match-report.json',import.meta.url);
 const curated=JSON.parse(await readFile(new URL('../data/telegram-curated.json',import.meta.url),'utf8'));
 let report;
 try{report=JSON.parse(await readFile(file,'utf8'))}catch{report={version:1,lookups:{}}}
+// If rights are separately confirmed, backfill existing verified titles whose
+// licensed public-field snapshot was never generated (e.g. permission activated later).
+const redistributionAllowed=process.env.RMDB_OMDB_REPUBLICATION_ALLOWED==='true';
+let alreadyLicensed=new Set();
+if(redistributionAllowed){
+ try{const previous=JSON.parse(await readFile(new URL('../data/omdb-licensed-metadata.json',import.meta.url),'utf8'));alreadyLicensed=new Set((previous.items||[]).map(x=>x.imdbId))}catch{}
+}
 // Count ALL attempted HTTP calls, including errors, against the per-day account budget.
 const budgetFile=new URL('../data/omdb-daily-budget.json',import.meta.url);
 const today=new Date().toISOString().slice(0,10);
@@ -26,7 +33,7 @@ for(const item of curated.items||[]){
  if(!/^tt\d{7,9}$/.test(imdb||''))continue;
  const cachedAt=Date.parse(report.lookups[imdb]?.verifiedAt||'');
  // Recheck previous matches at most once every 30 days; keep old snapshot on failures.
- if(Number.isFinite(cachedAt)&&Date.now()-cachedAt<30*24*60*60*1000)continue;
+ if(Number.isFinite(cachedAt)&&Date.now()-cachedAt<30*24*60*60*1000&&(!redistributionAllowed||alreadyLicensed.has(imdb)))continue;
  const url=new URL('https://www.omdbapi.com/');
  url.searchParams.set('i',imdb);url.searchParams.set('apikey',key);url.searchParams.set('r','json');url.searchParams.set('plot','full');
  try{
@@ -72,6 +79,7 @@ for(const item of curated.items||[]){
    const updates=Object.fromEntries(Object.entries(fields).filter(([_,v])=>v!==null&&v!==undefined&&v!==''&&(!Array.isArray(v)||v.length>0)));
    licensed.items=licensed.items.filter(x=>x.imdbId!==imdb);
    licensed.items.push({imdbId:imdb,fields:{...(previous?.fields||{}),...updates},license:'CC BY-NC 4.0',verifiedAt:record.verifiedAt});
+   alreadyLicensed.add(imdb);
    await writeFile(licensedFile,JSON.stringify(licensed,null,2)+'\n');
   }
   report.lookups[imdb]={...record,telegramMessageId:messageId};
