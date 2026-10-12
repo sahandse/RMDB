@@ -1,9 +1,9 @@
 {
   "version": "v1",
-  "updatedAt": "2026-10-11T08:53:37.961Z",
+  "updatedAt": "2026-10-12T09:38:53.556Z",
   "license": "CC0-1.0",
   "source": "Wikidata",
-  "count": 1,
+  "count": 40,
   "items": [
     {
       "id": "wd-Q100052082",
@@ -40,6 +40,1677 @@
       "productionCompanies": [],
       "releaseDate": "+2019-09-25T00:00:00Z",
       "runtimeMinutes": "+84",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000094",
+      "wikidataId": "Q1000094",
+      "title": {
+        "display": "You're Dead",
+        "en": "You're Dead"
+      },
+      "year": "1999",
+      "descriptionFa": null,
+      "descriptionEn": "1999 film directed by Andy Hurst",
+      "imdbId": "tt0178997",
+      "credits": {
+        "directors": [
+          "Q526222"
+        ],
+        "cast": [
+          "Q215017",
+          "Q200405",
+          "Q134506684"
+        ],
+        "writers": [
+          "Q526222"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q2484376",
+        "Q157443"
+      ],
+      "countries": [
+        "Q183",
+        "Q145",
+        "Q30"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1999-01-01T00:00:00Z",
+      "runtimeMinutes": "+100",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000174",
+      "wikidataId": "Q1000174",
+      "title": {
+        "display": "Tinko",
+        "en": "Tinko"
+      },
+      "year": "1957",
+      "descriptionFa": null,
+      "descriptionEn": "1957 German film directed by Herbert Ballmann",
+      "imdbId": "tt0131068",
+      "credits": {
+        "directors": [
+          "Q1379822"
+        ],
+        "cast": [
+          "Q108233",
+          "Q95951",
+          "Q1578075",
+          "Q2061747",
+          "Q1442953",
+          "Q4238551",
+          "Q1461729"
+        ],
+        "writers": [
+          "Q67991",
+          "Q71019"
+        ],
+        "producers": []
+      },
+      "genres": [],
+      "countries": [
+        "Q16957",
+        "Q183"
+      ],
+      "languages": [
+        "Q188"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1957-01-01T00:00:00Z",
+      "runtimeMinutes": "+91",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000210",
+      "wikidataId": "Q1000210",
+      "title": {
+        "display": "Untersuchung an Mädeln",
+        "en": "Untersuchung an Mädeln"
+      },
+      "year": "1999",
+      "descriptionFa": null,
+      "descriptionEn": "1999 film by Peter Payer",
+      "imdbId": "tt0209455",
+      "credits": {
+        "directors": [
+          "Q2077488"
+        ],
+        "cast": [
+          "Q63910",
+          "Q90067"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q2484376"
+      ],
+      "countries": [
+        "Q40"
+      ],
+      "languages": [
+        "Q188"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1999-10-09T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000394",
+      "wikidataId": "Q1000394",
+      "title": {
+        "display": "This Modern Age",
+        "en": "This Modern Age"
+      },
+      "year": "1931",
+      "descriptionFa": null,
+      "descriptionEn": "1931 film by Nick Grinde",
+      "imdbId": "tt0022478",
+      "credits": {
+        "directors": [
+          "Q1985392"
+        ],
+        "cast": [
+          "Q40475",
+          "Q461370",
+          "Q922580",
+          "Q15069875",
+          "Q2831060",
+          "Q448208",
+          "Q458513",
+          "Q1621558",
+          "Q1383202",
+          "Q455912",
+          "Q6902234",
+          "Q6756370"
+        ],
+        "writers": [
+          "Q1443029"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232",
+        "Q1054574"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [
+        "Q179200"
+      ],
+      "releaseDate": "+1931-08-29T00:00:00Z",
+      "runtimeMinutes": "+69",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q10005695",
+      "wikidataId": "Q10005695",
+      "title": {
+        "display": "Happy Journey",
+        "en": "Happy Journey"
+      },
+      "year": "2014",
+      "descriptionFa": null,
+      "descriptionEn": "2014 Marathi film directed by Sachin Kundalkar",
+      "imdbId": "tt4443924",
+      "credits": {
+        "directors": [
+          "Q7396742"
+        ],
+        "cast": [
+          "Q4818791",
+          "Q7246459",
+          "Q7127782"
+        ],
+        "writers": [
+          "Q7396742"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q668"
+      ],
+      "languages": [
+        "Q1571"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2014-11-28T00:00:00Z",
+      "runtimeMinutes": "+130",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100057542",
+      "wikidataId": "Q100057542",
+      "title": {
+        "display": "The Two Sights",
+        "en": "The Two Sights"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 film directed by Joshua Bonnetta",
+      "imdbId": "tt11991040",
+      "credits": {
+        "directors": [
+          "Q28948381"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q93204"
+      ],
+      "countries": [
+        "Q16"
+      ],
+      "languages": [
+        "Q1860",
+        "Q9314"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-02-15T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q10007277",
+      "wikidataId": "Q10007277",
+      "title": {
+        "display": "Pacho, hybský zbojník",
+        "en": "Pacho, hybský zbojník"
+      },
+      "year": "1975",
+      "descriptionFa": null,
+      "descriptionEn": "1975 film by Martin Ťapák",
+      "imdbId": "tt0073504",
+      "credits": {
+        "directors": [
+          "Q12035899"
+        ],
+        "cast": [
+          "Q511930",
+          "Q12027605",
+          "Q12028808",
+          "Q12765013",
+          "Q12044704",
+          "Q730137",
+          "Q11985169",
+          "Q1066361",
+          "Q7542461",
+          "Q13539044",
+          "Q3502280",
+          "Q12021980",
+          "Q13419675",
+          "Q12781500",
+          "Q12761856",
+          "Q11710967",
+          "Q19401093",
+          "Q12765998",
+          "Q16519811",
+          "Q12034870",
+          "Q61971605",
+          "Q12768716",
+          "Q3509419",
+          "Q13421335",
+          "Q1166581",
+          "Q13449830",
+          "Q95745200",
+          "Q95899232",
+          "Q95892088",
+          "Q13421853",
+          "Q94929242",
+          "Q3506567",
+          "Q12778636",
+          "Q95170853",
+          "Q12773042",
+          "Q101209969",
+          "Q101249083",
+          "Q102318458",
+          "Q106353977",
+          "Q106158775",
+          "Q106188418",
+          "Q108147497",
+          "Q108271001",
+          "Q110787083",
+          "Q110693810",
+          "Q110693786",
+          "Q110773833",
+          "Q120634224",
+          "Q116896865",
+          "Q133310691",
+          "Q112396028",
+          "Q131850359",
+          "Q133367551",
+          "Q109986917",
+          "Q133465638",
+          "Q133467467",
+          "Q133576203",
+          "Q133576405",
+          "Q133576268",
+          "Q133587111",
+          "Q133576281",
+          "Q133578001",
+          "Q133577255",
+          "Q133767926",
+          "Q133576404",
+          "Q133577414",
+          "Q133695510",
+          "Q133576265",
+          "Q133576401",
+          "Q133576287",
+          "Q133577368",
+          "Q112462484",
+          "Q133576473",
+          "Q133767804"
+        ],
+        "writers": [
+          "Q3394963",
+          "Q1934261",
+          "Q562897",
+          "Q12035899"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q157443"
+      ],
+      "countries": [
+        "Q33946"
+      ],
+      "languages": [
+        "Q9058"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1975-08-26T00:00:00Z",
+      "runtimeMinutes": "+85",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000825",
+      "wikidataId": "Q1000825",
+      "title": {
+        "display": "Jan Dara",
+        "en": "Jan Dara"
+      },
+      "year": "2001",
+      "descriptionFa": null,
+      "descriptionEn": "2001 Thai film directed by Nonzee Nimibutr",
+      "imdbId": "tt0282628",
+      "credits": {
+        "directors": [
+          "Q360509"
+        ],
+        "cast": [
+          "Q2370079",
+          "Q1041384",
+          "Q4272908",
+          "Q13016199",
+          "Q16305292",
+          "Q16139733",
+          "Q6121318"
+        ],
+        "writers": [
+          "Q360509",
+          "Q13016619"
+        ],
+        "producers": [
+          "Q716064",
+          "Q13014776",
+          "Q360509"
+        ]
+      },
+      "genres": [
+        "Q20442589"
+      ],
+      "countries": [
+        "Q869"
+      ],
+      "languages": [
+        "Q9217"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2001-01-01T00:00:00Z",
+      "runtimeMinutes": "+108",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1000826",
+      "wikidataId": "Q1000826",
+      "title": {
+        "display": "Guns of the Magnificent Seven",
+        "en": "Guns of the Magnificent Seven"
+      },
+      "year": "1969",
+      "descriptionFa": null,
+      "descriptionEn": "1969 film by Paul Wendkos",
+      "imdbId": "tt0064395",
+      "credits": {
+        "directors": [
+          "Q450601"
+        ],
+        "cast": [
+          "Q298818",
+          "Q313040",
+          "Q945099",
+          "Q3751926",
+          "Q465643",
+          "Q106743",
+          "Q372497",
+          "Q962579",
+          "Q1276579",
+          "Q891531",
+          "Q516627",
+          "Q14747"
+        ],
+        "writers": [
+          "Q3134070"
+        ],
+        "producers": [
+          "Q3559718"
+        ]
+      },
+      "genres": [
+        "Q172980"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [
+        "Q456294"
+      ],
+      "releaseDate": "+1969-01-01T00:00:00Z",
+      "runtimeMinutes": "+100",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100097551",
+      "wikidataId": "Q100097551",
+      "title": {
+        "display": "قتل آمریکایی: خانواده همسایه",
+        "en": "American Murder: The Family Next Door"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 true crime documentary film",
+      "imdbId": "tt12987894",
+      "credits": {
+        "directors": [
+          "Q108574859"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q93204",
+        "Q959790"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [
+        "Q7976"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-09-30T00:00:00Z",
+      "runtimeMinutes": "+82",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100104941",
+      "wikidataId": "Q100104941",
+      "title": {
+        "display": "Die Filmstadt Hollywood",
+        "en": "Die Filmstadt Hollywood"
+      },
+      "year": "1928",
+      "descriptionFa": null,
+      "descriptionEn": "1928 film by Max Goldschmidt",
+      "imdbId": "tt0460795",
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q882",
+          "Q55412",
+          "Q77181"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q93204"
+      ],
+      "countries": [],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+1928-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100105983",
+      "wikidataId": "Q100105983",
+      "title": {
+        "display": "Dakara - The confession of a thug",
+        "en": "Dakara - The confession of a thug"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 film by Lemena Vintsy",
+      "imdbId": "tt11899814",
+      "credits": {
+        "directors": [
+          "Q100093874"
+        ],
+        "cast": [],
+        "writers": [
+          "Q100093874"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232",
+        "Q959790",
+        "Q2484376"
+      ],
+      "countries": [
+        "Q1019"
+      ],
+      "languages": [
+        "Q7930"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-12-19T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1001065",
+      "wikidataId": "Q1001065",
+      "title": {
+        "display": "En la sombra",
+        "en": "En la sombra"
+      },
+      "year": "1917",
+      "descriptionFa": null,
+      "descriptionEn": "1917 film",
+      "imdbId": "tt0007889",
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q1936124"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q226730"
+      ],
+      "countries": [
+        "Q96"
+      ],
+      "languages": [
+        "Q1321"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1917-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100109700",
+      "wikidataId": "Q100109700",
+      "title": {
+        "display": "Dog's Eyes",
+        "en": "Dog's Eyes"
+      },
+      "year": "1983",
+      "descriptionFa": null,
+      "descriptionEn": "1983 film directed by Alberto Durant",
+      "imdbId": "tt0084029",
+      "credits": {
+        "directors": [
+          "Q20014632"
+        ],
+        "cast": [],
+        "writers": [
+          "Q20014632",
+          "Q730457"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q419"
+      ],
+      "languages": [
+        "Q1321"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1983-00-00T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1001102",
+      "wikidataId": "Q1001102",
+      "title": {
+        "display": "The Rat Savior",
+        "en": "The Rat Savior"
+      },
+      "year": "1976",
+      "descriptionFa": null,
+      "descriptionEn": "1976 film by Krsto Papić",
+      "imdbId": "tt0074701",
+      "credits": {
+        "directors": [
+          "Q3199956"
+        ],
+        "cast": [
+          "Q1269500",
+          "Q603685",
+          "Q1658517",
+          "Q1253847",
+          "Q12628320",
+          "Q1590034",
+          "Q5340143"
+        ],
+        "writers": [
+          "Q617562",
+          "Q3199956"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q200092",
+        "Q471839"
+      ],
+      "countries": [
+        "Q83286",
+        "Q36704"
+      ],
+      "languages": [
+        "Q6654",
+        "Q9299",
+        "Q9301"
+      ],
+      "productionCompanies": [
+        "Q3503539"
+      ],
+      "releaseDate": "+1976-10-26T00:00:00Z",
+      "runtimeMinutes": "+75",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q10012033",
+      "wikidataId": "Q10012033",
+      "title": {
+        "display": "Candle March",
+        "en": "Candle March"
+      },
+      "year": "2014",
+      "descriptionFa": null,
+      "descriptionEn": "2014 film directed by Sachin Dev",
+      "imdbId": "tt6304754",
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q12062287",
+          "Q7695206",
+          "Q16202697"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [],
+      "countries": [
+        "Q668"
+      ],
+      "languages": [
+        "Q1571"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2014-12-05T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100136557",
+      "wikidataId": "Q100136557",
+      "title": {
+        "display": "Ariran omo olusho",
+        "en": "Ariran omo olusho"
+      },
+      "year": "2020",
+      "descriptionFa": "فيلم نيجريه 2020",
+      "descriptionEn": "2020 Nigerian film",
+      "imdbId": null,
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q19610277",
+          "Q20810389",
+          "Q19665328"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q1033"
+      ],
+      "languages": [
+        "Q34311"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100136948",
+      "wikidataId": "Q100136948",
+      "title": {
+        "display": "Agba Yahoo",
+        "en": "Agba Yahoo"
+      },
+      "year": "2020",
+      "descriptionFa": "فيلم نيجريه 2020",
+      "descriptionEn": "2020 Nigerian film",
+      "imdbId": null,
+      "credits": {
+        "directors": [],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q1033"
+      ],
+      "languages": [
+        "Q34311"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100136995",
+      "wikidataId": "Q100136995",
+      "title": {
+        "display": "Yeye eleye",
+        "en": "Yeye eleye"
+      },
+      "year": "2020",
+      "descriptionFa": "فيلم نيجريه 2020",
+      "descriptionEn": "2020 Nigerian film",
+      "imdbId": null,
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q19610277",
+          "Q19282080",
+          "Q20810389",
+          "Q19665037",
+          "Q19665328"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q1033"
+      ],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100137285",
+      "wikidataId": "Q100137285",
+      "title": {
+        "display": "Alala Meji",
+        "en": "Alala Meji"
+      },
+      "year": "2020",
+      "descriptionFa": "فيلم نيجريه 2020",
+      "descriptionEn": "2020 Nigerian film",
+      "imdbId": null,
+      "credits": {
+        "directors": [],
+        "cast": [
+          "Q19610277",
+          "Q97483783"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q1033"
+      ],
+      "languages": [
+        "Q34311"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100137799",
+      "wikidataId": "Q100137799",
+      "title": {
+        "display": "Shots in Marienbad",
+        "en": "Shots in Marienbad"
+      },
+      "year": "1973",
+      "descriptionFa": null,
+      "descriptionEn": "1973 film directed by Ivo Toman",
+      "imdbId": "tt0183994",
+      "credits": {
+        "directors": [
+          "Q12022128",
+          "Q19602847"
+        ],
+        "cast": [
+          "Q95177289",
+          "Q1704158",
+          "Q12028243",
+          "Q1457023",
+          "Q11219781",
+          "Q7940562",
+          "Q2573700",
+          "Q15234625",
+          "Q95244382",
+          "Q95859003",
+          "Q12019001",
+          "Q95465177",
+          "Q12032612",
+          "Q12043258",
+          "Q55679560",
+          "Q95786699",
+          "Q23563996",
+          "Q12044219",
+          "Q1632648",
+          "Q73748848",
+          "Q1698625",
+          "Q95078230",
+          "Q95862900",
+          "Q20222959",
+          "Q1576092",
+          "Q95228174",
+          "Q101210271",
+          "Q101210278",
+          "Q101244916",
+          "Q12025831",
+          "Q12023093",
+          "Q16515400",
+          "Q11219828",
+          "Q12055916",
+          "Q104599211",
+          "Q101210248",
+          "Q12037255",
+          "Q10857588",
+          "Q123509407",
+          "Q133297489",
+          "Q133415539",
+          "Q95169073",
+          "Q133569985",
+          "Q133570308",
+          "Q133572624",
+          "Q133572625",
+          "Q133572626",
+          "Q133572627",
+          "Q133572628",
+          "Q133572531",
+          "Q41505146",
+          "Q58798372",
+          "Q95868032",
+          "Q95260015",
+          "Q133574085",
+          "Q95901190",
+          "Q95794483",
+          "Q133574086"
+        ],
+        "writers": [
+          "Q95174604",
+          "Q12022128"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q959790",
+        "Q130232",
+        "Q17013749",
+        "Q2484376"
+      ],
+      "countries": [
+        "Q16957",
+        "Q33946",
+        "Q183"
+      ],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+1973-00-00T00:00:00Z",
+      "runtimeMinutes": "+88",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100138177",
+      "wikidataId": "Q100138177",
+      "title": {
+        "display": "Huracán Ramírez y la monjita negra",
+        "en": "Huracán Ramírez y la monjita negra"
+      },
+      "year": "1973",
+      "descriptionFa": null,
+      "descriptionEn": "1973 film by Joselito Rodríguez",
+      "imdbId": "tt0272132",
+      "credits": {
+        "directors": [
+          "Q3184079"
+        ],
+        "cast": [
+          "Q17462558",
+          "Q6147507",
+          "Q7702233"
+        ],
+        "writers": [
+          "Q3184079"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q188473",
+        "Q319221",
+        "Q157443",
+        "Q959790"
+      ],
+      "countries": [
+        "Q96"
+      ],
+      "languages": [
+        "Q1321"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1973-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100138178",
+      "wikidataId": "Q100138178",
+      "title": {
+        "display": "La venganza de Huracán Ramírez",
+        "en": "La venganza de Huracán Ramírez"
+      },
+      "year": "1969",
+      "descriptionFa": null,
+      "descriptionEn": "1969 film by Joselito Rodríguez",
+      "imdbId": "tt0324425",
+      "credits": {
+        "directors": [
+          "Q3184079"
+        ],
+        "cast": [
+          "Q17462558",
+          "Q6147507",
+          "Q3018788",
+          "Q2939565",
+          "Q8962746",
+          "Q16832556",
+          "Q19801602",
+          "Q10313836"
+        ],
+        "writers": [
+          "Q3184079"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q157394",
+        "Q471839"
+      ],
+      "countries": [
+        "Q96"
+      ],
+      "languages": [
+        "Q1321"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1969-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100138224",
+      "wikidataId": "Q100138224",
+      "title": {
+        "display": "De sangre chicana",
+        "en": "De sangre chicana"
+      },
+      "year": "1974",
+      "descriptionFa": null,
+      "descriptionEn": "1974 film by Joselito Rodríguez",
+      "imdbId": "tt0321951",
+      "credits": {
+        "directors": [
+          "Q3184079"
+        ],
+        "cast": [
+          "Q17462558",
+          "Q5938989",
+          "Q3725049"
+        ],
+        "writers": [
+          "Q3184079"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q188473",
+        "Q959790",
+        "Q130232"
+      ],
+      "countries": [
+        "Q96"
+      ],
+      "languages": [
+        "Q1321",
+        "Q1860"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1974-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100139868",
+      "wikidataId": "Q100139868",
+      "title": {
+        "display": "Education",
+        "en": "Education"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 film directed by Steve McQueen",
+      "imdbId": "tt10551106",
+      "credits": {
+        "directors": [
+          "Q706475"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q145"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-12-13T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100139870",
+      "wikidataId": "Q100139870",
+      "title": {
+        "display": "Love Emergency",
+        "en": "Love Emergency"
+      },
+      "year": "2019",
+      "descriptionFa": null,
+      "descriptionEn": "2019 film by Will Ryder",
+      "imdbId": "tt13206808",
+      "credits": {
+        "directors": [
+          "Q19867131"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q185529"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [],
+      "productionCompanies": [
+        "Q4678604"
+      ],
+      "releaseDate": "+2019-00-00T00:00:00Z",
+      "runtimeMinutes": "+128",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1001400",
+      "wikidataId": "Q1001400",
+      "title": {
+        "display": "Ukraine on Fire",
+        "en": "Ukraine on Fire"
+      },
+      "year": "2016",
+      "descriptionFa": null,
+      "descriptionEn": "documentary propaganda film directed by Igor Lopatonok (2016)",
+      "imdbId": "tt5724358",
+      "credits": {
+        "directors": [
+          "Q21104467"
+        ],
+        "cast": [
+          "Q179497"
+        ],
+        "writers": [
+          "Q24629031"
+        ],
+        "producers": [
+          "Q21104467",
+          "Q24629031",
+          "Q179497"
+        ]
+      },
+      "genres": [
+        "Q93204",
+        "Q1935609"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [
+        "Q1860",
+        "Q7737"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2016-00-00T00:00:00Z",
+      "runtimeMinutes": "+94",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100144601",
+      "wikidataId": "Q100144601",
+      "title": {
+        "display": "Summer White",
+        "en": "Summer White"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 film directed by Rodrigo Ruiz Patterson",
+      "imdbId": "tt11394288",
+      "credits": {
+        "directors": [],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q96"
+      ],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": "+87",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100144828",
+      "wikidataId": "Q100144828",
+      "title": {
+        "display": "Bargain with Bullets",
+        "en": "Bargain with Bullets"
+      },
+      "year": "1937",
+      "descriptionFa": null,
+      "descriptionEn": "1937 American film",
+      "imdbId": "tt0028917",
+      "credits": {
+        "directors": [
+          "Q3127850"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q7444356"
+      ],
+      "countries": [],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+1937-00-00T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100146341",
+      "wikidataId": "Q100146341",
+      "title": {
+        "display": "Inés de Castro",
+        "en": "Inés de Castro"
+      },
+      "year": "1944",
+      "descriptionFa": null,
+      "descriptionEn": "1944 film by José Leitão de Barros",
+      "imdbId": "tt0036960",
+      "credits": {
+        "directors": [
+          "Q939919"
+        ],
+        "cast": [
+          "Q611506",
+          "Q30510",
+          "Q10357657",
+          "Q1560243",
+          "Q12258732"
+        ],
+        "writers": [
+          "Q51883456",
+          "Q383450"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q542475",
+        "Q17013749",
+        "Q130232"
+      ],
+      "countries": [
+        "Q29",
+        "Q45"
+      ],
+      "languages": [
+        "Q1321",
+        "Q5146"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1944-12-28T00:00:00Z",
+      "runtimeMinutes": "+92",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100146435",
+      "wikidataId": "Q100146435",
+      "title": {
+        "display": "Big Boys Don’t Cry",
+        "en": "Big Boys Don’t Cry"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2022 film directed by Steve Crowhurst",
+      "imdbId": "tt9797932",
+      "credits": {
+        "directors": [],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q645928"
+      ],
+      "countries": [
+        "Q145"
+      ],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+2020-00-00T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100156260",
+      "wikidataId": "Q100156260",
+      "title": {
+        "display": "Freaks Out",
+        "en": "Freaks Out"
+      },
+      "year": "2021",
+      "descriptionFa": null,
+      "descriptionEn": "2021 film directed by Gabriele Mainetti",
+      "imdbId": "tt7270808",
+      "credits": {
+        "directors": [
+          "Q3756624"
+        ],
+        "cast": [
+          "Q959138",
+          "Q3903764",
+          "Q100156263",
+          "Q100156267",
+          "Q795628",
+          "Q3853059",
+          "Q16064485"
+        ],
+        "writers": [
+          "Q3876239",
+          "Q3756624"
+        ],
+        "producers": [
+          "Q938333"
+        ]
+      },
+      "genres": [
+        "Q130232"
+      ],
+      "countries": [
+        "Q38"
+      ],
+      "languages": [
+        "Q652"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2021-09-08T00:00:00Z",
+      "runtimeMinutes": "+141",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100157919",
+      "wikidataId": "Q100157919",
+      "title": {
+        "display": "His Darker Self",
+        "en": "His Darker Self"
+      },
+      "year": "1924",
+      "descriptionFa": null,
+      "descriptionEn": "1924 film directed by John W. Noble",
+      "imdbId": "tt0014989",
+      "credits": {
+        "directors": [
+          "Q15117330"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q226730",
+        "Q157443"
+      ],
+      "countries": [
+        "Q30"
+      ],
+      "languages": [],
+      "productionCompanies": [],
+      "releaseDate": "+1924-00-00T00:00:00Z",
+      "runtimeMinutes": "+50",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1002495",
+      "wikidataId": "Q1002495",
+      "title": {
+        "display": "What Remains of Us",
+        "en": "What Remains of Us"
+      },
+      "year": "2004",
+      "descriptionFa": null,
+      "descriptionEn": "2004 film by Hugo Latulippe",
+      "imdbId": "tt0420541",
+      "credits": {
+        "directors": [
+          "Q3142408",
+          "Q2297794"
+        ],
+        "cast": [
+          "Q37349",
+          "Q3192255",
+          "Q17293"
+        ],
+        "writers": [
+          "Q3142408"
+        ],
+        "producers": []
+      },
+      "genres": [
+        "Q93204"
+      ],
+      "countries": [
+        "Q16"
+      ],
+      "languages": [
+        "Q150",
+        "Q1860",
+        "Q34271"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2004-01-01T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100252108",
+      "wikidataId": "Q100252108",
+      "title": {
+        "display": "Narcissus Off Duty",
+        "en": "Narcissus Off Duty"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 Brazilian documentary",
+      "imdbId": "tt12792446",
+      "credits": {
+        "directors": [
+          "Q10359389"
+        ],
+        "cast": [
+          "Q309983"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q93204"
+      ],
+      "countries": [
+        "Q155"
+      ],
+      "languages": [
+        "Q5146"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-09-07T00:00:00Z",
+      "runtimeMinutes": "+84",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100259954",
+      "wikidataId": "Q100259954",
+      "title": {
+        "display": "Scrap of Bread",
+        "en": "Scrap of Bread"
+      },
+      "year": "1960",
+      "descriptionFa": null,
+      "descriptionEn": "1960 Egyptian film",
+      "imdbId": "tt0359623",
+      "credits": {
+        "directors": [
+          "Q3339525"
+        ],
+        "cast": [
+          "Q7403450"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [],
+      "countries": [
+        "Q79"
+      ],
+      "languages": [
+        "Q29919"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1960-00-00T00:00:00Z",
+      "runtimeMinutes": "+90",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100278859",
+      "wikidataId": "Q100278859",
+      "title": {
+        "display": "Alex Wheatle",
+        "en": "Alex Wheatle"
+      },
+      "year": "2020",
+      "descriptionFa": null,
+      "descriptionEn": "2020 film directed by Steve McQueen",
+      "imdbId": "tt10551104",
+      "credits": {
+        "directors": [
+          "Q706475"
+        ],
+        "cast": [],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q645928"
+      ],
+      "countries": [
+        "Q145"
+      ],
+      "languages": [
+        "Q1860"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2020-12-06T00:00:00Z",
+      "runtimeMinutes": null,
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q1003094",
+      "wikidataId": "Q1003094",
+      "title": {
+        "display": "Private Popsicle",
+        "en": "Private Popsicle"
+      },
+      "year": "1982",
+      "descriptionFa": null,
+      "descriptionEn": "1982 film directed by Boaz Davidson",
+      "imdbId": "tt0084629",
+      "credits": {
+        "directors": [
+          "Q887614"
+        ],
+        "cast": [
+          "Q1356584",
+          "Q390091"
+        ],
+        "writers": [
+          "Q887614"
+        ],
+        "producers": [
+          "Q542003"
+        ]
+      },
+      "genres": [
+        "Q157443"
+      ],
+      "countries": [
+        "Q183",
+        "Q801"
+      ],
+      "languages": [
+        "Q9288"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+1982-00-00T00:00:00Z",
+      "runtimeMinutes": "+95",
+      "source": "Wikidata",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "wd-Q100422251",
+      "wikidataId": "Q100422251",
+      "title": {
+        "display": "Diabolik",
+        "en": "Diabolik"
+      },
+      "year": "2021",
+      "descriptionFa": null,
+      "descriptionEn": "2021 film by Manetti Bros.",
+      "imdbId": "tt9381682",
+      "credits": {
+        "directors": [
+          "Q13600449",
+          "Q13600455"
+        ],
+        "cast": [
+          "Q3838188",
+          "Q676749",
+          "Q1052746",
+          "Q3610255",
+          "Q3955856",
+          "Q123757386",
+          "Q4008556",
+          "Q1042623",
+          "Q3619073",
+          "Q3701821",
+          "Q2092695",
+          "Q66085239",
+          "Q2500306",
+          "Q26033958",
+          "Q3703536",
+          "Q3972644",
+          "Q16658154",
+          "Q468793"
+        ],
+        "writers": [],
+        "producers": []
+      },
+      "genres": [
+        "Q959790"
+      ],
+      "countries": [
+        "Q38"
+      ],
+      "languages": [
+        "Q652"
+      ],
+      "productionCompanies": [],
+      "releaseDate": "+2021-12-16T00:00:00Z",
+      "runtimeMinutes": "+133",
       "source": "Wikidata",
       "license": "CC0-1.0"
     }
