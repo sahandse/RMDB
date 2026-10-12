@@ -47,7 +47,7 @@ try{
    let full;
    try{full=await json('https://api.tvmaze.com/shows/'+s.id+'?embed%5B%5D=cast&embed%5B%5D=episodes')}
    catch(e){full=s;counts.errors.push('TVmaze detail fallback tv-'+s.id+': '+e.message)}
-   const actors=(full._embedded?.cast||[]).map(x=>({id:x.person?.id||null,name:x.person?.name||null,character:x.character?.name||null})).filter(x=>x.id&&x.name);
+   const actors=(full._embedded?.cast||[]).map(x=>({id:x.person?.id||null,name:x.person?.name||null,character:x.character?.name||null,image:x.person?.image?.medium||null})).filter(x=>x.id&&x.name);
    const episodes=(full._embedded?.episodes||[]).map(x=>({id:x.id,season:x.season,number:x.number,name:x.name,airdate:x.airdate,runtime:x.runtime,summary:x.summary||null}));
    await add({cast:actors,episodes,officialSite:full.officialSite||null,ended:full.ended||null,premiered:full.premiered||null,averageRuntime:full.averageRuntime||null,type:full.type||null,id:'tv-'+s.id,title:s.name,titleEn:s.name,year:s.premiered?.slice(0,4)||null,image:s.image?.medium||null,rating:s.rating?.average??null,genres:s.genres||[],summary:s.summary||null,language:s.language||null,status:s.status||null,network:s.network?.name||s.webChannel?.name||null,imdbId:s.externals?.imdb||null,source:'TVmaze',license:'CC BY-SA 4.0'},'shows')
    }catch(e){counts.errors.push('tv-'+s.id+': '+e.message)}
