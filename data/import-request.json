@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-11T10:32:55.544Z",
-  "source": "RMDB administrator via ChatGPT",
+  "requestedAt": "2026-10-12T07:41:15.516Z",
+  "source": "RMDB continuous GitHub-first catalog importer",
   "batch": {
     "films": 10,
     "series": 10
   },
-  "mode": "immediate-10-plus-10-verified",
-  "note": "User requested 20 new records now: 10 movies and 10 TV series, skip duplicates, publish licensed/quality-complete records and keep incomplete items in archive."
+  "mode": "github-primary-telegram-optional",
+  "note": "Deploy real verified film and show titles even if poster/synopsis missing. Independently count up to 1000 OMDb requests per UTC day; retry every 10 minutes. OMDb content display only if redistribution rights separately authorized."
 }
