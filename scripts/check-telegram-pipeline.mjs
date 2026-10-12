@@ -24,14 +24,5 @@ for(const item of localImages){
  if(!/^[a-zA-Z0-9._-]+$/.test(name))throw Error('Unsafe local media path: '+item.id);
  await access(new URL('../public/media/'+name,import.meta.url)).catch(()=>{throw Error('Local image missing: '+item.id)});
 }
-// Regression check: a real film imported from the Telegram channel must appear
-// in both the RMDB catalog and the free Wikidata-only API.
-const filmId='wd-Q1000094';
-const archivedFilm=curated.items.find(x=>x.id===filmId);
-if(!archivedFilm)throw Error('Expected real test film is missing from Telegram archive: '+filmId);
-if(!/^tt\d{7,9}$/.test(archivedFilm.imdbId||'')||!Number.isInteger(archivedFilm.telegramMessageId))throw Error('Film metadata or Telegram delivery evidence invalid: '+filmId);
-const publishedFilm=site.movies.find(x=>x.id===filmId),publishedApiFilm=api.items.find(x=>x.id===filmId);
-if(publishedFilm&&(!publishedApiFilm||publishedApiFilm.imdbId!==archivedFilm.imdbId))throw Error('Published film CC0 API regression failed: '+filmId);
-if(publishedFilm&&publishedFilm.imdbId!==archivedFilm.imdbId)throw Error('Published film IMDb mismatch: '+filmId);
-console.log('Single-film Telegram → RMDB CC0 API integrity PASS:',filmId,archivedFilm.title,'publishedInCuratedUI:',Boolean(publishedFilm));
+// All archived, uniquely identified records are validated generically; no single title is required.
 console.log(JSON.stringify({passed:true,localImagesChecked:localImages.length,telegramRecords:curated.items.length,siteFilms:site.movies.length,siteShows:site.shows.length,apiMovies:api.items.length,seriesWithEpisodes:full.length}));
