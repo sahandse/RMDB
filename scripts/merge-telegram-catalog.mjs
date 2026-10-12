@@ -27,7 +27,12 @@ for(const item of curated.items){
 }
 const at=current[category].findIndex(x=>x.id===item.id);
  if(at<0)current[category].push(entry);
- else current[category][at]={...current[category][at],...entry};
+ else {
+  // A partial follow-up record must never erase previously verified metadata.
+  const previous=current[category][at];
+  const additions=Object.fromEntries(Object.entries(entry).filter(([key,value])=>key==='id'||key==='source'||(value!==null&&value!==undefined&&value!==''&&(!Array.isArray(value)||value.length>0))));
+  current[category][at]={...previous,...additions};
+ }
 }
 // Licensed OMDb snapshot takes precedence only if the site operator has confirmed
 // appropriate republication rights. Otherwise TVmaze/Wikidata remain public sources.
@@ -39,7 +44,11 @@ if(licensed){
   const all=[...current.movies,...current.shows];
   const target=all.find(v=>v.imdbId===x.imdbId);
   if(!target)continue;
-  for(const [key,val] of Object.entries(x.fields||{}))if(val!==null&&val!==undefined&&val!==''&&!(Array.isArray(val)&&!val.length))target[key]=val;
+  for(const [key,val] of Object.entries(x.fields||{}))if(val!==null&&val!==undefined&&val!==''&&!(Array.isArray(val)&&!val.length)){
+   // Preserve the Wikidata or TVmaze display identity and existing archive history.
+   if(['id','source','license','imdbId','imageCredit','addedAt','telegramMessageId'].includes(key))continue;
+   target[key]=val;
+  }
   if(typeof x.fields?.imdbRating==='string'&&/^\d(?:\.\d)?$|^10(?:\.0)?$/.test(x.fields.imdbRating))target.rating=Number(x.fields.imdbRating);
   target.detailProvider='OMDb';
  }
