@@ -87,4 +87,7 @@ try{
  }
 }catch(e){counts.errors.push('Wikidata: '+e.message)}
 await persist();
+// Persist a public audit summary so the owner can see actual additions per run.
+await mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
+await writeFile(new URL('../public/data/import-last-run.json',import.meta.url),JSON.stringify({updatedAt:new Date().toISOString(),addedFilms:counts.films,addedShows:counts.shows,totalArchived:catalog.items.length,errors:counts.errors.slice(0,12)},null,2)+'\n');
 console.log(JSON.stringify({addedFilms:counts.films,addedShows:counts.shows,total:catalog.items.length,cursor:state,errors:counts.errors.slice(0,8)}));
