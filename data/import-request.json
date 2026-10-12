@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-12T11:32:20.003Z",
+  "requestedAt": "2026-10-12T14:29:56.932Z",
   "source": "RMDB admin and images upgrade",
   "batch": {
     "films": 10,
     "series": 10
   },
-  "mode": "github-admin-photos-enrichment",
-  "note": "Trigger updated GitHub Pages export with five-tap admin route, authenticated manual dispatch, automatic schedule controls, licensed Commons film actor portraits and TVmaze series actor-photo backfill; OMDb posters gated by permissions."
+  "mode": "github-first-automated-omdb-verification",
+  "note": "Run immediate 10+10 import using GitHub archive; honor 1000 daily OMDb attempts, preserve existing metadata, report actual per-run additions; do not publish OMDb poster/plot without confirmed rights."
 }
