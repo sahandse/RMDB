@@ -2,7 +2,8 @@
 // Telegram = append-only human-readable record stream; GitHub JSON = independent catalog.
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const token=process.env.RMDB_TELEGRAM_BOT_TOKEN,channel=process.env.RMDB_TELEGRAM_CHANNEL_ID;
-if(!token||!/^\-100\d+$/.test(channel||''))throw Error('Missing bot token or Telegram channel ID');
+const telegramConfigured=Boolean(token&&/^-100\d+$/.test(channel||''));
+if(!telegramConfigured)console.warn('Telegram archive disabled; local GitHub JSON remains authoritative.');
 const file=new URL('../data/telegram-curated.json',import.meta.url);
 const cursorFile=new URL('../data/auto-import-state.json',import.meta.url);
 const load=async(u,v)=>{try{return JSON.parse(await readFile(u,'utf8'))}catch(e){if(e.code==='ENOENT')return v;throw e}};
@@ -13,6 +14,7 @@ const existing=new Set(catalog.items.map(x=>x.id));
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 async function json(url){for(let n=0;n<3;n++){try{const r=await fetch(url,{headers:{Accept:'application/json','User-Agent':'RMDB/1.0 data synchronization (https://github.com/sahandse/RMDB)'},signal:AbortSignal.timeout(25000)});if(r.status===429||r.status===503){await delay(2500*(n+1));continue}if(!r.ok)throw Error('HTTP '+r.status);return await r.json()}catch(e){if(n===2)throw e;await delay(1600*(n+1))}}}
 async function telegram(item){
+ if(!telegramConfigured)return null;
  // A native JSON document carries all metadata (Telegram messages are limited to 4096 chars).
  const form=new FormData();
  form.set('chat_id',channel);
@@ -27,7 +29,12 @@ async function telegram(item){
 async function jsonPost(name,body){const r=await fetch('https://api.telegram.org/bot'+token+'/'+name,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(20000)});const data=await r.json();if(!r.ok||!data.ok)throw Error('Telegram '+name+' '+(data.description||r.status));return data.result}
 const counts={films:0,shows:0,errors:[]};
 const persist=async()=>{await mkdir(new URL('../data/',import.meta.url),{recursive:true});await writeFile(file,JSON.stringify(catalog,null,2)+'\n');await writeFile(cursorFile,JSON.stringify(state,null,2)+'\n')};
-async function add(item,type){if(existing.has(item.id))return false;const messageId=await telegram(item);catalog.items.push({...item,telegramMessageId:messageId,addedAt:new Date().toISOString()});existing.add(item.id);counts[type]++;await persist();await delay(650);return true}
+async function add(item,type){if(existing.has(item.id))return false;
+ // Save verified metadata to the repository even if optional Telegram logging fails.
+ const entry={...item,addedAt:new Date().toISOString()};
+ catalog.items.push(entry);existing.add(item.id);counts[type]++;await persist();
+ if(telegramConfigured){try{entry.telegramMessageId=await telegram(item);await persist()}catch(e){counts.errors.push('Optional Telegram archive '+item.id+': '+e.message)}}
+ await delay(650);return true}
 try{
  // Stable TVmaze show-index page numbers; page N contains IDs in the N*250 range.
  for(let pages=0;pages<8&&counts.shows<10;pages++){
