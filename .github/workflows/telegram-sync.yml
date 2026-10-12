@@ -90,7 +90,7 @@ jobs:
           for file in data/telegram-curated.json data/telegram-offset.json data/auto-import-state.json data/actor-photo-state.json data/omdb-match-report.json data/omdb-daily-budget.json data/omdb-licensed-metadata.json; do
             if [ -f "$file" ]; then git add "$file"; fi
           done
-          git add public/data/image-credits.json public/data/person-images.json
+          git add public/data/image-credits.json public/data/person-images.json public/data/import-last-run.json
           if [ -d public/media ]; then git add public/media; fi
           if ! git diff --cached --quiet; then
             git commit -m "data: sync verified Telegram curator records"
