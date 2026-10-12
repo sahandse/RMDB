@@ -56,7 +56,8 @@ jobs:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
-        run: node scripts/sync-telegram.mjs
+        run: |
+          node scripts/sync-telegram.mjs || echo 'Optional Telegram poll failed; continuing GitHub catalog import.'
       - name: Import up to 20 new titles (10 movies and 10 series)
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
@@ -117,4 +118,5 @@ jobs:
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
-        run: node scripts/notify-manual-import.mjs
+        run: |
+          node scripts/notify-manual-import.mjs || echo 'Optional Telegram notification failed after successful deployment.'
