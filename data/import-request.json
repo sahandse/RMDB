@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-12T10:15:16.824Z",
+  "requestedAt": "2026-10-12T10:35:26.042Z",
   "source": "RMDB continuous GitHub-first catalog importer",
   "batch": {
     "films": 10,
     "series": 10
   },
-  "mode": "github-persistent-omdb-refresh",
-  "note": "Run scheduled 10 movies + 10 series catalog ingestion; preserve existing verified metadata, revalidate stale OMDb records without losing data, apply OMDb content to public site only when redistribution permission is configured."
+  "mode": "persistent-omdb-first-with-licensed-poster-fallback",
+  "note": "Run ten-minute GitHub-first ingestion, preserve verified existing data, refresh stale OMDb matches within daily 1000 cap, and use OMDb poster only if separate metadata and poster republication rights variables are explicitly true."
 }
