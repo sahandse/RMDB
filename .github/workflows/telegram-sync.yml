@@ -59,6 +59,7 @@ jobs:
         run: |
           node scripts/sync-telegram.mjs || echo 'Optional Telegram poll failed; continuing GitHub catalog import.'
       - name: Import up to 20 new titles (10 movies and 10 series)
+        if: github.event_name != 'schedule' || vars.RMDB_AUTO_IMPORT_ENABLED != 'false'
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
@@ -69,6 +70,7 @@ jobs:
         env:
           RMDB_OMDB_API_KEY: ${{ secrets.RMDB_OMDB_API_KEY }}
           RMDB_OMDB_REPUBLICATION_ALLOWED: ${{ vars.RMDB_OMDB_REPUBLICATION_ALLOWED }}
+          RMDB_OMDB_POSTER_RIGHTS_GRANTED: ${{ vars.RMDB_OMDB_POSTER_RIGHTS_GRANTED }}
           RMDB_OMDB_POSTER_RIGHTS_GRANTED: ${{ vars.RMDB_OMDB_POSTER_RIGHTS_GRANTED }}
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
