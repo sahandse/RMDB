@@ -1,10 +1,10 @@
 {
-  "requestedAt": "2026-10-12T10:35:26.042Z",
-  "source": "RMDB continuous GitHub-first catalog importer",
+  "requestedAt": "2026-10-12T11:32:20.003Z",
+  "source": "RMDB admin and images upgrade",
   "batch": {
     "films": 10,
     "series": 10
   },
-  "mode": "persistent-omdb-first-with-licensed-poster-fallback",
-  "note": "Run ten-minute GitHub-first ingestion, preserve verified existing data, refresh stale OMDb matches within daily 1000 cap, and use OMDb poster only if separate metadata and poster republication rights variables are explicitly true."
+  "mode": "github-admin-photos-enrichment",
+  "note": "Trigger updated GitHub Pages export with five-tap admin route, authenticated manual dispatch, automatic schedule controls, licensed Commons film actor portraits and TVmaze series actor-photo backfill; OMDb posters gated by permissions."
 }
