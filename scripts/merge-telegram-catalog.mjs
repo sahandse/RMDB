@@ -44,18 +44,17 @@ if(licensed){
   target.detailProvider='OMDb';
  }
 }
-// Publication gate: keep incomplete original records in the private archive for
-// later enrichment, but remove them from the public-facing catalog.
+// Publish authentic catalog records even when a poster or extended synopsis is
+// still unavailable. The UI uses its existing neutral missing-poster presentation.
+// Never invent metadata or bypass provider attribution and licensing.
 const present=x=>typeof x==='string'&&x.trim().length>0;
-const rich=x=>present(x.descriptionFa)||present(x.descriptionEn)||present(x.summary)||present(x.plot);
-const poster=x=>present(x.image)&&(/^(\/RMDB\/|\/media\/|https:\/\/)/.test(x.image));
-const detailed=x=>Boolean(x.cast?.length||x.credits?.directors?.length||x.episodes?.length||x.genres?.length||x.entityNames?.directors?.length);
-const publishable=x=>present(x.title)&&present(x.year)&&/^tt\d{7,9}$/.test(x.imdbId||'')&&poster(x)&&rich(x)&&detailed(x);
+const allowedId=x=>(x.source==='Wikidata'&&/^wd-Q\d+$/.test(x.id))||(x.source==='TVmaze'&&/^tv-\d+$/.test(x.id));
+const publishable=x=>allowedId(x)&&present(x.title);
 const hidden={movies:current.movies.length,shows:current.shows.length};
 current.movies=current.movies.filter(publishable);
 current.shows=current.shows.filter(publishable);
-current.qualityGate={requires:['title','year','IMDb identifier','image','synopsis','verified cast or production information'],excluded:{movies:hidden.movies-current.movies.length,shows:hidden.shows-current.shows.length}};
-console.log('RMDB publication quality gate:',JSON.stringify(current.qualityGate));
+current.qualityGate={requires:['verified provider ID','nonempty title'],excluded:{movies:hidden.movies-current.movies.length,shows:hidden.shows-current.shows.length},notice:'Missing metadata remains missing; no demo or fabricated entries.'};
+console.log('RMDB catalog publication:',JSON.stringify({movies:current.movies.length,shows:current.shows.length,qualityGate:current.qualityGate}));
 
 current.updatedAt=new Date().toISOString();
 await mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
