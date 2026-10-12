@@ -16,6 +16,9 @@ jobs:
       - name: Fetch permitted public metadata
         run: node scripts/refresh-catalog.mjs
       - name: Preserve verified Telegram additions
+        env:
+          RMDB_OMDB_REPUBLICATION_ALLOWED: ${{ vars.RMDB_OMDB_REPUBLICATION_ALLOWED }}
+          RMDB_OMDB_POSTER_RIGHTS_GRANTED: ${{ vars.RMDB_OMDB_POSTER_RIGHTS_GRANTED }}
         run: node scripts/merge-telegram-catalog.mjs
       - name: Commit refreshed snapshot
         run: |
