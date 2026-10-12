@@ -232,3 +232,5 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
 .rmdb-admin-message{margin-top:18px;background:#29271f;border:1px solid #5b4d30;color:#f9e4b5;border-radius:12px;padding:13px 17px;font-size:13px}
 .rmdb-admin-foot{margin-top:30px}
 @media(max-width:720px){.rmdb-admin-grid{grid-template-columns:1fr}.rmdb-admin-intro{margin-top:34px}.rmdb-admin-panel{border-radius:15px}}
+
+.rmdb-actor-credits{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:14px 0 25px;color:var(--muted);font-size:11px}.rmdb-actor-credits a{color:#d6bc8b;border-bottom:1px solid #d6bc8b55}.rmdb-actor-credits small{font-size:11px}
