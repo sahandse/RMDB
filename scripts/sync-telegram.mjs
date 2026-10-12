@@ -4,7 +4,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const token=process.env.RMDB_TELEGRAM_BOT_TOKEN;
 const owner=String(process.env.RMDB_TELEGRAM_OWNER_ID||'');
 const channel=String(process.env.RMDB_TELEGRAM_CHANNEL_ID||'');
-if(!token||!/^\d+$/.test(owner)||!/^-100\d+$/.test(channel))throw Error('Missing Telegram secrets: BOT_TOKEN, OWNER_ID, CHANNEL_ID');
+if(!token||!/^\d+$/.test(owner)||!/^-100\d+$/.test(channel)){console.warn('Telegram inbox not configured; skipping optional bot poll.');process.exit(0)}
 const path=new URL('../data/telegram-curated.json',import.meta.url);
 const statePath=new URL('../data/telegram-offset.json',import.meta.url);
 const load=async(url,fallback)=>{try{return JSON.parse(await readFile(url,'utf8'))}catch{return fallback}};
