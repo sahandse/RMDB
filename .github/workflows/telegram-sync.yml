@@ -52,7 +52,6 @@ jobs:
           node --check scripts/check-telegram-pipeline.mjs
           node --check scripts/report-data-health.mjs
       - name: Poll approved bot commands
-        if: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN != '' && secrets.RMDB_TELEGRAM_OWNER_ID != '' && secrets.RMDB_TELEGRAM_CHANNEL_ID != '' }}
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
@@ -114,7 +113,7 @@ jobs:
       - name: Deploy updated pages
         uses: actions/deploy-pages@v4
       - name: Notify owner about requested import after successful deployment
-        if: ${{ success() && secrets.RMDB_TELEGRAM_BOT_TOKEN != '' && secrets.RMDB_TELEGRAM_OWNER_ID != '' }}
+        if: success()
         env:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_OWNER_ID: ${{ secrets.RMDB_TELEGRAM_OWNER_ID }}
