@@ -69,6 +69,7 @@ jobs:
         env:
           RMDB_OMDB_API_KEY: ${{ secrets.RMDB_OMDB_API_KEY }}
           RMDB_OMDB_REPUBLICATION_ALLOWED: ${{ vars.RMDB_OMDB_REPUBLICATION_ALLOWED }}
+          RMDB_OMDB_POSTER_RIGHTS_GRANTED: ${{ vars.RMDB_OMDB_POSTER_RIGHTS_GRANTED }}
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
         run: node scripts/enrich-omdb.mjs
@@ -90,6 +91,7 @@ jobs:
       - name: Build updated catalog and public pages
         env:
           RMDB_OMDB_REPUBLICATION_ALLOWED: ${{ vars.RMDB_OMDB_REPUBLICATION_ALLOWED }}
+          RMDB_OMDB_POSTER_RIGHTS_GRANTED: ${{ vars.RMDB_OMDB_POSTER_RIGHTS_GRANTED }}
         run: |
           npm install --no-audit --no-fund
           npx tsc --noEmit
