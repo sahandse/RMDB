@@ -46,6 +46,7 @@ jobs:
           node --check scripts/audit-telegram-catalog.mjs
           node --check scripts/cache-licensed-images.mjs
           node --check scripts/auto-import-telegram.mjs
+          node --check scripts/refresh-actor-images.mjs
           node --check scripts/merge-telegram-catalog.mjs
           node --check scripts/sync-telegram.mjs
           node --check scripts/notify-manual-import.mjs
@@ -64,6 +65,8 @@ jobs:
           RMDB_TELEGRAM_BOT_TOKEN: ${{ secrets.RMDB_TELEGRAM_BOT_TOKEN }}
           RMDB_TELEGRAM_CHANNEL_ID: ${{ secrets.RMDB_TELEGRAM_CHANNEL_ID }}
         run: node scripts/auto-import-telegram.mjs
+      - name: Fill missing existing TVmaze actor photographs
+        run: node scripts/refresh-actor-images.mjs
       - name: Resolve bilingual names for film credits and genres
         run: node scripts/resolve-wikidata-names.mjs
       - name: Verify IMDb references with OMDb (optional)
