@@ -55,7 +55,10 @@ if(licensed){
    if(['id','source','license','imdbId','imageCredit','addedAt','telegramMessageId'].includes(key))continue;
    target[key]=val;
   }
-  // The generic OMDb poster field is kept separate from the public artwork slot.\n  // Publish it only when explicit republication rights have been confirmed.\n  if(process.env.RMDB_OMDB_POSTER_RIGHTS_GRANTED==='true' && typeof x.fields?.omdbPoster==='string' && /^https:\/\//.test(x.fields.omdbPoster) && (!target.image || !target.image.startsWith('/RMDB/media/'))){target.image=x.fields.omdbPoster;target.imageCredit={source:'OMDb',license:'Requires separately verified poster redistribution rights'};}\n  if(typeof x.fields?.imdbRating==='string'&&/^\d(?:\.\d)?$|^10(?:\.0)?$/.test(x.fields.imdbRating))target.rating=Number(x.fields.imdbRating);
+  // The generic OMDb poster field is kept separate from the public artwork slot.
+  // Publish it only when explicit republication rights have been confirmed.
+  if(process.env.RMDB_OMDB_POSTER_RIGHTS_GRANTED==='true' && typeof x.fields?.omdbPoster==='string' && /^https:\/\//.test(x.fields.omdbPoster) && (!target.image || !target.image.startsWith('/RMDB/media/'))){target.image=x.fields.omdbPoster;target.imageCredit={source:'OMDb',license:'Requires separately verified poster redistribution rights'};}
+  if(typeof x.fields?.imdbRating==='string'&&/^\d(?:\.\d)?$|^10(?:\.0)?$/.test(x.fields.imdbRating))target.rating=Number(x.fields.imdbRating);
   target.detailProvider='OMDb';
  }
 }
