@@ -6,7 +6,7 @@ const key=process.env.RMDB_OMDB_API_KEY;
 const botToken=process.env.RMDB_TELEGRAM_BOT_TOKEN;
 const channel=process.env.RMDB_TELEGRAM_CHANNEL_ID;
 if(!key){console.log('OMDb disabled: configure RMDB_OMDB_API_KEY as an Actions secret.');process.exit(0)}
-if(!botToken||!/^[-]100\d+$/.test(channel||''))throw Error('Telegram secrets required for OMDb verification archive');
+const telegramConfigured=Boolean(botToken&&/^[-]100\d+$/.test(channel||''));
 const file=new URL('../data/omdb-match-report.json',import.meta.url);
 const curated=JSON.parse(await readFile(new URL('../data/telegram-curated.json',import.meta.url),'utf8'));
 let report;
@@ -35,13 +35,19 @@ for(const item of curated.items||[]){
   if(data.Response!=='True'){console.warn('OMDb did not resolve a title:',imdb);continue}
   if(data.imdbID?.toLowerCase()!==imdb.toLowerCase())throw Error('OMDb ID mismatch');
   const record={matchedId:imdb,originalRecordId:item.id,verifiedAt:new Date().toISOString(),type:data.Type||null,releaseYear:data.Year||null,titleMatches:Boolean(data.Title&&data.Title.toLowerCase()===String(item.titleEn||item.title).toLowerCase()),source:'OMDb identifier cross-check',availableFields:Object.fromEntries(['Rated','Released','Runtime','Genre','Director','Writer','Actors','Plot','Language','Country','Awards','Poster','Ratings','Metascore','imdbRating','imdbVotes','BoxOffice','Production','DVD','totalSeasons'].map(field=>[field,data[field]!=null&&data[field]!=='N/A'&&data[field]!==''&&(!Array.isArray(data[field])||data[field].length>0)]))};
-  const form=new FormData();
-  form.set('chat_id',channel);
-  form.set('caption','RMDB OMDb ID verification · '+imdb+' · '+item.id);
-  form.set('document',new Blob([JSON.stringify(record,null,2)],{type:'application/json'}),imdb+'-verified.json');
-  const sent=await fetch('https://api.telegram.org/bot'+botToken+'/sendDocument',{method:'POST',body:form,signal:AbortSignal.timeout(25000)});
-  const reply=await sent.json();
-  if(!sent.ok||!reply.ok)throw Error('Telegram OMDb archive failed: '+(reply.description||sent.status));
+  let messageId=null;
+  if(telegramConfigured){
+   try{
+    const form=new FormData();
+    form.set('chat_id',channel);
+    form.set('caption','RMDB OMDb ID verification · '+imdb+' · '+item.id);
+    form.set('document',new Blob([JSON.stringify(record,null,2)],{type:'application/json'}),imdb+'-verified.json');
+    const sent=await fetch('https://api.telegram.org/bot'+botToken+'/sendDocument',{method:'POST',body:form,signal:AbortSignal.timeout(25000)});
+    const reply=await sent.json();
+    if(!sent.ok||!reply.ok)throw Error(reply.description||sent.status);
+    messageId=reply.result?.message_id||null;
+   }catch(e){console.warn('Optional Telegram OMDb verification archive failed:',e.message)}
+  }
   if(process.env.RMDB_OMDB_REPUBLICATION_ALLOWED==='true'){
    // Activate only if redistribution/storage rights are confirmed for this project.
    const licensedFile=new URL('../data/omdb-licensed-metadata.json',import.meta.url);
@@ -62,7 +68,7 @@ for(const item of curated.items||[]){
    licensed.items.push({imdbId:imdb,fields,license:'CC BY-NC 4.0',verifiedAt:record.verifiedAt});
    await writeFile(licensedFile,JSON.stringify(licensed,null,2)+'\n');
   }
-  report.lookups[imdb]={...record,telegramMessageId:reply.result.message_id};
+  report.lookups[imdb]={...record,telegramMessageId:messageId};
   await mkdir(new URL('../data/',import.meta.url),{recursive:true});
   await writeFile(file,JSON.stringify(report,null,2)+'\n');
   done++;
