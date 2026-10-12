@@ -3,7 +3,12 @@
 import {readFile,writeFile} from 'node:fs/promises';
 const file=new URL('../data/telegram-curated.json',import.meta.url);
 const data=JSON.parse(await readFile(file,'utf8'));
-const candidates=(data.items||[]).filter(x=>x.source==='TVmaze'&&/^tv-\d+$/.test(x.id)&&Array.isArray(x.cast)&&x.cast.length&&x.cast.some(y=>!y.image)).slice(0,8);
+const eligible=(data.items||[]).filter(x=>x.source==='TVmaze'&&/^tv-\d+$/.test(x.id)&&Array.isArray(x.cast)&&x.cast.length&&x.cast.some(y=>!y.image));
+const stateFile=new URL('../data/actor-photo-state.json',import.meta.url);
+let cursor=0;
+try{const state=JSON.parse(await readFile(stateFile,'utf8'));if(Number.isInteger(state.cursor))cursor=state.cursor}catch{}
+const start=eligible.length?cursor%eligible.length:0;
+const candidates=Array.from({length:Math.min(8,eligible.length)},(_,i)=>eligible[(start+i)%eligible.length]);
 let showsUpdated=0,photosAdded=0;
 for(const item of candidates){
  try{
@@ -21,4 +26,5 @@ for(const item of candidates){
  }catch(e){console.warn('Actor photo refresh skipped',item.id,String(e).slice(0,100))}
 }
 if(photosAdded)await writeFile(file,JSON.stringify(data,null,2)+'\n');
+await writeFile(stateFile,JSON.stringify({cursor:cursor+candidates.length,checkedAt:new Date().toISOString()},null,2)+'\n');
 console.log(JSON.stringify({showsChecked:candidates.length,showsUpdated,photosAdded,source:'TVmaze'}));
