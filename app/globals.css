@@ -210,3 +210,25 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
  .rmdb-view-all{padding:5px 10px;font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){.movie .poster{transition:none}}
+
+/* Owner-only RMDB admin dashboard; access is enforced by GitHub API credentials. */
+.rmdb-admin{max-width:1100px;min-height:100vh;padding-top:22px;padding-bottom:80px;direction:rtl}
+.rmdb-admin-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff1b;padding-bottom:22px}
+.rmdb-admin-head a{font-size:13px;color:var(--muted)}
+.rmdb-admin-intro{max-width:680px;margin:55px 0 30px}
+.rmdb-admin-intro>span,.rmdb-admin-panel>span{font-size:12px;color:var(--gold)}
+.rmdb-admin-intro h1{font-size:clamp(28px,4vw,45px);line-height:1.4;margin:7px 0}
+.rmdb-admin-intro p,.rmdb-admin-panel p,.rmdb-admin-foot{color:var(--muted);font-size:14px}
+.rmdb-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.rmdb-admin-panel{background:#151a22;border:1px solid #ffffff18;border-radius:20px;padding:clamp(20px,3vw,30px);display:flex;align-items:flex-start;flex-direction:column;gap:12px;max-width:100%}
+.rmdb-admin-panel h2{font-size:21px;font-weight:700;margin:0}
+.rmdb-admin-panel p{margin:0 0 10px}
+.rmdb-admin-panel label{font-size:13px}
+.rmdb-admin-panel input{width:100%;padding:14px 16px;border:1px solid #39414c;background:#0e141d;color:#fff;border-radius:12px;direction:ltr}
+.rmdb-admin-panel button{background:#e7bb65;color:#18150e;padding:11px 19px;border:0;border-radius:11px;cursor:pointer;font-weight:750}
+.rmdb-admin-panel button:disabled{opacity:.44;cursor:not-allowed}
+.rmdb-admin-panel .rmdb-admin-secondary{background:#272e39;color:#e6e8ed}
+.rmdb-admin-panel a{color:#e7bb65;text-decoration:underline;text-underline-offset:4px}
+.rmdb-admin-message{margin-top:18px;background:#29271f;border:1px solid #5b4d30;color:#f9e4b5;border-radius:12px;padding:13px 17px;font-size:13px}
+.rmdb-admin-foot{margin-top:30px}
+@media(max-width:720px){.rmdb-admin-grid{grid-template-columns:1fr}.rmdb-admin-intro{margin-top:34px}.rmdb-admin-panel{border-radius:15px}}
