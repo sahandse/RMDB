@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T12:11:34.150Z",
+  "updatedAt": "2026-10-19T10:03:43.631Z",
   "shows": [
     {
       "id": "tv-1",
@@ -45387,7 +45387,7 @@
       "title": "Chicago Fire",
       "year": "2012",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/644/1611896.jpg",
-      "rating": 8,
+      "rating": 7.9,
       "genres": [
         "Drama",
         "Action"
@@ -45538,7 +45538,7 @@
       "title": "Dancing with the Stars",
       "year": "2005",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/641/1603519.jpg",
-      "rating": 6.6,
+      "rating": 6.5,
       "genres": [
         "Family"
       ],
@@ -46033,7 +46033,7 @@
       "title": "South Park",
       "year": "1997",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/641/1604427.jpg",
-      "rating": 8.2,
+      "rating": 8.3,
       "genres": [
         "Comedy"
       ],
@@ -46313,7 +46313,7 @@
       "title": "Girls",
       "year": "2012",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/31/78286.jpg",
-      "rating": 6.5,
+      "rating": 6.4,
       "genres": [
         "Drama",
         "Romance"
@@ -50246,7 +50246,7 @@
       "title": "X-Men",
       "year": "1992",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/305/764844.jpg",
-      "rating": 8,
+      "rating": 7.9,
       "genres": [
         "Children",
         "Science-Fiction"
@@ -56403,7 +56403,7 @@
       "id": "tv-1011",
       "title": "Vanderpump Rules",
       "year": "2013",
-      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/601/1503999.jpg",
+      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/141/353200.jpg",
       "rating": 5.7,
       "genres": [],
       "source": "TVmaze"
@@ -57456,6 +57456,7 @@
       "rating": 7.7,
       "genres": [
         "Drama",
+        "Action",
         "Science-Fiction"
       ],
       "source": "TVmaze"
@@ -59558,6 +59559,7 @@
       "rating": null,
       "genres": [
         "Drama",
+        "Family",
         "History"
       ],
       "source": "TVmaze"
@@ -64931,7 +64933,7 @@
       "title": "Scream: The TV Series",
       "year": "2015",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/203/508247.jpg",
-      "rating": 7,
+      "rating": 6.9,
       "genres": [
         "Horror",
         "Mystery"
@@ -67160,7 +67162,7 @@
       "genres": [
         "Drama",
         "Science-Fiction",
-        "Thriller"
+        "Mystery"
       ],
       "source": "TVmaze"
     },
@@ -71863,7 +71865,7 @@
       "title": "Dr. Jeff: Rocky Mountain Vet",
       "year": "2015",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/407/1017613.jpg",
-      "rating": 7.8,
+      "rating": 7.9,
       "genres": [
         "Drama",
         "Medical"
@@ -76742,7 +76744,7 @@
       "id": "tv-2900",
       "title": "Below Deck",
       "year": "2013",
-      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/575/1439157.jpg",
+      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/645/1614746.jpg",
       "rating": 6.6,
       "genres": [
         "Drama",
@@ -79420,7 +79422,7 @@
       "title": "Inspector George Gently",
       "year": "2008",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/112/282284.jpg",
-      "rating": 8,
+      "rating": 7.7,
       "genres": [
         "Drama",
         "Crime"
@@ -83318,7 +83320,7 @@
       "title": "Garage Sale Mystery",
       "year": "2013",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/171/428059.jpg",
-      "rating": 7.3,
+      "rating": 7.4,
       "genres": [
         "Drama",
         "Crime",
@@ -88491,7 +88493,7 @@
       "title": "60 Minutes",
       "year": "1968",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/642/1605873.jpg",
-      "rating": 7.1,
+      "rating": 7,
       "genres": [],
       "source": "TVmaze"
     },
@@ -90710,7 +90712,7 @@
       "title": "He-Man and the Masters of the Universe",
       "year": "2002",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/578/1446013.jpg",
-      "rating": 7.7,
+      "rating": 7.6,
       "genres": [
         "Action",
         "Adventure",
@@ -98763,7 +98765,7 @@
       "title": "Biography",
       "year": "1961",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/81/204593.jpg",
-      "rating": null,
+      "rating": 7.8,
       "genres": [],
       "source": "TVmaze"
     },
