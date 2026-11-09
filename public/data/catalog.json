@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T12:39:12.750Z",
+  "updatedAt": "2026-11-09T13:03:07.866Z",
   "shows": [
     {
       "id": "tv-1",
@@ -45906,7 +45906,7 @@
       "title": "Boardwalk Empire",
       "year": "2010",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/405/1012589.jpg",
-      "rating": 8.4,
+      "rating": 8.3,
       "genres": [
         "Drama",
         "Crime"
@@ -46945,7 +46945,7 @@
       "title": "Halt and Catch Fire",
       "year": "2014",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/1/2798.jpg",
-      "rating": 8.1,
+      "rating": 8.2,
       "genres": [
         "Drama"
       ],
@@ -48949,7 +48949,7 @@
       "title": "Saturday Night Live",
       "year": "1975",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/589/1474771.jpg",
-      "rating": 6,
+      "rating": 5.9,
       "genres": [
         "Comedy",
         "Music"
@@ -50003,7 +50003,7 @@
       "title": "Tales from the Crypt",
       "year": "1989",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/3/9142.jpg",
-      "rating": 8.1,
+      "rating": 8,
       "genres": [
         "Comedy",
         "Fantasy",
@@ -53841,7 +53841,8 @@
       "rating": 7.7,
       "genres": [
         "Drama",
-        "Crime"
+        "Crime",
+        "Mystery"
       ],
       "source": "TVmaze"
     },
@@ -54046,7 +54047,7 @@
       "title": "WWE Monday Night RAW",
       "year": "1993",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/627/1568559.jpg",
-      "rating": 7.3,
+      "rating": 7.4,
       "genres": [
         "Drama",
         "Action",
@@ -56181,7 +56182,7 @@
       "title": "Doc Martin",
       "year": "2004",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/423/1058629.jpg",
-      "rating": 8.1,
+      "rating": 8.2,
       "genres": [
         "Drama",
         "Comedy",
@@ -57289,7 +57290,7 @@
       "title": "The Crimson Petal and the White",
       "year": "2011",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/6/17200.jpg",
-      "rating": 6.7,
+      "rating": 6.8,
       "genres": [
         "Drama",
         "Thriller"
@@ -57879,7 +57880,7 @@
       "title": "Impractical Jokers",
       "year": "2011",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/633/1583027.jpg",
-      "rating": 7.6,
+      "rating": 7.7,
       "genres": [
         "Comedy"
       ],
@@ -59467,7 +59468,7 @@
       "title": "Prime Suspect",
       "year": "1991",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/7/18390.jpg",
-      "rating": 8,
+      "rating": 7.9,
       "genres": [
         "Drama",
         "Crime",
@@ -61563,7 +61564,7 @@
       "title": "Invasion",
       "year": "2005",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/8/21128.jpg",
-      "rating": 7.2,
+      "rating": 7.3,
       "genres": [
         "Science-Fiction",
         "Thriller",
@@ -63166,7 +63167,7 @@
       "title": "K.C. Undercover",
       "year": "2015",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/511/1279319.jpg",
-      "rating": 7.6,
+      "rating": 7.3,
       "genres": [
         "Comedy",
         "Action",
@@ -65809,7 +65810,7 @@
       "title": "Mr. Robot",
       "year": "2015",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/211/528026.jpg",
-      "rating": 8.2,
+      "rating": 8.3,
       "genres": [
         "Drama",
         "Crime",
@@ -68722,7 +68723,7 @@
       "title": "Quantico",
       "year": "2015",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/14/35887.jpg",
-      "rating": 6.3,
+      "rating": 6.4,
       "genres": [
         "Crime",
         "Mystery",
@@ -81291,7 +81292,7 @@
       "title": "What Would You Do?",
       "year": "2008",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/513/1284419.jpg",
-      "rating": 3.4,
+      "rating": 3.1,
       "genres": [],
       "source": "TVmaze"
     },
@@ -83182,7 +83183,7 @@
       "title": "The Wild Wild West",
       "year": "1965",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/18/46499.jpg",
-      "rating": 8,
+      "rating": 8.1,
       "genres": [
         "Action",
         "Adventure",
@@ -84255,7 +84256,7 @@
       "title": "Wallander",
       "year": "2006",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/18/47013.jpg",
-      "rating": 7.8,
+      "rating": 8,
       "genres": [
         "Drama",
         "Crime"
@@ -88330,7 +88331,7 @@
       "title": "Monsters Inside Me",
       "year": "2009",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/338/845357.jpg",
-      "rating": 6.8,
+      "rating": 7,
       "genres": [],
       "source": "TVmaze"
     },
@@ -88865,7 +88866,7 @@
       "title": "Jem",
       "year": "1985",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/44/110920.jpg",
-      "rating": 5.5,
+      "rating": 5.9,
       "genres": [
         "Drama",
         "Adventure"
@@ -89687,7 +89688,7 @@
       "title": "Three's Company",
       "year": "1977",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/20/50015.jpg",
-      "rating": 7.8,
+      "rating": 7.9,
       "genres": [
         "Comedy"
       ],
@@ -91050,7 +91051,7 @@
       "title": "One of Us",
       "year": "2016",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/72/180787.jpg",
-      "rating": 7.1,
+      "rating": 7.2,
       "genres": [
         "Drama",
         "Crime",
@@ -91190,7 +91191,7 @@
       "title": "Overlord",
       "year": "2015",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/561/1403815.jpg",
-      "rating": 7.5,
+      "rating": 7.6,
       "genres": [
         "Action",
         "Anime",
@@ -92720,7 +92721,7 @@
       "title": "48 Hours",
       "year": "1988",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/589/1474126.jpg",
-      "rating": 4.9,
+      "rating": 5.1,
       "genres": [
         "Drama",
         "Crime",
