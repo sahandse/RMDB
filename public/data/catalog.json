@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T12:56:00.121Z",
+  "updatedAt": "2026-11-23T14:56:51.427Z",
   "shows": [
     {
       "id": "tv-1",
@@ -52391,7 +52391,7 @@
       "title": "Torchwood",
       "year": "2006",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/356/890285.jpg",
-      "rating": 8.1,
+      "rating": 8,
       "genres": [
         "Drama",
         "Science-Fiction"
@@ -52415,7 +52415,7 @@
       "title": "The Great Christmas Light Fight",
       "year": "2013",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/359/898301.jpg",
-      "rating": 7.2,
+      "rating": 7.3,
       "genres": [],
       "source": "TVmaze"
     },
@@ -52935,7 +52935,7 @@
       "title": "Shaun the Sheep",
       "year": "2007",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/594/1486166.jpg",
-      "rating": 7.9,
+      "rating": 7.8,
       "genres": [
         "Comedy",
         "Children"
@@ -54606,7 +54606,7 @@
       "id": "tv-849",
       "title": "I'm a Celebrity, Get Me Out of Here!",
       "year": "2002",
-      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/598/1496591.jpg",
+      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/651/1629856.jpg",
       "rating": 6.7,
       "genres": [],
       "source": "TVmaze"
@@ -54727,7 +54727,7 @@
       "title": "Being Erica",
       "year": "2009",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/6/15912.jpg",
-      "rating": 7.9,
+      "rating": 7.7,
       "genres": [
         "Drama",
         "Comedy",
@@ -61950,7 +61950,7 @@
       "title": "Yes, Dear",
       "year": "2000",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/8/21260.jpg",
-      "rating": 7.1,
+      "rating": 6.9,
       "genres": [
         "Comedy",
         "Family"
@@ -65377,7 +65377,7 @@
       "rating": 8,
       "genres": [
         "Drama",
-        "Crime"
+        "History"
       ],
       "source": "TVmaze"
     },
@@ -73261,9 +73261,9 @@
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/13/34308.jpg",
       "rating": null,
       "genres": [
-        "Drama",
         "Comedy",
-        "Children"
+        "Children",
+        "Family"
       ],
       "source": "TVmaze"
     },
@@ -75932,7 +75932,7 @@
       "title": "Secret Love",
       "year": "2013",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/529/1323603.jpg",
-      "rating": 8.3,
+      "rating": 8,
       "genres": [
         "Drama",
         "Romance",
@@ -86731,7 +86731,7 @@
       "title": "PJ Masks",
       "year": "2015",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/19/48364.jpg",
-      "rating": 6.2,
+      "rating": 5.6,
       "genres": [
         "Action",
         "Adventure",
@@ -94754,7 +94754,7 @@
       "title": "Project Runway All Stars",
       "year": "2012",
       "image": "https://static.tvmaze.com/uploads/images/medium_portrait/20/52395.jpg",
-      "rating": 6.8,
+      "rating": 6.7,
       "genres": [],
       "source": "TVmaze"
     },
@@ -98609,7 +98609,7 @@
       "id": "tv-4945",
       "title": "A Certain Scientific Railgun",
       "year": "2009",
-      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/64/162081.jpg",
+      "image": "https://static.tvmaze.com/uploads/images/medium_portrait/652/1630867.jpg",
       "rating": 7.2,
       "genres": [
         "Anime",
